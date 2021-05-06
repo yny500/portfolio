@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+/* 영문 1벌 이상, 한글 1벌을 구글 폰트에서 지정. */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+
+
+body {
+	font-family: "Playfair Display", "Noto Sans KR", sans-serif;/*영문 타입, 한글 타입, 유형 */
+}
+
+/* 부분만 다른 서체 이용할때 입력. */
+
+
+
+
+
+
+
+
+
