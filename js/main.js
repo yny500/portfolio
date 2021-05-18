@@ -243,6 +243,6 @@ $(function(){
     
     AOS.init({
 		easing: "ease-in-out-sine",
-		once: false, // 재동작 못하게 함.
+		once: false, 
 	});
 });
