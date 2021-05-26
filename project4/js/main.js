@@ -159,8 +159,8 @@ $(function(){
     $(".top_btn").click(function(e){
         e.preventDefault();
         n=0;
+        
         $("html").animate({"scrollTop":0}, 500);
- 
     });
     
     // #page3 슬라이더 관련
