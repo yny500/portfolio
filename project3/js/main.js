@@ -60,7 +60,7 @@ $(function(){
 			$(".controller li").eq(n).addClass("on");
             $("#gnb li").removeClass("active");
             $("#gnb li").eq(n).addClass("active");
-		});
+		}, 100);
 	});
     $(window).trigger("scroll");
     
@@ -119,12 +119,4 @@ $(function(){
 		e.preventDefault();
 		$("html").animate({scrollTop:0}, 400);
 	});
-
-    // 마우스오버 관련
-    $(".portfolio_list li").mouseenter(function(){
-        $(this).addClass("over");
-    });
-    $(".portfolio_list li").mouseleave(function(){
-        $(".portfolio_list li").removeClass("over");
-    });
 });
