@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080">
+    <meta charset="UTF-8">
+    <title>sub2</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="ilc/resources/images/favicon.ico">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/button.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/common.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/form.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/grid.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/sfp/sfp-dialog.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-grid.css">
+    
+    <script src="ilc/resources/js/lib/jquery/jquery.min.js"></script>
+    <script src="ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+    <script src="ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="ilc/resources/js/project/sfp-property-pattern.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-utils.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ajax.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-lang.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-template.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-box.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+
+    <script defer="" src="ilc/resources/js/sfp/sfp-datepicker.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-dateutils.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-websocket.js"></script>
+    <script defer="" src="ilc/resources/js/project/project-dialog-sizer.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-stringutils.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-dialog.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery-barcode.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery.balloon.js"></script>
+    <script defer="" src="ilc/resources/js/lib/moment/moment.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+    <script defer="" src="ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+    <script src="ilc/resources/js/project/sfp-common.js"></script>
+
+    <script type="text/javascript">
+        sfp.context.setContextUrl("ilc");
+        sfp.context.setMenuUrl();
+        sfp.lang.init("ko");
+        $.sfp.grid.prototype.options.optCRUD.btn.text = sfp.lang.getInterpreter("작업");
+        $.sfp.template.prototype.options.emptyTxt = sfp.lang.getPhrase("no-data", "데이터가 존재하지 않습니다.");
+
+        $(function () {
+            $(".btn-reset").on("click", function () {
+                $(this).closest(".function-area").find("select, input:not([type=hidden])").each(function () {
+                    var $this = $(this);
+                    if ($this.hasClass("reset-ignore") == false) {
+                        $this.val("");
+                        $(".calendar").datepicker("option", { "minDate": null, "maxDate": null });
+
+                        if ($this.hasClass("multi-input-select") == true) {
+                            $this.data("val", "");
+                        }
+
+                    }
+                });
+            });
+        });
+
+        function showProgress() {
+            var $window = $(window);
+            var $loaderPanel = $("#loader-panel");
+            var $loader = $("#loader");
+            var windowWidth = $window.width();
+            var windowHeight = $window.height();
+            var loaderWidth = $loader.width();
+            var loaderHeight = $loader.height();
+
+            $loaderPanel.css("width", windowWidth).css("height", windowHeight);
+            $loader.css("left", (windowWidth / 2) - (loaderWidth / 2));
+            $loader.css("top", (windowHeight / 2) - (loaderHeight / 2));
+
+            $loaderPanel.fadeIn(100);
+            // 	$("#loader-panel").show();
+        }
+
+        function closeProgress() {
+            var $loaderPanel = $("#loader-panel");
+            $loaderPanel.fadeOut(100);
+            // 	$("#loader-panel").hide();
+        }
+
+    </script>
+    <style>
+        #loader-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            text-align: center;
+            vertical-align: middle;
+            display: none;
+        }
+
+        #loader {
+            position: absolute;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+        }
+
+        #layer-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            text-align: center;
+            vertical-align: middle;
+            display: none;
+        }
+
+        #big-image {
+            position: absolute;
+            z-index: 1001;
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader-panel" style="width: 1920px; height: 937px; display: none;">
+        <img id="loader" src="ilc/resources/images/ajax-loader.gif" alt="" style="left: 935px; top: 443.5px;">
+
+    </div>
+    <div id="layer-box">
+        <img id="big-image" src="ilc/resources/images/ajax-loader.gif" alt="">
+    </div>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ilc/resources/css/pop.css">
+    <link rel="stylesheet" href="ilc/resources/css/project/pop.css">
+
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-messagebox.css">
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-touch.css">
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-touch-pop.css">
+
+    <script src="ilc/resources/js/sfp/sfp-ui-touch.js"></script>
+    <script src="ilc/resources/js/project/sfp-barcode-pattern.js"></script>
+    <script src="ilc/resources/js/project/sfp-pop-header.js"></script>
+    <script src="ilc/resources/js/project/sfp-common-pop.js"></script>
+
+    <script>
+        window.locationType = "pop";
+        window.alert = function (msg) {
+            MessageBox.message(msg);
+        };
+
+        window.confirm = function (msg, cbFn) {
+            MessageBox.confirm(msg, cbFn);
+        };
+
+    </script>
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-messagebox.css">
+    
+    <script>
+        $(function () {
+
+            window.PickingOrderList = (function ($) {
+                var init = function () {
+                    $("#picking-order-grid").grid({
+                        header: [
+                            [
+                                { name: "WAVE NO" },
+                                { name: "WAVE NAME" },
+                                { name: "피킹유형", width: "200px" },
+                                // 						{name : "SKU 구분", width: "120px"},
+                                { name: "주문수", width: "110px" },
+                                { name: "소봉수", width: "110px" },
+                                //						{name : "시작일시", width: "200px"},
+                                //						{name : "완료일시", width: "200px"},
+                                { name: "상태", width: "100px" },
+                                { name: "분배상태", width: "100px" },
+                                { name: "보류여부", width: "100px" },
+                                { name: "미분배 확인", width: "130px" },
+                                { name: "분배 확인", width: "114px" },
+                                { name: "상세", width: "80px" }
+                            ]
+                        ]
+                        , height: "625px"
+                        //	 			,addClasses : "border-style"
+                    });
+                    _setForm();
+                    _bindEvent();
+                    list();
+                }
+                    , _bindEvent = function () {
+
+                        //$("#picking-order-grid").on("click", ".sfp-template-el", function(e) {
+                        $("#picking-order-grid").on("click", "tbody > tr", function (e) {
+                            e.preventDefault();
+
+                            var $target = $(e.target)
+                            if ($target.hasClass("btn-distribution-move") || $target.hasClass("btn-distribution-check") || $target.hasClass("btn-detail")) {
+                                return;
+                            }
+
+                            var data = $("#picking-order-grid").grid("getData", this);
+                            // 그리드 Row 클릭 시
+                            if (data.pickingOrderStatusCd == "READY") {
+                                Dialog.open("ilc/solutions/pop/picking/picking-order-detail.popdialog", "full", data, function (data) {
+                                });
+                            }
+                            else if (data.pickingOrderStatusCd == "ING") {
+                                SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/picking/picking-order-shelf-processing.hpop"), data);
+                            }
+                        });
+
+
+                        //분배이동
+                        $("#picking-order-grid").on("click", ".btn-distribution-move", function (e) {
+                            e.preventDefault();
+                            // 				e.stopPropagation();
+                            var gridData = $("#picking-order-grid").grid("getData", this);
+                            if (gridData.distributionYn != 'Y' || gridData.internalRequestNo == null || gridData.internalRequestNo == '') {
+                                return;
+                            }
+
+                            SfpAjax.ajax("ilc/solutions/wmd/workstation/getDetail", { workStationId: POPHeader.getWorkStationId() }, function (data) {
+                                //진행중이 작업이 있는경우!
+                                if (data) {
+                                    if (data.workOrderNo != null && data.workOrderNo != '' && data.workOrderNo != gridData.pickingOrderId) {
+                                        MessageBox.message("[접근 불가] 현재 작업장에 진행중인 지시가 있습니다.", { isAutoHide: true, isClickHide: true });
+                                        return;
+                                    }
+                                    Dialog.open("ilc/solutions/pop/distribution/order-draft-main-distribution-das.popdialog", { width: "1300px", height: "800px" }, { orderDraftMainId: gridData.internalRequestNo, interfaceRequestName: gridData.interfaceRequestName }, function (result) {
+                                        list();
+                                    });
+                                    return;
+                                }
+                            });
+
+                            // 				Dialog.open("ilc/solutions/pop/distribution/order-draft-main-distribution-das.popdialog", { width : "1300px", height: "800px" }, {orderDraftMainId : gridData.internalRequestNo, interfaceRequestName : gridData.interfaceRequestName}, function(result){
+                            // 					list();
+                            // 				});
+                        });
+
+                        //분배체크
+                        $("#picking-order-grid").on("click", ".btn-distribution-check", function (e) {
+                            e.preventDefault();
+                            var gridData = $("#picking-order-grid").grid("getData", this);
+                            if (gridData.distributionYn != 'Y' || gridData.internalRequestNo == null || gridData.internalRequestNo == '') {
+                                return;
+                            }
+
+                            MessageBox.confirm("미완료 분배건을 확인 하시겠습니까?", {
+                                cbFn: function () {
+                                    SfpAjax.ajax("ilc/solutions/wmd/workstation/getDetail", { workStationId: POPHeader.getWorkStationId() }, function (data) {
+                                        //진행중이 작업이 있는경우!
+                                        if (data) {
+                                            if (data.workOrderNo != null && data.workOrderNo != '' && data.workOrderNo != gridData.pickingOrderId) {
+                                                MessageBox.message("[접근 불가] 현재 작업장에 진행중인 지시가 있습니다.", { isAutoHide: true, isClickHide: true });
+                                                return;
+                                            }
+                                            SfpAjax.ajax("ilc/solutions/wom/orderdraftmaindistribution/setDasDisplayByDistributionIncompleteForController"
+                                                , { orderDraftMainId: gridData.internalRequestNo }
+                                                , function (data) {
+                                                    if (data) {
+                                                    }
+                                                });
+                                        }
+                                    });
+                                }
+                            });
+
+                            // 				MessageBox.confirm("미완료 분배건을 확인 하시겠습니까?", {cbFn : function() {
+                            // 					SfpAjax.ajax("ilc/solutions/wom/orderdraftmaindistribution/setDasDisplayByDistributionIncomplete"
+                            // 					, { orderDraftMainId : gridData.internalRequestNo}
+                            // 					, function(data) {
+                            // 						if(data){
+                            // 						}
+                            // 					});
+                            // 				}});
+                        });
+
+                        $("#picking-order-grid").on("click", ".btn-detail", function (e) {
+                            e.preventDefault();
+                            // 				e.stopPropagation();
+                            var data = $("#picking-order-grid").grid("getData", this);
+                            if (data.pickingOrderStatusCd == "READY") {
+                                Dialog.open("ilc/solutions/pop/picking/picking-order-detail.popdialog", "full", data, function (data) {
+                                });
+                            }
+                            else if (data.pickingOrderStatusCd == "ING") {
+                                data.workStationId = POPHeader.getWorkStationId();
+                                Dialog.open("ilc/solutions/pop/picking/picking-ing-order-and-complete-detail.popdialog", { width: "1920px", height: "1000px" },
+                                    data, function (result) {
+                                        if (result && result.processStatus == "FORCE_COMPLETE" || result.processStatus == "PAUSE_START" || result.processStatus == "PAUSE_STOP") {
+                                            //해당 건이 있으면 현재 있는 컨테이너를 보낸다.
+                                            SfpAjax.ajax("ilc/solutions/wmd/workstation/getWorkStationDetailWithContainerOrder", { workStationId: POPHeader.getWorkStationId() }, function (workStation) {
+                                                unloadContainer(workStation);
+                                            });
+                                            if (result.processStatus == "FORCE_COMPLETE") {
+                                                MessageBox.message("피킹지시가 완료되었습니다.", { isAutoHide: true, isClickHide: true, isTop: true });
+                                            }
+                                            else if (result.processStatus == "PAUSE_START") {
+                                                MessageBox.message("보류처리가 완료되었습니다.", { isAutoHide: true, isClickHide: true, isTop: true });
+                                            }
+                                            else if (result.processStatus == "PAUSE_STOP") {
+                                                MessageBox.message("보류처리가 해제되었습니다.", { isAutoHide: true, isClickHide: true, isTop: true });
+                                                SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/picking/picking-order-shelf-processing.hpop"), data);
+                                            }
+                                            list();
+                                        }
+                                    });
+                            }
+                            if (data.pickingOrderStatusCd == "COMPLETE"
+                                || data.pickingOrderStatusCd == "FORCE_COMPLETE") {
+                                Dialog.open("ilc/solutions/pop/picking/picking-complete-order-detail.popdialog", "full", data, function (data) {
+                                });
+                            }
+                        })
+                        $(".btn-srch").click(function () {
+                            list();
+                        });
+                    }
+                    , _setForm = function () {
+                        //POPHeader.setTitle("피킹지시 - 목록");
+                        POPHeader.setTitle("피킹목록");
+                        BoxTag.selectBox.draw([
+                            {
+                                selector: "#pauseYn",
+                                firstTxt: "-보류상태-",
+                                masterCd: "del_yn",
+                            },
+                            // 				{
+                            // 					selector : "#pickingOrderTypeCd",
+                            // 					firstTxt : "-피킹유형-",
+                            // 					masterCd : "picking_order_type_cd"
+                            // 				},
+                            {
+                                selector: "#waveTypeCd",
+                                firstTxt: "-피킹유형-",
+                                masterCd: "wave_type_cd"
+                            }
+                        ]);
+                    }
+                    , startPicking = function (data) {
+                        SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/picking/picking-order-shelf-processing.hpop"), data);
+                    }
+                    , unloadContainer = function (data) {
+                        if (data && data.bucket && data.bucket.containerId && data.bucket.containerFaceId) {
+                            SfpAjax.ajax("ilc/solutions/wpm/containerorderunload/unloadContainer",
+                                // 				SfpAjax.ajax("ilc/solutions/wom/pickingorder/unloadContainer",
+                                { containerId: data.bucket.containerId, containerFaceId: data.bucket.containerFaceId, workStationId: data.workStationId }
+                                , function (data) {
+                                    MessageBox.message("Shelf를 보냈습니다.");
+                                });
+                        }
+                    }
+                    , list = function () {
+                        if (!POPHeader.getWorkStationId()) {
+                            MessageBox.message("작업장을 설정하세요.", { isAutoHide: true, isClickHide: true });
+                            return;
+                        }
+
+                        var data = $(".function-area").find("input, select").serializeObject();
+                        data.workStationId = POPHeader.getWorkStationId()
+                        //워킹스테이션 별로 가능한 오더를 조회
+                        SfpAjax.ajax("ilc/solutions/wom/pickingorder/getStartPossiblePickingOrderList",
+                            data
+                            , function (list) {
+                                $("#totalRows").text(0);
+                                $("#totalRows").text(list.length);
+                                $("#picking-order-grid").grid("draw", list, function (row) {
+
+                                    if (row.distributionYn == "Y" && row.pickingOrderStatusCd != "READY") {
+                                        if (row.distributionStatusCd != "COMPLETE") {
+                                            row.distributionMoveHtml = "<button class='btn-distribution-move blue row'>분배 확인</button>";
+                                            row.distributionCheckHtml = "<button class='btn-distribution-check blue row'>미완료 분배</button>";
+                                        }
+                                    }
+
+                                    //진행중
+                                    if (row.pickingOrderStatusCd == "ING") {
+                                        //보류 N
+                                        if (row.pauseYn == null || row.pauseYn == '' || row.pauseYn == 'N') {
+                                            row.pauseStatus = 'pauseN';
+                                            //보류 Y
+                                        } else {
+                                            row.pauseStatus = 'pauseY';
+                                        }
+                                    }
+
+                                    if (row.distributionStatusCd == null) {
+                                        row.distributionStatusNameCache = 'N/A';
+                                    }
+
+                                });
+                            });
+                    };
+                init();
+                return {
+                    list: list
+                    , startPicking: startPicking
+                }
+            })(jQuery);
+        });
+    </script>
+    <style>
+        .function-area {
+            display: flex !important;
+            width: 100%;
+        }
+
+        .sfp-grid tbody tr.pauseY td {
+            background: #FF8A80;
+        }
+
+        .sfp-grid tbody tr.pauseN td {
+            background: #BBDEFB;
+        }
+    </style>
+    
+    <div id="left-menu">
+        <p class="txt-logo">DEALICIOUS</p>
+        <a href="#" class="mn-home"></a>
+        <ul class="mn-list">
+            <li><a href="#" class="mn-1 on"></a></li>
+            <li><a href="#" class="mn-2"></a></li>
+            <li><a href="#" class="mn-3"></a></li>
+            <li><a href="#" class="mn-4"></a></li>
+        </ul>
+        <a href="" class="mn-logout"></a>
+    </div>
+    <main>
+        <div class="contents-wrap no-footer">
+            <section>
+                <div class="col-2-wrap cont-2-wrap">
+                    <div class="col-sp info-area">
+                        <div class="top-title">
+                            <div class="top-con">
+                                <dl style="width: 300px;">
+                                    <dt>Wave No</dt>
+                                    <span id="pickingOrderId" style="display:none;">PO-1624271647122-00023</span>
+                                    <dd><span id="interfaceRequestNo">20210621_010_4</span></dd>
+                                </dl>
+                                <dl style="width: 450px;">
+                                    <dt>Wave Name</dt>
+                                    <dd><span id="interfaceRequestName">20210526 댄_단포장4차(AGV)</span></dd>
+                                </dl>
+                                <dl>
+                                    <dt>총SKU</dt>
+                                    <dd><span id="skuCount">7</span></dd>
+                                </dl>
+                                <dl>
+                                    <dt>지시수량</dt>
+                                    <dd><span id="totalOrderQty">7</span></dd>
+                                </dl>
+                                <dl>
+                                    <dt>피킹수량</dt>
+                                    <dd><span id="totalCompleteQty">2</span></dd>
+                                </dl>
+                                <dl>
+                                    <dt>보류상태</dt>
+                                    <dd><span id="pauseNameCache">보류중</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="item-wp clearfix">
+                            <div class="item-wp-in">
+                                <div class="item-img">
+                                    <p><img src="/ilc/resources/images/no-image_small.png" alt="" id="pickingSkuImage">
+                                    </p>
+                                    <span class="validation"></span>
+                                </div>
+                                <div class="item-info">
+                                    <div class="tbl-cont">
+                                        <div class="tbl-cont-left">
+                                            <input type="hidden" id="itemId">
+                                            <input type="hidden" id="containerCellId">
+                                            <input type="hidden" id="containerWorkPlan">
+                                            <table>
+                                                <colgroup>
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                    <col style="width:10%">
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr>
+                                                        <th colspan="2">LOT</th>
+                                                        <td colspan="3"><span id="lotNo">8809624712243</span></td>
+                                                        <th colspan="2">품목코드</th>
+                                                        <td colspan="3">8809624712243<span id="skuCd"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="2">품목명</th>
+                                                        <td colspan="3"><span id="productName">레더라이크_카드지갑</span></td>
+                                                        <th colspan="2">화주</th>
+                                                        <td colspan="3">스튜디오쓰리에스<span id="shipperId"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="2">바코드</th>
+                                                        <td colspan="3">8809624712243<span id="universalBarcode"></span>
+                                                        </td>
+                                                        <th colspan="2">Location</th>
+                                                        <td colspan="3">01-01<span id="containerCellSplitId"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tbl-cont-right">
+                                            <div class="tbl-cont-right-row">
+                                                <span class="sky-cal">지시수량</span>
+                                                <strong class="sky-cal" id="incompleteQty">20</strong>
+                                            </div>
+                                            <span>/</span>
+                                            <div class="tbl-cont-right-row">
+                                                <span>피킹할수량</span>
+                                                <div class="tbl-cont-right-row-val">
+                                                    <div class="value" style="width : 141px; display: inline-block;"><strong id="executePickingQty">5</strong></div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-count">
+                                                <button class="btn-minus" style="visibility:visible; width: 40px; height:55px;margin:15px;"></button>
+                                                <button class="btn-plus" style="visibility:visible; width: 40px; height:55px;margin:15px;"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-cont-bottom">
+                                        <div class="tbl-cont-bottom-left">
+                                            <strong
+                                                style="margin-left: 10px; margin-right: 10px;">품목
+                                                바코드</strong>
+                                            <input type="text" class="btn-picking" id="barcode" name="barcode"
+                                                style="width : calc(100% - 250px); font-size: 18px !important"
+                                                disabled="">
+                                            <button class="btn" id="btn-item-check"
+                                                style=" height: 100%; margin-top: 10px; width: 80px;">확인</button>
+                                        </div>
+                                        <div class="tbl-cont-bottom-right">
+                                            <button name="btn-picking" id="btn-picking" class="btn-picking" 
+                                                style="width : 300px;">Start</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-list">
+                            <div id="sku-grid" class="sfp-grid-panel">
+                                <div class="sfp-grid-header-panel" style="overflow-x: hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:150px;">
+                                            <col style="width:150px;">
+                                            <col style="width:150px;">
+                                            <col style="width:*">
+                                            <col style="width:100px">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>LOT</th>
+                                                <th>품목코드</th>
+                                                <th>바코드</th>
+                                                <th>품목명</th>
+                                                <th>화주</th>
+                                                <th>Location</th>
+                                                <th>지시수량</th>
+                                                <th>피킹한수량</th>
+                                                <th>재고수량</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 190px;height: 190px">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:150px;">
+                                            <col style="width:150px;">
+                                            <col style="width:150px;">
+                                            <col style="width:*">
+                                            <col style="width:100px">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                        </colgroup>
+                                        <thead style="display: none;">
+                                            <tr>
+                                                <th>LOT</th>
+                                                <th>품목코드</th>
+                                                <th>바코드</th>
+                                                <th>품목명</th>
+                                                <th>화주</th>
+                                                <th>Location</th>
+                                                <th>지시수량</th>
+                                                <th>피킹한수량</th>
+                                                <th>재고수량</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="sfp-template-el R">
+                                                <td>0000414820</td>
+                                                <td>8901097-00691</td>
+                                                <td>8809774171365</td>
+                                                <td>초콜릿</td>
+                                                <td>1</td>
+                                                <td>12323</td>
+                                                <td>1</td>
+                                                <td>21</td>
+                                                <td>20</td>
+                                            </tr>
+                                            <tr class="sfp-template-el R">
+                                                <td>0000414820</td>
+                                                <td>8901097-00691</td>
+                                                <td>8809774171365</td>
+                                                <td>초콜릿</td>
+                                                <td>1</td>
+                                                <td>12323</td>
+                                                <td>1</td>
+                                                <td>21</td>
+                                                <td>20</td>
+                                            </tr>
+                                            <tr class="sfp-template-el R">
+                                                <td>0000414820</td>
+                                                <td>8901097-00691</td>
+                                                <td>8809774171365</td>
+                                                <td>초콜릿</td>
+                                                <td>1</td>
+                                                <td>12323</td>
+                                                <td>1</td>
+                                                <td>21</td>
+                                                <td>20</td>
+                                            </tr>
+                                            <tr class="sfp-template-el R">
+                                                <td>0000414820</td>
+                                                <td>8901097-00691</td>
+                                                <td>8809774171365</td>
+                                                <td>초콜릿</td>
+                                                <td>1</td>
+                                                <td>12323</td>
+                                                <td>1</td>
+                                                <td>21</td>
+                                                <td>20</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:150px;">
+                                            <col style="width:150px;">
+                                            <col style="width:150px;">
+                                            <col style="width:*">
+                                            <col style="width:100px">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                            <col style="width:100px;">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sp shelf-area">
+                        <div class="shelf-cont">
+                            <div class="shelf-top">
+                                <dl>
+                                    <dt>Shelf No:<span id="containerId">0009</span></dt>
+                                </dl>
+                                <dl>
+                                    <dt>Face:<span id="containerFaceId">03</span></dt>
+                                </dl>
+                            </div>
+                            <div class="container-item-wrap">
+                                <div class="grid" id="blocks"></div>
+                            </div>
+                            <div class="shelf-bottom" style="text-align: center;">
+                                <button class="btn-orange" id="btn-marking" >Marking<span></span></button>
+                                <button class="btn-pass-shelf">Send<span></span></button>
+                            </div>
+                        </div>
+                        <ul class="btn-list array4">
+                            <li>
+                                <button class="btn-picking-list">
+                                    <span></span><p>피킹<br>지시 목록</p>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn-picking-detail">
+                                    <span></span><p>피킹<br>지시 상세</p>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn-shelf-check">
+                                    <span></span><p>Shelf<br>상황 확인</p>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn-distribution">
+                                    <span></span><p><br>분배 확인</p>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

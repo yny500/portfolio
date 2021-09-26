@@ -1,0 +1,69 @@
+@charset "utf-8";
+
+body{background:#fff}
+.login-box{box-shadow:none}
+.login-box h1{display:block;height:auto;padding-bottom:20px;font-size:22px;line-height:1.5}
+.login-box .login-cont{position:relative;padding-bottom:26px}
+.login-box .alert{position:absolute;left:0;right:0;bottom:-10px;width:100%;margin:0;line-height:35px;text-align:center;color:#fff;background:rgba(255,0,0,0.6)}
+
+.contents-wrap.csc-calendar{background:#fff}
+.contents-wrap.aside-csc{flex-basis:450px;}
+.contents-wrap.aside-csc > section{padding-left:20px}
+
+.aside-csc .tab-list-wrap{height:65%;padding-bottom:20px;box-sizing:border-box}
+.aside-csc .tab-container > label{width:50%;box-sizing:border-box;}
+.aside-csc .tab-container > label + input + label{margin:0}
+.aside-csc .tab-container.tab-type2 > label:after{z-index:3}
+.aside-csc .tab-content{position:relative;height:calc(100% - 38px);padding:40px 0 10px;box-sizing:border-box}
+.aside-csc .tab-list-wrap .list-cnt{position:absolute;top:10px;right:10px;font-size:14px}
+.aside-csc .tab-content .grid-wrap{height:100%}
+.aside-csc .tab-content .sfp-grid-panel{height:100%}
+.aside-csc .tab-content .sfp-grid-body-panel{height:calc(100% - 35px)}
+.aside-csc .list-cnt{color:#000}
+.aside-csc .list-cnt strong{font-weight:bold;color:#fd3838}
+
+
+.contents-wrap.csc-calendar > section{overflow-y:auto;padding-right:30px}
+.contents-wrap.csc-calendar > section:after{display:none}
+.csc-calendar .calendar-wrap{position:relative;width:100%;height:100%;padding-bottom:100px;box-sizing:border-box;}
+
+.csc-calendar .calendar-wrap #datepicker{height:100%;box-sizing:border-box}
+.csc-calendar .calendar-wrap .ui-datepicker{position:relative;width:100%;height:100%;padding:80px 1px 1px;box-sizing:border-box}
+.csc-calendar .calendar-wrap .ui-datepicker-header{position:absolute;top:0;left:0;right:0;height:80px;}
+.csc-calendar .calendar-wrap .ui-datepicker-header .ui-datepicker-title{line-height:80px;width:auto;font-size:26px}
+.csc-calendar .calendar-wrap .ui-datepicker-calendar{width:100%;height:100%;margin:0;}
+.csc-calendar .calendar-wrap .ui-datepicker-calendar th{height:30px;padding-top:4px;text-align:center;font-size:16px;font-weight:700;box-sizing:border-box}
+/* .csc-calendar .calendar-wrap .ui-datepicker-calendar th > span{display:inline-block;padding:0 3px;border-bottom:1px solid #000} */
+.csc-calendar .calendar-wrap .ui-datepicker-calendar th:first-child > span{color:#f20f08;}
+.csc-calendar .calendar-wrap .ui-datepicker-calendar td{position:relative;table-layout:fixed;height:16.6%;padding:10px 10px 0 10px;border:1px solid #efefef;text-align:left;vertical-align:top;}
+.csc-calendar .calendar-wrap .ui-datepicker-calendar td:first-child{border-left:0}
+.csc-calendar .calendar-wrap .ui-datepicker-calendar td:last-child{border-right:0}
+.csc-calendar .calendar-wrap .ui-datepicker-calendar td a{font-size:14px;border:0}
+.csc-calendar .ui-datepicker-calendar td .cnt{position:absolute;top:10px;right:10px;font-size:15px;font-weight:700;color:#4a4a4a}
+.csc-calendar .ui-datepicker-calendar td .cnt > strong{font-size:15px;color:#e30f08}
+.csc-calendar .ui-datepicker-calendar td .reservation-list{margin-top:10px}
+.csc-calendar .ui-datepicker-calendar td .reservation-list li{padding:2px 5px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;background:#c1e8ed;}
+.csc-calendar .ui-datepicker-calendar td .reservation-list li > span{display:inline-block;font-size:13px}
+.csc-calendar .ui-datepicker-calendar td .reservation-list li > span + span{margin-left:5px}
+.csc-calendar .ui-datepicker-calendar td .reservation-list li + li{margin-top:2px}
+.csc-calendar .ui-datepicker-calendar td.ui-datepicker-today{background:#fcf8d8}
+.csc-calendar .ui-datepicker-header a[class*="ui-datepicker-"]{position:absolute;top:50%;width:0;height:0;margin-top:-12px;font-size:0;cursor:pointer;border:12px solid transparent;background:none}
+.csc-calendar .ui-datepicker-header a.ui-datepicker-prev{left:40%;border-right-color:#06a6b1}
+.csc-calendar .ui-datepicker-header a.ui-datepicker-next{right:40%;border-left-color:#06a6b1}
+.csc-calendar .ui-datepicker-calendar td a.ui-state-active{color:#555 !important;border:0;background:none}
+.csc-calendar .ui-datepicker-calendar td.cant-add{border:2px solid #fb8080;background:#fbd2d2}
+
+.calendar-wrap .legend-wrap{position:absolute;bottom:40px;right:10px;font-size:0;}
+.calendar-wrap .legend-wrap li{position:relative;display:inline-block;height:30px;padding-left:25px;line-height:30px;font-size:14px}
+.calendar-wrap .legend-wrap li:after{content:'';display:inline-block;position:absolute;left:0;top:50%;width:20px;height:20px;margin-top:-10px;box-sizing:border-box}
+.calendar-wrap .legend-wrap li + li{margin-left:15px}
+.calendar-wrap .legend-wrap li.today:after{background-color:#fcf8d8}
+.calendar-wrap .legend-wrap li.reservation:after{background-color:#c1e8ed}
+.calendar-wrap .legend-wrap li.cant-add:after{border:1px solid #fb8080;background-color:#fbd2d2}
+
+@media (max-width:399px) {
+    .login-box{left:10px;width:calc(100% - 20px);margin-left:0;padding:40px 10px;border-radius:0;box-sizing:border-box}
+    .login-box .info{left:10px;right:10px}
+    .login-box h1{font-size:22px}
+
+}

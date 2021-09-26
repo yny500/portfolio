@@ -1,0 +1,1022 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=1920, height=1080">
+	<meta charset="UTF-8">
+	<title>Map-main</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="ilc/resources/images/favicon.ico">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/button.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/common.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/form.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/grid.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/sfp/sfp-dialog.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-grid.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/theme/factory/button.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/theme/factory/common.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/theme/factory/form.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/theme/factory/grid.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/project/button.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/project/common.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/project/form.css">
+	<link defer="" rel="stylesheet" href="ilc/resources/css/project/grid.css">
+
+	<script src="ilc/resources/js/lib/jquery/jquery.min.js"></script>
+	<script src="ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+	<script src="ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+	<script defer="" src="ilc/resources/js/lib/moment/moment.min.js"></script>
+	<script defer="" src="ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+	<script defer="" src="ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+	<script defer="" src="ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+	<script defer="" src="ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+	<script defer="" src="ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+	<script src="ilc/resources/js/phrase.js"></script>
+	<script src="ilc/resources/js/interpreter.js"></script>
+	<script src="ilc/resources/js/project/sfp-property-pattern.js"></script>
+    
+	<script defer="" src="ilc/resources/js/sfp/sfp-stringutils.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-utils.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-ajax.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-dialog.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-ui-template.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-ui-box.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-datepicker.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-dateutils.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+	<script defer="" src="ilc/resources/js/sfp/sfp-websocket.js"></script>
+	<script src="ilc/resources/js/sfp/sfp-multi-input.js"></script>
+	<script defer="" src="ilc/resources/js/project/project-dialog-sizer.js"></script>
+	<script defer="" src="ilc/resources/js/lib/jquery-barcode.js"></script>
+	<script defer="" src="ilc/resources/js/lib/jquery.balloon.js"></script>
+	<script defer="" src="ilc/resources/js/project/sfp-common.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			SFPURL.setContextUrl("ilc");
+			SFPURL.setMenuUrl();
+			SfpUtils.setLocale("ko");
+			$(".btn-reset").on("click", function () {
+				$(this).closest(".function-area").find("select, input:not([type=hidden])").each(function () {
+					var $this = $(this);
+					if ($this.hasClass("reset-ignore") == false) {
+						$this.val("");
+						$(".calendar").datepicker("option", { "minDate": null, "maxDate": null });
+
+						if ($this.hasClass("multi-input-select") == true) {
+							$this.data("val", "");
+						}
+
+					}
+				});
+			});
+		});
+
+		function showProgress() {
+			var $window = $(window);
+			var $loaderPanel = $("#loader-panel");
+			var $loader = $("#loader");
+			var windowWidth = $window.width();
+			var windowHeight = $window.height();
+			var loaderWidth = $loader.width();
+			var loaderHeight = $loader.height();
+
+			$loaderPanel.css("width", windowWidth).css("height", windowHeight);
+			$loader.css("left", (windowWidth / 2) - (loaderWidth / 2));
+			$loader.css("top", (windowHeight / 2) - (loaderHeight / 2));
+
+			$loaderPanel.fadeIn(100);
+			// 	$("#loader-panel").show();
+		}
+
+		function closeProgress() {
+			var $loaderPanel = $("#loader-panel");
+			$loaderPanel.fadeOut(100);
+			// 	$("#loader-panel").hide();
+		}
+
+	</script>
+	<style>
+		#loader-panel {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1000;
+			text-align: center;
+			vertical-align: middle;
+			display: none;
+		}
+
+		#loader {
+			position: absolute;
+			z-index: 1001;
+			width: 50px;
+			height: 50px;
+		}
+
+		#layer-box {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1000;
+			text-align: center;
+			vertical-align: middle;
+			display: none;
+		}
+
+		#big-image {
+			position: absolute;
+			z-index: 1001;
+			width: 400px;
+			height: 400px;
+		}
+	</style>
+	<style type="text/css">
+		.JColResizer {
+			table-layout: fixed;
+		}
+
+		.JColResizer>tbody>tr>td,
+		.JColResizer>tbody>tr>th {
+			overflow: hidden;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+
+		.JCLRgrips {
+			height: 0px;
+			position: relative;
+		}
+
+		.JCLRgrip {
+			margin-left: -5px;
+			position: absolute;
+			z-index: 5;
+		}
+
+		.JCLRgrip .JColResizer {
+			position: absolute;
+			background-color: red;
+			filter: alpha(opacity=1);
+			opacity: 0;
+			width: 10px;
+			height: 100%;
+			cursor: e-resize;
+			top: 0px
+		}
+
+		.JCLRLastGrip {
+			position: absolute;
+			width: 1px;
+		}
+
+		.JCLRgripDrag {
+			border-left: 1px dotted black;
+		}
+
+		.JCLRFlex {
+			width: auto !important;
+		}
+
+		.JCLRgrip.JCLRdisabledGrip .JColResizer {
+			cursor: default;
+			display: none;
+		}
+	</style>
+	<style class="moogle-contextmenu-style" type="text/css">
+		#tabMenuBox div.new-tab {
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="loader-panel" style="width: 1920px; height: 937px; display: none;">
+		<img id="loader" src="ilc/resources/images/ajax-loader.gif" alt="" style="left: 935px; top: 443.5px;">
+	</div>
+	<div id="layer-box">
+		<img id="big-image" src="ilc/resources/images/ajax-loader.gif" alt="">
+	</div>
+
+	<link rel="stylesheet" href="ilc/resources/css/page.css">
+	<link rel="stylesheet" href="ilc/resources/css/theme/factory/page.css">
+	<link rel="stylesheet" href="ilc/resources/css/project/page.css">
+
+	<script src="ilc/resources/js/project/sfp-common-page.js"></script>
+	<script src="ilc/resources/js/lib/jquery.fileDownload.js"></script>
+	<script src="ilc/resources/js/lib/colResizable.js"></script>
+
+	<link rel="stylesheet" href="ilc/resources/css/left_hidden_tree.css">
+	<link rel="stylesheet" href="ilc/resources/css/theme/factory/left_hidden_tree.css">
+    
+	<script src="ilc/resources/js/lib/ui-contextmenu/jquery.ui-contextmenu.js"></script>
+	<link rel="stylesheet" href="ilc/resources/css/lib/jquery-ui/jquery-ui.css">
+
+	<script type="text/javascript">
+		$(function () {
+
+			window.TMHEADER = (function ($) {
+				var init = function () {
+					$("#config-menu").template({ height: "180px" });
+					_setForm();
+					_bindEvent();
+					//configMenuList();
+				}
+					, _setForm = function () {
+					}
+					, _bindEvent = function () {
+						// 로고 클릭 시
+						$('.txt-logo').click(function (e) {
+							location.replace("ilc/");
+						});
+
+						// 메뉴 클릭 시
+						$("ul.menu-ul").on("click", "li", function (e) {
+							var $this = $(this).find("a");
+							var url = $this.data("url");
+							if (url) {
+								var _url = SFPURL.getUrl(url);
+								var _menuId = $this.data("menuid");
+								var _menuName = $this.text();
+								if ($this.hasClass("dialog-menu")) {
+									var url = _url + ".dialog";
+									Dialog.open(url, DialogSizer[_menuId], null, function (result) { });
+								} else {
+									addMenuTab(_menuId, _menuName, _url + ".page");
+								}
+							}
+							e.stopPropagation();
+						});
+
+						$(".app-menu-list").on("click", "a", function () {
+							var $this = $(this);
+							var url = SFPURL.getUrl($this.data("url") + ".tpage");
+							window.open(url);
+						});
+
+						// 헬프 클릭 시
+						$(".app-help").click(function () {
+							if ($(".frame-container.on").attr("id") !== '' && $(".frame-container.on").attr("src") !== '') {
+								var _frmPop = document.frmPopup;
+								window.open('', 'HELP-POP', "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=1200,height=800");
+
+								_frmPop.action = "ilc/" + "common/help.page";
+								_frmPop.target = 'HELP-POP';
+								_frmPop.menuId.value = $(".frame-container.on").attr("id");
+								_frmPop.menuUrl.value = $(".frame-container.on").attr("src");
+								_frmPop.submit();
+							}
+						});
+
+						$(".tab-item-holder").on("click", ".tab-item i", function (e) {
+							var $el = $(e.target).closest(".tab-item");
+
+							if ($el.hasClass("on")) {
+								$(".tab-item-holder .tab-item:eq(0)").trigger("click");
+							}
+
+							$("#" + $el.data("tab-id")).remove();
+							$el.closest(".tab-item").remove();
+
+							e.stopPropagation();
+						});
+
+						$(".tab-item-holder").on("click", ".tab-item", function (e) {
+							window.TMHEADER.showProgress();
+							var $this = $(this);
+							$(".tab-item-holder .tab-item, .frame-container").removeClass("on");
+							$this.addClass("on");
+							$("#" + $(this).data("tab-id")).addClass("on");
+							setTimeout(window.TMHEADER.closeProgress, 100);
+						});
+
+						$("#tabMenuBox").contextmenu({
+							delegate: "div.new-tab"
+							, autoFocus: true
+							, preventContextMenuForPopup: true
+							, preventSelect: true
+							, taphold: true
+							, menu: [
+								{ title: SfpUtils.getInterpreter("현재 탭 새로고침"), cmd: "refresh", uiIcon: "ui-icon-refresh" },//Refresh Current Tab
+								{ title: SfpUtils.getInterpreter("현재 탭 닫기"), cmd: "closeOne", uiIcon: "ui-icon-close" },//Close Current Tab
+								{ title: SfpUtils.getInterpreter("현재 탭 제외하고 닫기"), cmd: "closeAround", uiIcon: "ui-icon-circle-close" },//Close except current tab
+								{ title: SfpUtils.getInterpreter("모든 탭 닫기"), cmd: "closeAll", uiIcon: "ui-icon-circle-close" }//Close all tabs
+							]
+							, beforeOpen: function (event, ui) {
+
+							}
+							, close: function (event, ui) {
+
+							}
+							, select: function (event, ui) {
+								var $target = ui.target;
+								var $div = $target.closest(".tab-item");
+								var _id = $div.data("tab-id");
+
+								switch (ui.cmd) {
+									case "refresh":
+										$("#" + _id).attr('src', $("#" + _id).attr('src'));
+										break;
+
+									case "closeOne":
+										if (_id !== 'content-frame') {
+											$("#" + _id).remove();
+											$div.remove();
+										}
+										$(".tab-item-holder .tab-item:eq(0)").trigger("click");
+										break;
+
+									case "closeAround":
+										$(".new-tab").each(function (index) {
+											var $this = $(this);
+											if ($this.data("tab-id") !== _id) {
+												$("#" + $this.data("tab-id")).remove();
+												$this.remove();
+											}
+										});
+										$div.trigger("click");
+										break;
+
+									case "closeAll":
+										$(".new-frame").remove();
+										$(".new-tab").remove();
+										$(".tab-item-holder .tab-item:eq(0)").trigger("click");
+										break;
+								}
+							}
+						});
+
+						$("div.util-menu .user").click(function () {
+							Dialog.open('ilc/apps/sys/userprivate/user-private.dialog', 550);
+						});
+
+						$(".logout").on("click", function () {
+							if (confirm(SfpUtils.getPhrase("msg-005"))) {
+								document.getElementById("logoutForm").submit();
+							}
+						});
+					}
+					, showProgress = function () {
+						// 			var $window = $(window);
+						// 			var $loaderPanel = $("#loader-panel");
+						// 			var $loader = $("#loader");
+						// 			var windowWidth = $window.width();
+						// 			var windowHeight = $window.height();
+						// 			var loaderWidth = $loader.width();
+						// 			var loaderHeight = $loader.height();
+
+						// 			$loaderPanel.css("width", windowWidth).css("height", windowHeight);
+						// 			$loader.css("left", (parseInt(windowWidth)/2)-(parseInt(loaderWidth)/2) );
+						// 			$loader.css("top", (parseInt(windowHeight)/2)-(parseInt(loaderHeight)/2) );
+
+						// 			$loaderPanel.fadeIn(100);
+					}
+					, closeProgress = function () {
+						// 			var $loaderPanel = $("#loader-panel");
+						// 			$loaderPanel.fadeOut(100);
+					}
+					, addMenuTab = function (menuId, menuName, meNuUrl) {
+						$(".tab-item-holder .tab-item").removeClass("on");
+						$(".frame-container").removeClass("on");
+
+						var isAdd = true;
+
+						$(".tab-item-holder .tab-item").each(function (index) {
+							if ($(this).data("tab-id") === menuId) {
+								$(this).addClass("on");
+								$("#" + menuId).addClass("on");
+								isAdd = false;
+							}
+						});
+
+						if (isAdd) {
+							window.TMHEADER.showProgress();
+							if ($(".tab-item-holder .tab-item").length > 9) {
+								$(".tab-item-holder .tab-item").eq(1).remove();
+								$("#content-frame-container .frame-container").eq(1).remove();
+							}
+							$("#tabMenuBox").append('<div class="new-tab tab-item on" data-tab-id="' + menuId + '"><span>' + SfpUtils.getInterpreter(menuName) + '</span><i></i></div>');
+							$("#content-frame-container").append('<iframe class="new-frame frame-container on" id="' + menuId + '" data-menu-id="' + menuId + '" src="' + meNuUrl + '" onload="setTimeout(window.TMHEADER.closeProgress, 500)" frameborder="0" framespacing="0"></iframe>');
+						} else {
+							setTimeout(window.TMHEADER.closeProgress, 500);
+						}
+					}
+					, getMenuClass = function (idx) {
+						var array = ['mdm', 'mes', 'wms', 'vmi', 'lms', 'oee', 'bom', 'system', 'option'];
+						return array[idx];
+					}
+					, configMenuList = function () {
+						var _param = { menuAppliedDevice: "PC", menuGroupCd: "CONFIG" };
+						SfpAjax.ajax("ilc/apps/sys/menu/getRecursiveMenuListByAppliedDeviceByMemory", _param
+							, function (list) {
+								$("#config-menu").template("draw", list, function (row) {
+									row.menuClass = getMenuClass(row.rowNum);
+									if (row.level === 1 && row.pMenuId == null && row.auth == true) {
+										return true;
+									}
+								});
+							}
+						);
+					};
+				init();
+				return {
+					showProgress: showProgress
+					, closeProgress: closeProgress
+					, addMenuTab: addMenuTab
+				}
+			})(jQuery);
+		});
+	</script>
+
+	<header>
+		<a href="#" class="toggle-menu active">menu<span></span></a>
+		<h1><a href="#" class="txt-logo">LGL</a></h1>
+		<nav>
+			<ul class="menu-ul">
+				<li><a href="#" data-sub="A100" class=" has-depth " data-url="" data-menuid="A100">품목 관리</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wmd/item/item-list" data-menuid="A110">품목 목록</a>
+						</li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="B100" class=" has-depth " data-url="" data-menuid="B100">LOT 관리</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wis/lot/lot-list" data-menuid="B110">LOT 목록</a>
+						</li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="D100" class=" has-depth " data-url="" data-menuid="D100">Shelf 관리</a><a
+						href="#" class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wmd/containertype/shelf-type-list"
+								data-menuid="D110">Shelf 유형 목록</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wmd/container/shelf-list"
+								data-menuid="D120">Shelf 목록</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="E100" class=" has-depth " data-url="" data-menuid="E100">스테이션 관리</a><a
+						href="#" class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wmd/workstation/work-station-out-list"
+								data-menuid="E110">피킹스테이션</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wmd/workstation/work-station-in-list"
+								data-menuid="E120">진열스테이션</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="F100" class=" has-depth " data-url="" data-menuid="F100">PDA 관리</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wmd/pda/pda-list" data-menuid="F110">PDA 목록</a>
+						</li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="G100" class=" has-depth " data-url="" data-menuid="G100">AGV 관리</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wmd/agv/agv-list" data-menuid="G110">AGV 목록</a>
+						</li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="H100" class=" has-depth " data-url="" data-menuid="H100">진열지시</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wom/displayorder/display-order-list"
+								data-menuid="H110">진열지시 목록</a></li>
+						<li><a href="#" class="  " data-url="/solutions/pc/display-order-interface-test-list"
+								data-menuid="H120">진열지시테스트</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="I100" class=" has-depth " data-url="" data-menuid="I100">피킹지시</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wom/pickingorder/picking-order-list"
+								data-menuid="I110">피킹지시 목록</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="J100" class=" has-depth " data-url="" data-menuid="J100">재고조사</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  "
+								data-url="/solutions/wom/inventorysurveyorder/inventory-survey-order-list"
+								data-menuid="J110">재고조사지시</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="K100" class=" has-depth " data-url="" data-menuid="K100">발주지시</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wom/orderdraftmain/order-draft-main-list"
+								data-menuid="K110">발주 목록</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="W100" class=" has-depth " data-url="" data-menuid="W100">수기피킹</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  "
+								data-url="/solutions/wom/manualpickingorder/manual-picking-order-list"
+								data-menuid="W110">수기피킹지시</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="M100" class=" has-depth " data-url="" data-menuid="M100">점검</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wmd/markingtype/marking-type-list"
+								data-menuid="M110">마킹유형</a></li>
+						<li><a href="#" class="  "
+								data-url="/solutions/wem/containerabnormalmarking/container-abnormal-marking-list"
+								data-menuid="M120">마킹목록</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wom/inspectionorder/inspection-order-list"
+								data-menuid="M130">Shelf 점검지시</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="P100" class=" has-depth " data-url="" data-menuid="P100">현황</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/wis/containerinventory/item-storage-current"
+								data-menuid="P110">품목 현황</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wis/containerinventory/lot-storage-current"
+								data-menuid="P140">LOT 현황</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wis/containerinventory/container-inventory-list"
+								data-menuid="P150">재고 현황</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="Q100" class=" has-depth " data-url="" data-menuid="Q100">물류집계</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/report/logistics-history"
+								data-menuid="Q120">물류이력</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="R100" class=" has-depth " data-url="" data-menuid="R100">인터페이스</a><a href="#"
+						class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/dmw/interfacehistory/agv-interface-history-list"
+								data-menuid="R110">WCS 인터페이스</a></li>
+						<li><a href="#" class="  " data-url="/solutions/dmw/interfacehistory/wms-interface-history-list"
+								data-menuid="R1210">WMS 인터페이스</a></li>
+					</ul>
+				</li>
+				<li><a href="#" data-sub="ROLE_ADMIN" class=" has-depth " data-url="" data-menuid="ROLE_ADMIN">DEV</a><a
+						href="#" class="depth-btn"></a>
+					<ul>
+						<li><a href="#" class="  " data-url="/solutions/dev/simulator-agv-picking-order-list"
+								data-menuid="S110">피킹지시생성</a></li>
+						<li><a href="#" class="  " data-url="/solutions/dev/command" data-menuid="S120">명령</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wmd/map/map-point" data-menuid="S130">Map</a>
+						</li>
+						<li><a href="#" class="  " data-url="/solutions/dev/manager/manager-list"
+								data-menuid="S140">관리자</a></li>
+						<li><a href="#" class="  " data-url="/solutions/wpm/containerorder/container-order-list"
+								data-menuid="S150">컨테이너오더</a></li>
+						<li><a href="#" class="  " data-url="/apps/sys/menu/menu-tree-edit"
+								data-menuid="MENU_ROLE">메뉴관리</a></li>
+						<li><a href="#" class="  " data-url="/apps/sys/userrole/user-role-add-and-mapping"
+								data-menuid="ROLEBYMENU">권한관리</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="util-menu">
+			<ul>
+				<li>
+					<a href="#" class="app-menu"><span>메뉴</span></a>
+					<div class="app-menu-list">
+						<ul id="config-menu" style="height: 180px;">
+							<li><a href="#" class="mes" data-menuid="T100"
+									data-url="/solutions/dashboard/total-daily">일일 지표</a></li>
+							<li><a href="#" class="wms" data-menuid="U100"
+									data-url="/solutions/dashboard/total-monthly">월간 지표</a></li>
+						</ul>
+					</div>
+					<div class="dimmed"></div>
+				</li>
+			</ul>
+		</div>
+		<form action="ilc/logout" method="post" id="logoutForm">
+		</form>
+
+		<form name="frmPopup" method="post">
+			<input type="hidden" name="menuId">
+			<input type="hidden" name="menuUrl">
+			<input type="hidden" name="jspPath">
+		</form>
+	</header>
+
+	<script type="text/sfp-template" data-model="config-menu">
+	</script>
+	<link rel="stylesheet" href="ilc/resources/css/lib/jquery.fancytree/skin-win8/ui.fancytree.css">
+	<script src="ilc/resources/js/lib/jquery.fancytree/jquery.fancytree-all-deps.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			window.TreeMenu = (function ($) {
+				var init = function () {
+					_setForm();
+					_bindEvent();
+					list({ expanded: false, menuAppliedDevice: "PC", menuGroupCd: "MENU" });
+					treeOption = {
+						autoApply: true,   // Re-apply last filter if lazy data is loaded
+						autoExpand: true, // Expand all branches that contain matches while filtered
+						counter: true,     // Show a badge with number of matching child nodes near parent icons
+						fuzzy: false,      // Match single characters in order, e.g. 'fb' will match 'FooBar'
+						hideExpandedCounter: true,  // Hide counter badge if parent is expanded
+						hideExpanders: false,       // Hide expanders if all child nodes are hidden by filter
+						highlight: true,   // Highlight matches by wrapping inside <mark> tags
+						leavesOnly: false, // Match end nodes only
+						nodata: true,      // Display a 'no data' status node if result is empty
+						mode: "dimm"       // Grayout unmatched nodes (pass "hide" to remove unmatched node instead)
+					};
+				}
+					, _setForm = function () {
+					}
+					, _bindEvent = function () {
+						$('.toggle-menu').click(function (e) {
+							$('.menu-group').toggleClass('active');
+							$('.toggle-menu').toggleClass('active');
+						});
+						$("#menuSearch").on("keyup", function (e) {
+							var n,
+								tree = $.ui.fancytree.getTree(),
+								args = "autoApply autoExpand fuzzy hideExpanders highlight leavesOnly nodata".split(" "),
+								// 				opts = {},
+								opts = treeOption,
+								filterFunc = $("#branchMode").is(":checked") ? tree.filterBranches : tree.filterNodes,
+								match = $(this).val();
+
+							// 				$.each(args, function(i, o) {
+							// 					opts[o] = $("#" + o).is(":checked");
+							// 				});
+							// 				opts.mode = $("#hideMode").is(":checked") ? "hide" : "dimm";
+
+							// 				if(e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === ""){
+							// 					$("#btnResetSearch").click();
+							// 					return;
+							// 				}
+							// 				if($("#regex").is(":checked")) {
+							// 					n = filterFunc.call(tree, function(node) {
+							// 						return new RegExp(match, "i").test(node.title);
+							// 					}, opts);
+							// 				} else {
+							// 					n = filterFunc.call(tree, match, opts);
+							// 				}
+							n = filterFunc.call(tree, match, opts);
+							$("#btnResetSearch").attr("disabled", false);
+						}).focus();
+
+						$("#btnResetSearch").click(function (e) {
+							$("#menuSearch").val("");
+							var tree = $.ui.fancytree.getTree();
+							tree.clearFilter();
+						}).attr("disabled", true);
+
+						$("#expandAll").on("click", function (e) {
+							$(".menu-footer-btn").removeClass("active");
+							$(this).addClass("active");
+							$.ui.fancytree.getTree().expandAll();
+						});
+
+						$("#collapseAll").on("click", function (e) {
+							$(".menu-footer-btn").removeClass("active");
+							$(this).addClass("active");
+							$.ui.fancytree.getTree().expandAll(false);
+						});
+
+					}
+					, drawFancytree = function (list) {
+						$("#menu-tree:ui-fancytree").fancytree("destroy");
+
+						$("#menu-tree").fancytree({
+							extensions: ["filter"]
+							, quicksearch: true
+							, source: list
+							, aria: true
+							, filter: treeOption
+							// 				,filter: {
+							// 					autoApply: true,   // Re-apply last filter if lazy data is loaded
+							// 					autoExpand: true, // Expand all branches that contain matches while filtered
+							// 					counter: true,     // Show a badge with number of matching child nodes near parent icons
+							// 					fuzzy: false,      // Match single characters in order, e.g. 'fb' will match 'FooBar'
+							// 					hideExpandedCounter: true,  // Hide counter badge if parent is expanded
+							// 					hideExpanders: false,       // Hide expanders if all child nodes are hidden by filter
+							// 					highlight: true,   // Highlight matches by wrapping inside <mark> tags
+							// 					leavesOnly: false, // Match end nodes only
+							// 					nodata: true,      // Display a 'no data' status node if result is empty
+							// 					mode: "dimm"       // Grayout unmatched nodes (pass "hide" to remove unmatched node instead)
+							// 				}
+							, selectMode: 1 // 1:single, 2:multi, 3:multi-hier
+							, clickFolderMode: 2 // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
+							// 				,tooltip: true
+							// 				,activate: function(event, data) {
+							, click: function (event, data) {
+								var node = data.node;
+
+								if (node.data.auth == false) {
+									return;
+								}
+								// 					console.dir(node.data);
+
+								node.setActive(false);
+								node.setSelected(false);
+
+								if (node.isFolder()) {
+									// 						if(node.isExpanded()){
+									// 							node.setExpanded(false);
+									// 						}else{
+									// 							node.setExpanded(true);
+									// 						}
+									return;
+								}
+
+								var _url = SFPURL.getUrl(node.data.menuUrl);
+
+								if (_url === '') {
+									return;
+								}
+
+								// 					if(node.data.auth == false){
+								// 						alert("권한이 없습니다");
+								// 						return;
+								// 					}
+
+								SFPURL.setMenuId(node.data.menuId);
+								SFPURL.setMenuUrl(node.data.menuUrl);
+
+								if (node.data.menuDialogYn === 'N') {
+									window.TMHEADER.addMenuTab(node.data.menuId, node.data.menuName, _url + ".page");
+								} else {
+									Dialog.open(_url + ".dialog", DialogSizer[node.data.menuId], null, function (result) {
+									});
+								}
+							}
+						});
+
+						// 			$("#menu-tree").fancytree("getTree").visit(function(node){
+						// 				if(node.data.menuUrl === SFPURL.getMenuUrl()){
+						// 					node.setSelected(true);
+						// 				}
+						// 			});
+
+					}
+					, list = function (param) {
+						// 			SfpAjax.ajax("ilc/apps/sys/menu/getRecursiveMenuListByAppliedDevice", param
+						SfpAjax.ajax("ilc/apps/sys/menu/getRecursiveMenuListByAppliedDeviceByMemory", param
+							, function (list) {
+								drawFancytree(list);
+							}
+						);
+					};
+				init();
+				return {
+					list: list
+				}
+			})(jQuery);
+
+		});
+	</script>
+
+	<style>
+		#menuSearch {
+			height: 28px;
+			line-height: 28px;
+			border-radius: 0;
+		}
+
+		#btnResetSearch {
+			height: 28px;
+			padding: 0 5px;
+			border-radius: 0;
+		}
+
+		#btnResetSearch:before {
+			height: 28px;
+			margin-top: -7px;
+		}
+
+		.menu-tree {
+			bottom: 40px;
+		}
+
+		.menu-footer {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+		}
+
+		.menu-footer .menu-footer-btn {
+			width: 50%;
+			height: 100%;
+			line-height: 40px;
+			float: left;
+			box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+		}
+
+		.menu-footer .menu-footer-btn.active {
+			color: #000;
+		}
+
+		.menu-footer .menu-footer-btn:hover {
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+
+		.fancytree-title span.no-auth {
+			color: #8080805c;
+		}
+	</style>
+
+	<div id="menu-group" class="menu-group active">
+		<div id="menu-search" class="menu-search active">
+			<div class="align-center">
+				<span>
+					<label>Filter:</label>
+					<input type="text" name="menuSearch" id="menuSearch" placeholder="Filter..." autocomplete="off">
+				</span>
+				<button class="btn-reset image" id="btnResetSearch" disabled="disabled">초기화</button>
+			</div>
+		</div>
+		<div id="menu-tree" class="menu-tree active">
+			<ul class="ui-fancytree fancytree-container fancytree-plain" tabindex="0" role="tree"
+				aria-activedescendant="ui-id-7">
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span class="auth">품목
+								관리</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span class="auth">LOT
+								관리</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span class="auth">Shelf
+								관리</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span class="auth">스테이션
+								관리</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span class="auth">PDA
+								관리</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span class="auth">AGV
+								관리</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">진열지시</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">피킹지시</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">재고조사</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">발주지시</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">수기피킹</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">점검</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">현황</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">물류집계</span></span></span></li>
+				<li role="treeitem" aria-expanded="false" aria-selected="false"><span
+						class="fancytree-node fancytree-folder fancytree-has-children fancytree-exp-c fancytree-ico-cf"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">인터페이스</span></span></span></li>
+				<li role="treeitem" aria-expanded="true" aria-selected="false" class="fancytree-lastsib" id="ui-id-6">
+					<span
+						class="fancytree-node fancytree-expanded fancytree-folder fancytree-has-children fancytree-lastsib fancytree-exp-el fancytree-ico-ef"><span
+							role="button" class="fancytree-expander"></span><span role="presentation"
+							class="fancytree-icon"></span><span class="fancytree-title"><span
+								class="auth">DEV</span></span></span>
+					<ul role="group" style="">
+						<li role="treeitem" aria-selected="false"><span
+								class="fancytree-node fancytree-expanded fancytree-exp-n fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">피킹지시생성</span></span></span></li>
+						<li role="treeitem" aria-selected="false"><span
+								class="fancytree-node fancytree-expanded fancytree-exp-n fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">명령</span></span></span></li>
+						<li role="treeitem" aria-selected="false" id="ui-id-7"><span
+								class="fancytree-node fancytree-active fancytree-expanded fancytree-exp-n fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">Map</span></span></span></li>
+						<li role="treeitem" aria-selected="false"><span
+								class="fancytree-node fancytree-expanded fancytree-exp-n fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">관리자</span></span></span></li>
+						<li role="treeitem" aria-selected="false"><span
+								class="fancytree-node fancytree-expanded fancytree-exp-n fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">컨테이너오더</span></span></span></li>
+						<li role="treeitem" aria-selected="false"><span
+								class="fancytree-node fancytree-expanded fancytree-exp-n fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">메뉴관리</span></span></span></li>
+						<li role="treeitem" aria-selected="false" class="fancytree-lastsib"><span
+								class="fancytree-node fancytree-expanded fancytree-lastsib fancytree-exp-nl fancytree-ico-e"><span
+									class="fancytree-expander"></span><span role="presentation"
+									class="fancytree-icon"></span><span class="fancytree-title"><span
+										class="auth">권한관리</span></span></span></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+
+		<div class="menu-footer">
+			<div class="menu-footer-btn" id="expandAll"><span>Expand all</span></div>
+			<div class="menu-footer-btn active" id="collapseAll"><span>Collapse all</span></div>
+		</div>
+
+	</div>
+	<div id="tabMenuBox" class="tab-item-holder">
+		<div class="tab-item" data-tab-id="content-frame"><span>HOME</span></div>
+		<div class="new-tab tab-item on" data-tab-id="S130"><span>Map</span><i></i></div>
+	</div>
+
+	<main>
+		<div id="content-frame-container" class="frame-contents">
+			<iframe class="new-frame frame-container on" id="S130" data-menu-id="S130"
+				src="solutions/index.html" onload="setTimeout(window.TMHEADER.closeProgress, 500)"
+				frameborder="0" framespacing="0"></iframe>
+		</div>
+	</main>
+	<ul class="ui-helper-hidden ui-contextmenu ui-menu ui-widget ui-widget-content ui-menu-icons" id="ui-id-1"
+		role="menu" tabindex="0" style="display: none;">
+		<li data-command="refresh" class="ui-menu-item">
+			<div id="ui-id-2" tabindex="-1" role="menuitem" class="ui-menu-item-wrapper">현재 탭 새로고침<span
+					class="ui-icon ui-icon-refresh"></span></div>
+		</li>
+		<li data-command="closeOne" class="ui-menu-item">
+			<div id="ui-id-3" tabindex="-1" role="menuitem" class="ui-menu-item-wrapper">현재 탭 닫기<span
+					class="ui-icon ui-icon-close"></span></div>
+		</li>
+		<li data-command="closeAround" class="ui-menu-item">
+			<div id="ui-id-4" tabindex="-1" role="menuitem" class="ui-menu-item-wrapper">현재 탭 제외하고 닫기<span
+					class="ui-icon ui-icon-circle-close"></span></div>
+		</li>
+		<li data-command="closeAll" class="ui-menu-item">
+			<div id="ui-id-5" tabindex="-1" role="menuitem" class="ui-menu-item-wrapper">모든 탭 닫기<span
+					class="ui-icon ui-icon-circle-close"></span></div>
+		</li>
+	</ul>
+</body>
+
+</html>

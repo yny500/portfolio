@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+nav ~ main{padding-left:0px;}
+nav ~ .tab-item-holder{padding-left:0px;}
+nav ~ main header{left:0px;}
+
+.menu-group.active ~ main{padding-left:250px; transition: all 300ms ease-in-out 0s; }
+.menu-group.active ~ main header{left:250px; transition: all 300ms ease-in-out 0s; }
+
+.menu-group.active ~ .tab-item-holder{padding-left:250px; transition: all 300ms ease-in-out 0s; }
+
+.menu-group ~ main .index-bg{left:0 !important; transition: all 300ms ease-in-out 0s;}
+.menu-group.active ~ main .index-bg{left:250px !important; transition: all 300ms ease-in-out 0s;}
+
+body > .menu-group{z-index:25;position:absolute;top:40px;bottom:0;left:0;width:250px;box-shadow:2px 0 4px rgba(0,0,0,0.2);transform:translate(-250px);transition: all 300ms ease-in-out 0s;background-color: transparent !important}
+body > .menu-group.active{transform:translate(0);transition: all 300ms ease-in-out 0s;}
+
+.menu-search{position:absolute;top:0px;bottom:0;left:0;width:250px;height:34px;box-shadow:2px 0 4px rgba(0,0,0,0.2);background-color:#fff; }
+.menu-search .align-center{padding: 3px;}
+
+.menu-tree{position:absolute;top:34px;bottom:0;left:0;width:250px;box-shadow:2px 0 4px rgba(0,0,0,0.2);background-color:rgba(255,255,255,0.8) !important; }
+.menu-tree > nav{width:100%;height:100%}
+
+.menu-tree > ul{height:100%;overflow-y:auto;overflow-x:hidden;box-sizing:border-box;}
+
+
+
+header ~ nav ~ main, header ~ main{height:calc(100% - 74px)}
+.tab-item-holder{width:auto; height: 34px; }
+.tab-item-holder{display: table; table-layout: fixed; box-sizing: border-box;}
+.tab-item-menu{display: table-cell; width: 10px; min-width: 10px; padding: 0px; border-right: 1px solid #636363; box-sizing: border-box;}
+.tab-item{
+	min-width: 120px; max-width: 160px; width:auto; cursor: pointer; position: relative; display: table-cell; box-sizing: border-box; height: 26px; padding: 10px 25px 0 15px;
+	border-right: 1px solid #636363; border-bottom: 1px solid #636363; color: #000; font-size: 0.9em; margin: 0 1px; background-color: #ddd;
+	background-image: linear-gradient(to bottom, #ddd, #ddd);
+}
+.tab-item.on{ background-color: #3B4851; background-image: linear-gradient(to bottom, #3B4851, #3B4851); border-bottom: 1px solid #3B4851; color: #fff;}
+.tab-item-addon{ display: table-cell; width: 10px; padding: 0px; box-sizing: border-box;}
+
+.tab-item span{ display: block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.tab-item i{
+	position: absolute; right: 0px; top : 4px; height: 25px; line-height: 25px; width: 25px; text-align: center;
+	font-family: 'cheqcon' !important; speak: none;font-style: normal;font-weight: normal;font-variant: normal;text-transform: none;-webkit-font-smoothing:antialiased;
+}
+.tab-item i:before{content: "\e95a"}
+
+.tab-item:hover{ background-color: #A8A8A8; background-image: linear-gradient(to bottom, #A8A8A8, #A8A8A8); border-bottom: 1px solid #A8A8A8; color: #fff;}
+
+.frame-contents{ width: 100%; height: 100%; }
+.frame-container{ width: 100%; height: 100%; display: none;}
+.frame-container.on{ display: block;}
+
+/* #loader-panel { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1000; text-align:center; vertical-align:middle; background:#fff; opacity:0.5; display:none;} */
+/* #loader { position:absolute; z-index:1001; width:50px; height:50px;} */
+
+/* 2019-08-22 KEVIN ADD - 메뉴 접었다 펼쳤다 */
+body > header h1{ padding-left: 50px;}
+
+.toggle-menu{z-index:31 !important;display:block;position:absolute;left:0;top:0;width:40px;height:40px;font-size:0;line-height:0;}
+.toggle-menu:after,.toggle-menu:before{content:'';display:inline-block;position:absolute;left:50%;top:50%;width:22px;height:2px;margin-left:-11px;background:#fff; transition: all 300ms ease-in-out 0s}
+.toggle-menu span{display:inline-block;position:absolute;left:50%;top:50%;width:22px;height:2px;margin:-1px 0 0 -11px;background:#fff;transition: all 300ms ease-in-out 0s}
+.toggle-menu.active:after,.toggle-menu.active:before,.toggle-menu.active span{background:#fff}
+.toggle-menu:before{margin-top:-7px}
+.toggle-menu:after{margin-top:5px}
+
+.toggle-menu.active:after,.toggle-menu.active:before{margin-top:-1px;transform:rotate(225deg);background:#fff}
+.toggle-menu.active:after{opacity:0}
+.toggle-menu.active span{transform:rotate(-225deg);background:#fff}

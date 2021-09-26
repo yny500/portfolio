@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+button[class*="btn"]{height:28px;padding:0 5px;border-radius:0}
+button[class*="ico"]:before,button[class*="image"]:before{height:28px;margin-top:-7px}
+button[class*="ico"][class*="small"]:before,button[class*="image"][class*="small"]:before{line-height:22px;margin-top:-1px}
+
+button[class*="ico"][class*="setup"].ver2:before, button[class*="image"][class*="setup"].ver2:before{margin:0}
+/* button[class*="ico"][class*="select"]:before, button[class*="image"][class*="select"]:before{margin-top:0} */
+
+button.btn-add{color: #fff;background-color:#F89406;}
+button.btn-save{color: #fff;background-color:skyblue}
+button.btn-mod{color: #fff;background-color:#2ecc71;}
+button.btn-del, button.btn-delete{color: #fff;background-color:#ff3131;}
+button.btn-mod:before{background-position:1px -580px !important}
+button.btn-mod.small:before{background-position:1px -585px !important}
+button.btn-add,button.btn-srch,button.btn-mod,button.btn-save,button.btn-cancel,button.btn-del, button.btn-delete{border:0 !important}

@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+input[type="text"],.function-area input[type="text"], select, button[class*="btn"]{border:1px solid #b3b3b3}
+select{border-radius:0;height:28px;line-height:28px}
+input[type="text"], input[type="password"], input[type="date"], input[type="tel"], input[type="number"]{height:28px;line-height:28px;border-radius:0}
+input[type="text"].color{border-right-width:30px}
+textarea{border-radius:0}
+
+.function-area .period input{border-radius:0}
+.period .calendar{border-radius:0}
+.period .calendar + .calendar{border-radius:0}
+.ui-datepicker .ui-datepicker-year,.ui-datepicker .ui-datepicker-month{border:0}
+label input.select + .btn-clear.square{border-radius:0}
+
+input[type="radio"] + .radio-mark:after{background-color:#e2134d}
+.sfp-grid input[type="checkbox"] + .check-mark{vertical-align:-1px}
+
+.period .calendar + .calendar{margin-left:20px;border-left:1px solid #b3b3b3;border-right:1px solid #b3b3b3;}
+
+.function-area.horizontal .period:after { right: 150px; }
+
+.multi-input-select-container li.checked { color:#e2134d !important; }
+.multi-input-select-container.ico li.checked { filter: invert(20%) sepia(78%) saturate(7497%) hue-rotate(337deg) brightness(92%) contrast(92%) !important; -webkit-filter: invert(20%) sepia(78%) saturate(7497%) hue-rotate(337deg) brightness(92%) contrast(92%) !important; }

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<META name="viewport" content="width=1920, height=1080">
+<meta charset="UTF-8">
+<title>DEALICIOUS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="ilc/resources/images/favicon.ico">
+
+
+<link defer rel="stylesheet" href="ilc/resources/css/button.css">
+<link defer rel="stylesheet" href="ilc/resources/css/common.css">
+<link defer rel="stylesheet" href="ilc/resources/css/form.css">
+<link defer rel="stylesheet" href="ilc/resources/css/grid.css">
+<link defer rel="stylesheet" href="ilc/resources/css/sfp/sfp-dialog(pop-main).css">
+<link defer rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-grid.css">
+
+<link defer rel="stylesheet" href="ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+<link defer rel="stylesheet" href="ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+<link defer rel="stylesheet" href="ilc/resources/css/project/button.css">
+<link defer rel="stylesheet" href="ilc/resources/css/project/common.css">
+<link defer rel="stylesheet" href="ilc/resources/css/project/form.css">
+<link defer rel="stylesheet" href="ilc/resources/css/project/grid.css">
+
+<script src="ilc/resources/js/lib/jquery/jquery.min.js"></script>
+<script src="ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+<script src="ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="ilc/resources/js/project/sfp-property-pattern.js"></script>
+
+<script src="ilc/resources/js/sfp/sfp-utils.js"></script>
+<script src="ilc/resources/js/sfp/sfp-ajax.js"></script>
+<script src="ilc/resources/js/sfp/sfp-lang.js"></script>
+
+<script src="ilc/resources/js/sfp/sfp-ui-template.js"></script>
+<script src="ilc/resources/js/sfp/sfp-ui-box.js"></script>
+<script src="ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+<script src="ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+
+<script defer src="ilc/resources/js/sfp/sfp-datepicker.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-dateutils.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-websocket.js"></script>
+
+<script defer src="ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+<script defer src="ilc/resources/js/sfp/sfp-stringutils.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-dialog.js"></script>
+<script defer src="ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+<script defer src="ilc/resources/js/lib/jquery-barcode.js"></script>
+<script defer src="ilc/resources/js/lib/jquery.balloon.js"></script>
+<script defer src="ilc/resources/js/lib/moment/moment.min.js"></script>
+<script defer src="ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+<script defer src="ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+<script defer src="ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+<script defer src="ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+<script defer src="ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+<script src="ilc/resources/js/project/sfp-common.js"></script>
+
+<script type="text/javascript">
+sfp.context.setContextUrl("/ilc");
+sfp.context.setMenuUrl();
+sfp.lang.init("ko");
+$.sfp.grid.prototype.options.optCRUD.btn.text = sfp.lang.getInterpreter("작업");
+$.sfp.template.prototype.options.emptyTxt = sfp.lang.getPhrase("no-data", "데이터가 존재하지 않습니다.");
+
+$(function(){
+	$(".btn-reset").on("click", function() {
+		$(this).closest(".function-area").find("select, input:not([type=hidden])").each(function(){
+			var $this = $(this);
+			if($this.hasClass("reset-ignore") == false){
+				$this.val("");
+				$( ".calendar" ).datepicker( "option", { "minDate" : null , "maxDate" : null });
+
+				if($this.hasClass("multi-input-select") == true){
+					$this.data("val", "");
+				}
+
+			}
+		});
+	});
+});
+
+function showProgress(){
+	var $window = $(window);
+	var $loaderPanel = $("#loader-panel");
+	var $loader = $("#loader");
+	var windowWidth = $window.width();
+	var windowHeight = $window.height();
+	var loaderWidth = $loader.width();
+	var loaderHeight = $loader.height();
+
+	$loaderPanel.css("width", windowWidth).css("height", windowHeight);
+	$loader.css("left", (windowWidth/2)-(loaderWidth/2));
+	$loader.css("top", (windowHeight/2)-(loaderHeight/2));
+
+	$loaderPanel.fadeIn(100);
+// 	$("#loader-panel").show();
+}
+
+function closeProgress(){
+	var $loaderPanel = $("#loader-panel");
+	$loaderPanel.fadeOut(100);
+// 	$("#loader-panel").hide();
+}
+
+</script>
+<style>
+#loader-panel { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1000; text-align:center; vertical-align:middle; display:none;}
+#loader { position:absolute; z-index:1001; width:50px; height:50px;}
+#layer-box{ position:absolute; top:0; left:0; width:100%; height:100%; z-index:1000; text-align:center; vertical-align:middle; display:none; }
+#big-image { position:absolute; z-index:1001; width:400px; height:400px; }
+</style>
+<div id="loader-panel">
+	<img id="loader" src="ilc/resources/images/ajax-loader.gif" alt="">
+
+</div>
+<div id="layer-box">
+	<img id="big-image" src="ilc/resources/images/ajax-loader.gif" alt="">
+</div>
+
+<style>
+</style>
+<script type="text/javascript">
+</script>
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="ilc/resources/css/pop.css">
+<link rel="stylesheet" href="ilc/resources/css/project/pop.css">
+<link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-messagebox.css">
+<link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-touch.css">
+<link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-touch-pop.css">
+
+<script src="ilc/resources/js/sfp/sfp-ui-messagebox.js"></script>
+<script src="ilc/resources/js/sfp/sfp-ui-touch.js"></script>
+
+<script src="ilc/resources/js/project/sfp-barcode-pattern.js"></script>
+<script src="ilc/resources/js/project/sfp-pop-header.js"></script>
+<script src="ilc/resources/js/project/sfp-common-pop.js"></script>
+
+<script>
+window.locationType = "pop";
+window.alert = function(msg) {
+	MessageBox.message(msg);
+};
+
+window.confirm = function(msg, cbFn) {
+	MessageBox.confirm(msg, cbFn);
+};
+
+</script>
+
+
+
+</head>
+<body>
+<script>
+$(function(){
+
+	window.POPMain = (function($){
+		var init = function(){
+			_setForm();
+			_bindEvent();
+		}
+		, _bindEvent = function(){
+
+			$(".main-menu ul").on("touchstart click", function(e){
+				$(this).css("background","#b5b5b5");
+			});
+
+			$(".main-menu ul").on("touchend click", function(e){
+				e.preventDefault();
+
+				if(POPHeader.isPopSettingCheck() == false){
+					MessageBox.message("작업장을 설정해주시기 바랍니다.");
+					return;
+				}
+				var $ulThis = $(this);
+
+				var folderPath = $(this).data("folderPath");
+				var path = $(this).data("path");
+
+				if(folderPath === "onlinedisplay"){
+					SfpAjax.ajax("/ilc/solutions/wmd/workstation/checkIngOrderByWorkStation", { workStationId : POPHeader.getWorkStationId() }, function(data) {
+						//진행중이 작업이 있는경우!
+						if(data){
+							MessageBox.message("[접근 불가] 현재 작업장에 진행중인 지시가 있습니다.", {isAutoHide : true, isClickHide : true});
+							$ulThis.css("background","");
+							return;
+						}
+						SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/"+folderPath+"/"+path+".hpop"));
+					});
+				}else{
+					SfpAjax.ajax("/ilc/solutions/wpm/containerorder/getDisplayAssignContainerOrderDTOCountByWorkStationId",
+							{workStationId  : POPHeader.getWorkStationId() }, function(data) {
+							if(data){
+								if(data.containerOrderCount > 0){
+									MessageBox.message("[접근 불가] 현재 작업장에 진행중인 입고 지시가 있습니다.", {isAutoHide : true, isClickHide : true});
+									$ulThis.css("background","");
+									return;
+								}
+								SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/"+folderPath+"/"+path+".hpop"));
+							}
+					});
+				}
+				//SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/"+$(this).data("path")+".hpop"));
+			});
+		}
+		, setMainData = function(){
+			$(".main-info").setData(POPHeader.getSettingInfo());
+		}
+		, _setForm = function(){
+			$("#setting").show();
+			$("#light-off").show();
+			POPHeader.setTitle("");
+			if(external && external.setNativeTitle){
+				external.setNativeTitle("ILC");// 선택된 작업장, 사번 정보 POP저장소에 세팅
+			}
+			setMainData();
+		};
+		init();
+		return {
+			setMainData : setMainData
+		}
+	})(jQuery);
+});
+</script>
+<style>
+</style>
+<main class="pop-main">
+	<div class="contents-wrap">
+		<section>
+			<div class="kiosk-main">
+				<div class="main-menu-area">
+					<p class="main-title">DEALICIOUS</p>
+					<ul class="main-menu array4">
+						<li data-path="picking-order-list-new">
+							<div class="mn1"><a href="#">피킹 지시</a></div>
+						</li>
+						<li data-path="online-display-order-processing">
+							<div class="mn2"><a href="#">입고 지시</a></div>
+						</li>
+						<li data-path="inventory-survey-order-list">
+							<div class="mn3"><a href="#">재고 조사</a></div>
+						</li>
+						<li data-path="inspection-order-list">
+							<div class="mn4"><a href="#">점검 지시</a></div>
+						</li>
+<!--						<li data-path="picking-order-list-new">
+							<div class="mn1"><a href="#">피킹 지시</a></div>
+						</li>
+						<li data-path="online-display-order-processing">
+							<div class="mn2"><a href="#">입고 지시</a></div>
+						</li>
+						<li data-path="inventory-survey-order-list">
+							<div class="mn3"><a href="#">재고 조사</a></div>
+						</li>
+						<li data-path="inspection-order-list">
+							<div class="mn4"><a href="#">점검 지시</a></div>
+						</li>
+						<li data-path="picking-order-list-new">
+							<div class="mn1"><a href="#">피킹 지시</a></div>
+						</li>
+						<li data-path="online-display-order-processing">
+							<div class="mn2"><a href="#">입고 지시</a></div>
+						</li>-->
+					</ul>
+				</div>
+				<div class="main-station">
+					<div class="main-station-inner">
+						<p class="station">Station</p>
+						<div class="station-number-area">
+							<div class="station-number">
+								<p class="number">13</p>
+								<p class="code">code</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div class="footer-wrap">
+				<div class="station-name">
+					Station Name <span>13</span>
+				</div>
+				<div class="progress-info">
+					<strong>진행 지시 정보</strong>
+					<p class="order-number">94522152ABVC2246</p>
+					<div class="state-wrap">
+						<span class="indicate">표시</span>
+						<p class="if-number">DC2156624<span class="state">피킹</span></p>
+					</div>
+					<button class="btn-stop">중단</button>
+				</div>
+				<div class="util-menu">
+					<button class="btn-das ico">DAS</button>
+					<button class="btn-refresh ico">새로고침</button>
+					<button class="btn-logout">로그아웃</button>
+				</div>
+			</div>
+		</footer>
+	</div>
+</main>
+
+</body>
+</html>

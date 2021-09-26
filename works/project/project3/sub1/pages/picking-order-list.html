@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080" />
+    <meta charset="UTF-8" />
+    <title>LGL Test</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="../ilc/resources/images/favicon.ico" />
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/button.css">
+    <link rel="stylesheet" href="../ilc/resources/css/page.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/common.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/form.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/grid.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-dialog.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-ui-grid.css">
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/button.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/common.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/form.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/grid.css">
+
+    <script src="../ilc/resources/js/lib/jquery/jquery.min.js"></script>
+    <script src="../ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+    <script src="../ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/moment/moment.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+    <script defer src="../ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+    <script src="../ilc/resources/js/project/sfp-property-pattern.js"></script>
+
+    <script defer src="../ilc/resources/js/sfp/sfp-stringutils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-utils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ajax.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dialog.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-template.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-box.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-datepicker.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dateutils.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-websocket.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-multi-input.js"></script>
+
+    <script defer src="../ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+    <script defer src="../ilc/resources/js/lib/jquery-barcode.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery.balloon.js"></script>
+
+    <script defer src="../ilc/resources/js/project/sfp-common.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-lang.js"></script>
+</head>
+
+<main>
+    <header>
+        <h2>피킹지시 목록</h2>
+    </header>
+
+    <div class="contents-wrap">
+        <section>
+            <div class="function-area">
+                <div class="align-left">
+                    <span>
+                        <label class="label-text">피킹지시번호</label>
+                        <input type="text" id="pickingOrderId" name="pickingOrderId" placeholder="피킹지시번호">
+                    </span>
+                    <span>
+                        <label class="label-text">WAVE NO</label>
+                        <input type="text" class="multi-input-grid" id="interfaceRequestNo" name="interfaceRequestNo"
+                            placeholder="WAVE NO" readonly="">
+                    </span>
+
+                    <span>
+                        <label class="label-text">피킹유형</label>
+                        <input type="text" id="waveTypeCd" class="ico multi-input-select" name="waveTypeCd"
+                            placeholder="피킹유형" readonly="">
+                        <ul class="multi-input-select-container ico">
+                            <li data-val="COMBINATION">일반/당특</li>
+                            <li data-val="EXPRESS">당특</li>
+                            <li data-val="NORMAL">일반</li>
+                            <li data-val="ORDER_STOP">주문중단</li>
+                        </ul>
+                    </span>
+                    <span>
+                        <label class="label-text">진행상태</label>
+                        <input type="text" id="pickingOrderStatusCd" class="ico multi-input-select"
+                            name="pickingOrderStatusCd" placeholder="진행상태" readonly="">
+                        <ul class="multi-input-select-container ico">
+                            <li data-val="CANCEL">취소</li>
+                            <li data-val="COMPLETE">완료</li>
+                            <li data-val="FORCE_COMPLETE">강제완료</li>
+                            <li data-val="ING">진행</li>
+                            <li data-val="READY">준비</li>
+                        </ul>
+                    </span>
+                    <span>
+                        <label class="label-text">스테이션</label>
+                        <select name="workStationId" id="workStationId">
+                            <option value="" selected="selected">-전체-</option>
+                            <option value="13">13</option>
+                            <option value="17">17</option>
+                            <option value="21">21</option>
+                            <option value="25">25</option>
+                        </select>
+                    </span>
+                    <span>
+                        <label class="label-text">등록일시</label>
+                        <input type="text" class="calendar hasDatepicker" readonly="readonly" id="regDay" name="regDay"
+                            placeholder="등록일시">
+                    </span>
+
+                    <button class="btn-srch ico">조회</button>
+                    <button class="btn-reset image">초기화</button>
+                </div>
+                <div class="align-center"></div>
+                <div class="align-right">
+
+                </div>
+            </div>
+            <div id="picking-order-grid" class="sfp-grid-panel">
+                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                    <table class="sfp-grid">
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:70px">
+                            <col style="width:80px">
+                            <col style="width:80px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:80px">
+                            <col style="width:80px">
+                            <col style="width:140px">
+                            <col style="width:140px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:130px">
+                            <col style="width:60px">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th headerproperty="pickingOrderId">피킹지시번호</th>
+                                <th headerproperty="interfaceRequestNo">WAVE NO</th>
+                                <th headerproperty="waveTypeNameCache">피킹유형</th>
+                                <th headerproperty="skuCount">소봉수</th>
+                                <th headerproperty="totalOrderQty">총 지시수량</th>
+                                <th headerproperty="totalCompleteQty">총 피킹처리<br>수량</th>
+                                <th headerproperty="pickingOrderStatusNameCache">진행상태</th>
+                                <th headerproperty="pauseNameCache">보류상태</th>
+                                <th headerproperty="pickingOrderPauseCount">보류횟수</th>
+                                <th headerproperty="workedContainerCount">작업Shelf수</th>
+                                <th headerproperty="workStationNameCache">스테이션</th>
+                                <th headerproperty="pickingStartDt">시작일시</th>
+                                <th headerproperty="pickingEndDt">완료일시</th>
+                                <th headerproperty="pickingOrderProcessingTime">소요시간</th>
+                                <th headerproperty="workedContainerTime">작업시간</th>
+                                <th headerproperty="regDt">등록일시</th>
+                                <th>상세</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="sfp-grid-body-panel"
+                    style="overflow-y:hidden; overflow-x:hidden;min-height: 640px;height: 100%">
+                    <table class="sfp-grid">
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:70px">
+                            <col style="width:80px">
+                            <col style="width:80px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:80px">
+                            <col style="width:80px">
+                            <col style="width:140px">
+                            <col style="width:140px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:130px">
+                            <col style="width:60px">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th headerproperty="pickingOrderId">피킹지시번호</th>
+                                <th headerproperty="interfaceRequestNo">WAVE NO</th>
+                                <th headerproperty="waveTypeNameCache">피킹유형</th>
+                                <th headerproperty="skuCount">소봉수</th>
+                                <th headerproperty="totalOrderQty">총 지시수량</th>
+                                <th headerproperty="totalCompleteQty">총 피킹처리<br>수량</th>
+                                <th headerproperty="pickingOrderStatusNameCache">진행상태</th>
+                                <th headerproperty="pauseNameCache">보류상태</th>
+                                <th headerproperty="pickingOrderPauseCount">보류횟수</th>
+                                <th headerproperty="workedContainerCount">작업Shelf수</th>
+                                <th headerproperty="workStationNameCache">스테이션</th>
+                                <th headerproperty="pickingStartDt">시작일시</th>
+                                <th headerproperty="pickingEndDt">완료일시</th>
+                                <th headerproperty="pickingOrderProcessingTime">소요시간</th>
+                                <th headerproperty="workedContainerTime">작업시간</th>
+                                <th headerproperty="regDt">등록일시</th>
+                                <th>상세</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1626224382518-00000</td>
+                                <td></td>
+                                <td></td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-07-14 09:59:42</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1626222361062-00000</td>
+                                <td></td>
+                                <td></td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-07-14 09:26:01</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1626161687860-00004</td>
+                                <td></td>
+                                <td></td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">2</td>
+                                <td data-number-comma="">2</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td>17</td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-07-13 16:34:47</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="complete sfp-template-el R">
+                                <td>PO-1623319640257-00098</td>
+                                <td>2002-5-001</td>
+                                <td>당특</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td>완료</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma="">0</td>
+                                <td></td>
+                                <td data-date-format="">2021-07-13 16:33:51</td>
+                                <td data-date-format="">2021-07-13 16:33:57</td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 19:07:20</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623319208691-00085</td>
+                                <td>2002-3-001</td>
+                                <td>당특</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 19:00:08</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623315423882-00070</td>
+                                <td>2001-2-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 17:57:03</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623315027321-00058</td>
+                                <td>2000-6-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 17:50:27</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623300135905-00044</td>
+                                <td>2000-4-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 13:42:15</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623300134858-00037</td>
+                                <td>2000-3-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 13:42:14</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623300133405-00030</td>
+                                <td>2000-2-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 13:42:13</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1623299989727-00023</td>
+                                <td>2000-1-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-06-10 13:39:49</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="complete sfp-template-el R">
+                                <td>PO-1620717568232-00432</td>
+                                <td>20210511-4-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">4</td>
+                                <td data-number-comma="">4</td>
+                                <td data-number-comma="">4</td>
+                                <td>완료</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma="">4</td>
+                                <td>13</td>
+                                <td data-date-format="">2021-07-09 14:05:24</td>
+                                <td data-date-format="">2021-07-09 14:13:46</td>
+                                <td>00:08:22</td>
+                                <td>00:00:27</td>
+                                <td data-date-format="">2021-05-11 16:19:28</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1620714413330-00415</td>
+                                <td>20210511-3-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">6</td>
+                                <td data-number-comma="">6</td>
+                                <td data-number-comma=""></td>
+                                <td>진행</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format="">2021-07-13 16:33:54</td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-05-11 15:26:53</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1620714015857-00394</td>
+                                <td>20210511-2-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">8</td>
+                                <td data-number-comma="">8</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-05-11 15:20:15</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1620302109877-00374</td>
+                                <td>1794-3-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-05-06 20:55:09</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="complete sfp-template-el R">
+                                <td>PO-1620300957998-00366</td>
+                                <td>1793-2-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">2</td>
+                                <td data-number-comma="">2</td>
+                                <td data-number-comma="">2</td>
+                                <td>완료</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma="">1</td>
+                                <td>13</td>
+                                <td data-date-format="">2021-05-22 19:42:24</td>
+                                <td data-date-format="">2021-05-22 19:44:35</td>
+                                <td>00:02:11</td>
+                                <td>00:01:24</td>
+                                <td data-date-format="">2021-05-06 20:35:58</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1620114007903-00338</td>
+                                <td>TESTTTTTTT-2232-001</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">2</td>
+                                <td data-number-comma="">2</td>
+                                <td data-number-comma=""></td>
+                                <td>준비</td>
+                                <td>-</td>
+                                <td data-number-comma=""></td>
+                                <td data-number-comma=""></td>
+                                <td></td>
+                                <td data-date-format=""></td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-05-04 16:40:07</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="complete sfp-template-el R">
+                                <td>PO-1619163193329-01485</td>
+                                <td>1740-4-004</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">8</td>
+                                <td data-number-comma="">8</td>
+                                <td data-number-comma="">8</td>
+                                <td>완료</td>
+                                <td>-</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma="">8</td>
+                                <td>13</td>
+                                <td data-date-format="">2021-04-23 16:41:16</td>
+                                <td data-date-format="">2021-04-23 16:51:40</td>
+                                <td>00:08:20</td>
+                                <td>00:06:25</td>
+                                <td data-date-format="">2021-04-23 16:33:13</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1619163193154-01404</td>
+                                <td>1740-4-003</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">67</td>
+                                <td data-number-comma="">67</td>
+                                <td data-number-comma="">6</td>
+                                <td>진행</td>
+                                <td>보류중</td>
+                                <td data-number-comma="">6</td>
+                                <td data-number-comma=""></td>
+                                <td>13</td>
+                                <td data-date-format="">2021-04-23 17:03:20</td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-04-23 16:33:13</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>PO-1619163192909-01225</td>
+                                <td>1740-4-002</td>
+                                <td>일반</td>
+                                <!--<td></td>-->
+                                <td data-number-comma="">78</td>
+                                <td data-number-comma="">78</td>
+                                <td data-number-comma=""></td>
+                                <td>진행</td>
+                                <td>보류중</td>
+                                <td data-number-comma="">1</td>
+                                <td data-number-comma=""></td>
+                                <td>13</td>
+                                <td data-date-format="">2021-06-22 14:43:52</td>
+                                <td data-date-format=""></td>
+                                <td></td>
+                                <td></td>
+                                <td data-date-format="">2021-04-23 16:33:12</td>
+                                <td><button type="button" class="btn-detail green">상세</button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot style="display: none;"></tfoot>
+                    </table>
+                </div>
+                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                    <table class="sfp-grid">
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:70px">
+                            <col style="width:80px">
+                            <col style="width:80px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:80px">
+                            <col style="width:80px">
+                            <col style="width:140px">
+                            <col style="width:140px">
+                            <col style="width:60px">
+                            <col style="width:60px">
+                            <col style="width:130px">
+                            <col style="width:60px">
+                        </colgroup>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="footer-wrap">
+                <div class="footer-title">Total <strong>24</strong></div>
+                <div class="paging-wrap"><a href="#" class="prev" disabled="disabled"></a><a href="#" class="on">1</a><a
+                        href="#">2</a><a href="#" class="next" disabled="disabled"></a></div>
+            </div>
+        </footer>
+    </div>
+</main>
+
+</html>

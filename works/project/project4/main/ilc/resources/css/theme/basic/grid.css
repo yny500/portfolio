@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+.sfp-grid-body-panel{background-color:#efefef}
+.sfp-grid thead th{color:#fff;background-color:#4b4e51;}
+
+.sfp-grid tbody tr:hover td{ background-color:#e3f3f1;color:#078f98; }
+.sfp-grid tbody tr.selected td{  background-color:#d7edf6;color:#076ea5; }
+.sfp-grid tbody td{border-top:1px solid #e7e7e7;background-color:#fff;}
+
+.sfp-grid tfoot td{border-top:1px solid #cdcdcd;background-color:#cbcccc;}
+/*
+.border-style.sfp-grid th,.border-style.sfp-grid td,.border-style .sfp-grid th, .border-style .sfp-grid td{border-top: 1px solid #6a6d6f;border-left: 1px solid #6a6d6f;}
+.border-style.sfp-grid tbody td,.border-style .sfp-grid tbody td{border-top: 1px solid #e7e7e7;border-left: 1px solid #e7e7e7;border-right: 1px solid #e7e7e7;} */
+
+
+
+.static-table.small th{padding:2px}
+.static-table.small td{padding:3px}

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<META name="viewport" content="width=1920, height=1080">
+	<meta charset="UTF-8">
+	<title>DEALICIOUS</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="shortcut icon" href="../../ilc/resources/images/favicon.ico">
+
+	<link defer rel="stylesheet" href="../ilc/resources/css/button.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/common.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/form.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/grid.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-dialog.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-ui-grid.css">
+
+	<link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+
+	<link defer rel="stylesheet" href="../ilc/resources/css/theme/factory/button.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/theme/factory/common.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/theme/factory/form.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/theme/factory/grid.css">
+
+	<link defer rel="stylesheet" href="../ilc/resources/css/project/button.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/project/common.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/project/form.css">
+	<link defer rel="stylesheet" href="../ilc/resources/css/project/grid.css">
+
+	<script src="../ilc/resources/js/lib/jquery/jquery.min.js"></script>
+	<script src="../ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+	<script src="../ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+
+	<script src="../ilc/resources/js/project/sfp-property-pattern.js"></script>
+
+	<script src="../ilc/resources/js/sfp/sfp-utils.js"></script>
+	<script src="../ilc/resources/js/sfp/sfp-ajax.js"></script>
+	<script src="../ilc/resources/js/sfp/sfp-lang.js"></script>
+
+	<script src="../ilc/resources/js/sfp/sfp-ui-template.js"></script>
+	<script src="../ilc/resources/js/sfp/sfp-ui-box.js"></script>
+	<script src="../ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+	<script src="../ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+
+	<script defer src="../ilc/resources/js/sfp/sfp-datepicker.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-dateutils.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-websocket.js"></script>
+
+	<script defer src="../ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+	<script defer src="../ilc/resources/js/sfp/sfp-stringutils.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-dialog.js"></script>
+	<script defer src="../ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+	<script defer src="../ilc/resources/js/lib/jquery-barcode.js"></script>
+	<script defer src="../ilc/resources/js/lib/jquery.balloon.js"></script>
+	<script defer src="../ilc/resources/js/lib/moment/moment.min.js"></script>
+	<script defer src="../ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+	<script defer src="../ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+	<script defer src="../ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+	<script defer src="../ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+	<script defer src="../ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+	<script src="../ilc/resources/js/project/sfp-common.js"></script>
+
+	<script type="text/javascript">
+		sfp.context.setContextUrl("/ilc");
+		sfp.context.setMenuUrl();
+		sfp.lang.init("ko");
+		$.sfp.grid.prototype.options.optCRUD.btn.text = sfp.lang.getInterpreter("작업");
+		$.sfp.template.prototype.options.emptyTxt = sfp.lang.getPhrase("no-data", "데이터가 존재하지 않습니다.");
+
+		$(function () {
+			$(".btn-reset").on("click", function () {
+				$(this).closest(".function-area").find("select, input:not([type=hidden])").each(function () {
+					var $this = $(this);
+					if ($this.hasClass("reset-ignore") == false) {
+						$this.val("");
+						$(".calendar").datepicker("option", { "minDate": null, "maxDate": null });
+
+						if ($this.hasClass("multi-input-select") == true) {
+							$this.data("val", "");
+						}
+
+					}
+				});
+			});
+		});
+
+		function showProgress() {
+			var $window = $(window);
+			var $loaderPanel = $("#loader-panel");
+			var $loader = $("#loader");
+			var windowWidth = $window.width();
+			var windowHeight = $window.height();
+			var loaderWidth = $loader.width();
+			var loaderHeight = $loader.height();
+
+			$loaderPanel.css("width", windowWidth).css("height", windowHeight);
+			$loader.css("left", (windowWidth / 2) - (loaderWidth / 2));
+			$loader.css("top", (windowHeight / 2) - (loaderHeight / 2));
+
+			$loaderPanel.fadeIn(100);
+			// 	$("#loader-panel").show();
+		}
+
+		function closeProgress() {
+			var $loaderPanel = $("#loader-panel");
+			$loaderPanel.fadeOut(100);
+			// 	$("#loader-panel").hide();
+		}
+
+	</script>
+	<style>
+		#loader-panel {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1000;
+			text-align: center;
+			vertical-align: middle;
+			display: none;
+		}
+
+		#loader {
+			position: absolute;
+			z-index: 1001;
+			width: 50px;
+			height: 50px;
+		}
+
+		#layer-box {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1000;
+			text-align: center;
+			vertical-align: middle;
+			display: none;
+		}
+
+		#big-image {
+			position: absolute;
+			z-index: 1001;
+			width: 400px;
+			height: 400px;
+		}
+	</style>
+	<div id="loader-panel">
+		<img id="loader" src="../ilc/resources/images/ajax-loader.gif" alt="">
+
+	</div>
+	<div id="layer-box">
+		<img id="big-image" src="../ilc//resources/images/ajax-loader.gif" alt="">
+	</div>
+
+
+
+
+	<link rel="stylesheet" href="../ilc//resources/css/dialog.css">
+
+
+
+	<script src="../ilc//resources/js/project/sfp-common-dialog.js"></script>
+	<script src="../ilc//resources/js/lib/colResizable.js"></script>
+
+
+
+
+	<link rel="stylesheet" href="../ilc//resources/css/dialog_pop.css">
+	<link rel="stylesheet" href="../ilc//resources/css/theme/factory/dialog_pop.css">
+	<link rel="stylesheet" href="../ilc//resources/css/project/dialog_pop.css">
+
+	<link rel="stylesheet" href="../ilc//resources/css/sfp/sfp-ui-touch.css">
+	<script src="../ilc//resources/js/sfp/sfp-ui-touch.js"></script>
+
+	<script>
+		$(document).on("contextmenu", function (e) {
+			return false;
+		});
+
+		$(document).on("touchend click", "button, input", function (e) {
+			$(e.target).blur();
+			$("#header_title").focus();
+			// 	$("header h2").focus();
+		});
+
+		window.alert = function (msg) {
+			MessageBox.alarm(msg);
+		};
+
+		window.confirm = function (msg) {
+			MessageBox.confirm(msg);
+		};
+	</script>
+
+
+
+
+
+
+	<link rel="stylesheet" href="../ilc//resources/css/sfp/sfp-ui-messagebox.css">
+	<script src="../ilc//resources/js/sfp/sfp-ui-messagebox.js"></script>
+	<script src="../ilc//resources/js/project/sfp-barcode-pattern.js"></script>
+	<script>
+		$(function () {
+
+			var params = Dialog.getParams();
+			window.PopSetting = (function ($) {
+				var init = function () {
+					_setForm();
+					_bindEvent();
+					_setExternal();
+					// 			if(params && params.workerId){
+					// 				if(isPossibleChangeSetting(params.workerId)){
+					// 					$(".setting").prop("disabled", false);
+					// 				}
+					// 			}
+					//작업장이 없는 경우는 할 수 없으므로 우선 활성화처리
+					var workStationId = params && params.workStationId ? params.workStationId : ""
+					if (workStationId == "") {
+						$("#workStationId").prop("disabled", false);
+					}
+				}
+					, _setForm = function () {
+						$(".login-in").setData(params);
+						BoxTag.selectBox.draw([
+							{
+								selector: "#workStationId"
+								, firstTxt: "선택하세요"
+								, serviceName: "workStation"
+								, value: "workStationId"
+								, text: "workStationName"
+								, selectedValue: params && params.workStationId ? params.workStationId : ""
+								, filter: function (row) {
+									return row.workStationType == "OUT_PLACE"
+								}
+							}
+							,
+							{
+								selector: "#sendAutoContainer"
+								, masterCd: "del_yn"
+								, selectedValue: (params && params.sendAutoContainer) ? params.sendAutoContainer : "N"
+							}
+						]);
+					}
+					, _bindEvent = function () {
+						$(".btn-ok").on("click", function (e) {
+							e.preventDefault();
+							if ($("#workStationId").val() === '') {
+								MessageBox.message("Station ID를 선택하세요.");
+								return;
+							}
+							// 				if($("#workerId").val() === ''){
+							// 					MessageBox.message("사번을 입력하세요.");
+							// 					return;
+							// 				}
+
+							//TODO 진행중인 JOB이 있으면 막음
+							// $("#workerId").val() !== params.workerId
+
+							checkWorker();
+						});
+
+						$(".btn-send-container").on("click", function (e) {
+							if (!$("#workStationId").val()) {
+								MessageBox.message("스테이션이 선택되지 않았습니다.", { isAutoHide: false, isClickHide: true });
+							}
+							SfpAjax.ajax("../ilc//solutions/containercall/forceSendContainer", { workStationId: $("#workStationId").val() }, function (data) {
+								MessageBox.message("강제 보내기를 완료했습니다.", { isAutoHide: false, isClickHide: true });
+							});
+						})
+					}
+					, _setExternal = function () {
+						//바코드 들어왔을 경우.
+						if (external && external.addBarcodeEvent) {
+							// 				사번 바코드일 경우 처리
+							// 				external.addBarcodeEvent(function(barcode){
+							// 					if(!barcode){ return; }
+							// 					$("#workerId").val(barcode);
+							// 					checkWorker();
+							// 				});
+						}
+					}
+					, checkWorker = function () {
+						// 			if(window.Barcode.isWorkerPattern($("#workerId").val()) == true){
+						$(".setting").prop("disabled", false);
+						var _param = {
+							workStationId: $("#workStationId").val()
+							, workStationName: $("#workStationId option:selected").text()
+							, sendAutoContainer: $("#sendAutoContainer").val()
+							// 					, workerId : $("#workerId").val()
+						};
+
+						Dialog.close(_param);
+						// 				_param.workerName = "TEST";
+
+						// 				SfpAjax.ajax("/ilc/auth/checkworkerno", { workerId : $("#workerId").val() }, function(data) {
+						// 					console.dir(data);
+						// 					if(data){
+						// 						if(data.resultCode === "00"){
+						// 							_param.workerName = data.workerName;
+						// 							Dialog.close(_param);
+						// 						}else{
+						// 							MessageBox.message(data.resultMessage, {isAutoHide : false, isClickHide : true});
+						// 						}
+						// 					}
+						// 				});
+						// 			}else{
+						// 				MessageBox.message("사번 바코드가 아닙니다.", {isAutoHide : false, isClickHide : true});
+						// 			}
+					}
+					//1로 시작하면
+					, isPossibleChangeSetting = function (str) {
+						var workerPattern = /^(1){1}[0-9]{13}$/;
+						if (workerPattern.test(str)) {
+							return true;
+						}
+						return false;
+					};
+				init();
+				return {
+
+				}
+			})(jQuery);
+
+		});
+	</script>
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+	<style>
+		.util-menu>ul>li>a.refresh {
+			background: url('../ilc/resources/images/icons/refresh.png') center center no-repeat;
+		}
+
+		.util-menu>ul>li>a.ing-order {
+			background: url('../ilc/resources/images/icons/icon_order_on.png') center center no-repeat;
+			background-size: 52px 52px;
+		}
+
+		.util-menu>ul>li>a.worker-setting {
+			background: url('../ilc/resources/images/icons/icon_id.png') center center no-repeat;
+			background-size: 52px 52px;
+		}
+
+		.util-menu>ul>li>a.light-off {
+			background: url('../ilc/resources/images/icons/light_off.png') center center no-repeat;
+			background-size: 52px 52px;
+		}
+
+		#worker-setting,
+		#setting,
+		#worker-out,
+		#light-off {
+			display: none;
+		}
+
+		#worker-out {
+			display: block;
+		}
+
+		.util-menu>ul>li.work-station-info {
+			padding-right: 30px;
+			text-align: right;
+		}
+
+		.util-menu>ul>li.work-station-info .order-no {
+			padding-right: 30px;
+		}
+
+		.util-menu>ul>li.work-station-info .order-no input {
+			width: 250px;
+		}
+
+		#stationInfo {
+			position: absolute;
+			left: 240px;
+		}
+
+		/* .work-station-info input{ background: #347dea; color : #ffffff; } */
+		.work-station-info input {
+			background: #00235D;
+			color: #ffffff;
+		}
+
+		#autoDistributionName {
+			animation: blink3 1.2s step-end infinite;
+		}
+
+		body>header h1 a {
+			color: white !important;
+			font-size: 30px;
+			text-align: center;
+			line-height: 3.5;
+			text-indent: 0em;
+		}
+	</style>
+
+
+
+	<script>
+		$(function () {
+
+			window.POPMain = (function ($) {
+				var init = function () {
+					_setForm();
+					_bindEvent();
+				}
+					, _bindEvent = function () {
+
+						$(".main-menu ul").on("touchstart click", function (e) {
+							$(this).css("background", "#b5b5b5");
+						});
+
+						$(".main-menu ul").on("touchend click", function (e) {
+							e.preventDefault();
+
+							if (POPHeader.isPopSettingCheck() == false) {
+								MessageBox.message("작업장을 설정해주시기 바랍니다.");
+								return;
+							}
+							var $ulThis = $(this);
+
+							var folderPath = $(this).data("folderPath");
+							var path = $(this).data("path");
+
+							if (folderPath === "onlinedisplay") {
+								SfpAjax.ajax("/../ilc/solutions/wmd/workstation/checkIngOrderByWorkStation", { workStationId: POPHeader.getWorkStationId() }, function (data) {
+									//진행중이 작업이 있는경우!
+									if (data) {
+										MessageBox.message("[접근 불가] 현재 작업장에 진행중인 지시가 있습니다.", { isAutoHide: true, isClickHide: true });
+										$ulThis.css("background", "");
+										return;
+									}
+									SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/" + folderPath + "/" + path + ".hpop"));
+								});
+							} else {
+								SfpAjax.ajax("/../ilc/solutions/wpm/containerorder/getDisplayAssignContainerOrderDTOCountByWorkStationId",
+									{ workStationId: POPHeader.getWorkStationId() }, function (data) {
+										if (data) {
+											if (data.containerOrderCount > 0) {
+												MessageBox.message("[접근 불가] 현재 작업장에 진행중인 입고 지시가 있습니다.", { isAutoHide: true, isClickHide: true });
+												$ulThis.css("background", "");
+												return;
+											}
+											SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/" + folderPath + "/" + path + ".hpop"));
+										}
+									});
+							}
+							//SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/"+$(this).data("path")+".hpop"));
+						});
+					}
+					, setMainData = function () {
+						$(".main-info").setData(POPHeader.getSettingInfo());
+					}
+					, _setForm = function () {
+						$("#setting").show();
+						$("#light-off").show();
+						POPHeader.setTitle("");
+						if (external && external.setNativeTitle) {
+							external.setNativeTitle("ILC");// 선택된 작업장, 사번 정보 POP저장소에 세팅
+						}
+						setMainData();
+					};
+				init();
+				return {
+					setMainData: setMainData
+				}
+			})(jQuery);
+		});
+	</script>
+	<style>
+	</style>
+	<main>
+		<header>
+			<h2>Shelf 현황</h2>
+		</header>
+
+		<div class="contents-wrap">
+			<section>
+				<div id="shelf-current-grid" class="sfp-grid-panel">
+					<div class="sfp-grid-header-panel" style="overflow-x: hidden;overflow-y:hidden">
+						<table class="sfp-grid small">
+							<colgroup>
+								<col style="width:*">
+								<col style="width:*">
+								<col style="width:*">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>Shelf</th>
+									<th>Face</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div class="sfp-grid-body-panel"
+						style="overflow-y:hidden; overflow-x:hidden;min-height: 500px;height: 500px">
+						<table class="sfp-grid small">
+							<colgroup>
+								<col style="width:*">
+								<col style="width:*">
+								<col style="width:*">
+							</colgroup>
+							<thead style="display: none;">
+								<tr>
+									<th>Shelf</th>
+									<th>Face</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+                                <tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+                                <tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+                                <tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+                                <tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+                                <tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+                                <tr>
+									<td colspan="3">데이터가 존재하지 않습니다.</td>
+								</tr>
+							</tbody>
+							<tfoot style="display: none;"></tfoot>
+						</table>
+					</div>
+					<div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+						<table class="sfp-grid small">
+							<colgroup>
+								<col style="width:*">
+								<col style="width:*">
+								<col style="width:*">
+							</colgroup>
+							<tfoot></tfoot>
+						</table>
+					</div>
+				</div>
+			</section>
+			<footer>
+				<div class="align-center">
+					<button class="btn-close">닫기</button>
+				</div>
+			</footer>
+		</div>
+	</main>
+
+</body>
+
+</html>

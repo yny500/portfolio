@@ -81,7 +81,7 @@ $(function(){
 		$(".dim").removeClass("active");
         $("body").removeClass("fixed");
         
-        $("html").animate({scrollTop:pos}, 800);
+        $("html").stop().animate({scrollTop:pos}, 800);
     });
 	
 	// 컨트롤러 관련
@@ -90,16 +90,16 @@ $(function(){
         n=$(this).index();
         
         if(n == 0){
-		  pos=$("#main_slider").offset().top;
+			pos=$("#main_slider").offset().top;
         }
         else {
-         pos=$("#page"+n).offset().top;
+			pos=$("#page"+n).offset().top;
         }
         
-        $("html").animate({scrollTop:pos}, 800);
+        $("html").stop().animate({scrollTop:pos}, 800);
     });
 	
-	// 탭 이동 관련
+	// 탭 관련
 	$(".main_tab").click(function(e){
 		e.preventDefault();
 		$("#mobile").toggleClass("active");

@@ -1,0 +1,11 @@
+
+@charset "utf-8";
+
+header { background: #00235D;}
+main footer button { background: #00235D;}
+*::-webkit-scrollbar-thumb { background: #00235D;}
+button[class*="btn"] { background: #00235D;}
+button[class*="btn"].btn-add { background: #00235D;}
+.tbl-cont .opt li.minus1 { border:1px solid #00235D; color : #00235D; }
+main footer button[class*="btn"]{ background: #00235D; }
+.btn-area .btn li button[class*="btn"] { color: #fff; }

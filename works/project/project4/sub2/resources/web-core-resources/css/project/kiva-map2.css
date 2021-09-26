@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.contents-wrap > section { padding: 10px; }
+.contents-wrap > section:after { display: none; }
+
+.kiva-map-area { width: 100%; height: 100%; }
+.kiva-map-area .title { display: inline-block; vertical-align: middle; font-size: 18px; font-weight: 500; color: #444; }
+.kiva-map { width: 100%; height: 100%; }
+
+.map-zone { height: calc(100% - 160px); overflow: auto; }
+.map-zone ul { width: 1950px; border-left: 1px solid #000; }
+.map-zone ul li { position: relative; float: left; width: 40px; height: 40px; font-size: 12px; font-weight: 500; text-align: center; cursor: pointer; color: #000; border: 1px solid #000; margin-left: -1px; margin-bottom: -1px; background-color: #fff; box-sizing: border-box; }
+.map-zone ul li.SHELF_POSITION::before { position: absolute; content: ""; display: block; left: 50%; top: 50%; margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; border: 2px dotted #000; box-sizing: border-box; }
+.map-zone ul li:hover { background: #79a8a9; }
+.map-zone ul li span { line-height: 40px; }
+
+.map-info { margin-top: 20px; padding: 42px 30px; width: 100%; height: 140px; background-color: #fff; box-sizing: border-box; }
+.map-info div[class$="-shelf"] { margin-top: 5px; width: 100%; }
+.map-info div[class$="-shelf"]:first-child { margin-top: 0; }
+.map-info div[class$="-shelf"] ul { display: inline-block; vertical-align: middle; margin-left: 20px; }
+.map-info div[class$="-shelf"] li { display: inline-block; margin-left: 14px; }
+.map-info div[class$="-shelf"] li:first-child { margin-left: 0; }
+.map-info div[class$="-shelf"] li p { display: inline-block; vertical-align: middle; text-indent: 5px; font-size: 14px; font-weight: 500; color: #444; }
+.map-info div[class$="-shelf"] li span { display: inline-block; vertical-align: middle; width: 20px; height: 20px; }
+
+.SUPPLY_INPUT_STATION { background-color: #00b050 !important; color: #fff !important; }
+.SUPPLY_REMOVE_STATION { background-color: #e1141b !important; color: #fff !important; }
+.SUPPLY_INPUT_WAITING { background-color: #e1f2ce !important; color: #fff !important; }
+.SUPPLY_REMOVE_WAITING { background-color: #fbced0 !important; color: #fff !important; }
+.SUPPLY_COMMON_WAITING { background-color: #a88000 !important; color: #fff !important; }
+
+.DISCHARGE_INPUT_STATION { background-color: #7030a0 !important; color: #fff !important; }
+.DISCHARGE_INPUT_WAITING { background-color: #c7a1e3 !important; color: #fff !important; }
+.DISCHARGE_REMOVE_STATION { background-color: #0075c2 !important; color: #fff !important; }
+.DISCHARGE_REMOVE_WAITING { background-color: #bae3f9 !important; color: #fff !important; }
+.DISCHARGE_COMMON_WAITING { background-color: #f79646 !important; color: #fff !important; }
+.NONE { background: repeating-linear-gradient(-45deg, #444, #444 3px, #c1c1c1 0, #c1c1c1 6px); color: #fff !important; }

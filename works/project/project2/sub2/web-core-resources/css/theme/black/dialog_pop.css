@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+header { background: #30373f;}
+main footer button { background: #30373f;}
+*::-webkit-scrollbar-thumb { background: #30373f;}
+button[class*="btn"] { background: #30373f;}
+button[class*="btn"].btn-add { background: #30373f;}
+.tbl-cont .opt li.minus1 { border:1px solid #30373f; color : #30373f; }

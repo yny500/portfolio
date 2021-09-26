@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+nav ~ main{padding-left:0px}
+nav ~ main header{left:0px}
+
+/*left gnb*/
+body > nav{left:0;box-shadow:2px 0 4px rgba(0,0,0,0.2);transform:translate(-95px);transition:all 0.4s ease;background-color:rgba(255,255,255,0.8) !important}
+body > nav.active{transform:translate(0)}
+body > nav > ul{background-color:rgba(242,242,242,0.5) !important}
+body > nav > ul ul{left:95px;border-left:1px solid #d7d7d7;box-shadow:2px 0 4px rgba(0,0,0,0.2);background-color:rgba(255,255,255,0.8) !important}
+body > nav > ul ul ul {left:100%}
+body > nav > ul ul li a{padding:0 35px 0 20px;}
+body > nav > ul ul li a.has-depth:after{right:20px;}
+/* nav > ul ul li:hover > a{color:#16838a;border-color:#e3f3f1;background-color:#e3f3f1 !important;} */
+nav > ul ul li:hover > a{color:#666;background-color:#f0efef !important;}
+/* body > nav ul li:hover > a{color:#16838a;background-color:#e3f3f1 !important;} */
+body > nav ul li:hover > a{color:#666;background-color:#f0efef !important;}
+nav li:hover a, nav li a:focus{background-color:rgba(255,255,255,0.7) !important}
+/* body > nav > ul > li:hover > a[disabled], body > nav > ul > li > a[disabled]{background-color:rgba(215,213,213,0.9) !important} */
+body > nav > ul > li:hover > a[disabled], body > nav > ul > li > a[disabled]{background-color:#f0efef;}
+
+nav + main .function-area.fix-position{left:0px}
+
+.gnb-button{z-index:100;display:block;position:absolute;left:0;top:50%;width:35px;height:40px;margin-top:-20px;border-radius:0 15px 15px 0;background:rgba(0,0,0,0.3);transition:all 0.4s ease}
+.gnb-button:after{content:'';display:inline-block;padding:5px;border:solid #fff;border-width:0 5px 5px 0;border-radius:3px 3px 0 3px;transform:rotate(-45deg) translate(-2px);-webkit-transform:rotate(-45deg) translate(-2px);transition:all 0.4s ease}
+nav.active + .gnb-button{z-index:3;transform: translate(95px)}
+nav.active + .gnb-button:after{margin:0;transform:rotate(135deg) translate(2px)}

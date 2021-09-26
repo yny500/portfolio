@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+/*title-bar*/
+header{background-color:#0075c2}
+
+/* footer */
+
+/* layout */
+/* 
+body{background:#202731;
+    scrollbar-face-color:#30373f;
+    scrollbar-3dlight-color:#202731;
+    scrollbar-darkshadow-color:#202731;
+    scrollbar-shadow-color:#30373f;
+    scrollbar-arrow-color:#202731;
+    scrollbar-track-color:#202731;
+}
+*::-webkit-scrollbar-track{ background:#202731; }
+*::-webkit-scrollbar-track-piece{ background:#202731; }
+*::-webkit-scrollbar-corner{ background:#202731; } */

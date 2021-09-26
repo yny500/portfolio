@@ -1,0 +1,1095 @@
+@charset "UTF-8";
+
+@import "common/_var";
+@import "common/_mixin";
+
+/* label */
+label {
+  position: relative;
+  vertical-align: middle;
+
+  + label {
+    margin-left: 15px;
+  }
+  &.label-text + label {
+    margin-left: 0;
+  }
+}
+
+.label-row-1 label {
+  width: 100%;
+  margin-left: 0;
+}
+
+.label-row-2 label {
+  float: left;
+  width: calc((100% - 15px)/2);
+
+  &:nth-child(2n+1) {
+    margin-left: 0;
+  }
+}
+
+.label-row-3 label {
+  float: left;
+  width: calc((100% - 40px)/3);
+
+  &:nth-child(3n+1) {
+    margin-left: 0;
+  }
+}
+
+.label-row-4 label {
+  float: left;
+  width: calc((100% - 55px)/4);
+
+  :nth-child(4n+1) {
+    margin-left: 0;
+  }
+}
+
+.label-row-5 label {
+  float: left;
+  width: calc((100% - 60px)/5);
+
+  :nth-child(5n+1) {
+    margin-left: 0;
+  }
+}
+
+/*input */
+input[type="color"] {
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+input[readonly="readonly"],
+input[readonly] {
+  background: #f5f5f5;
+}
+
+input[type="radio"] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  + .radio-mark {
+    position: relative;
+    display: inline-block;
+    min-height: 16px;
+    padding-left: 16px;
+    line-height: 14px;
+    cursor: pointer;
+    vertical-align: 2px;
+
+    &:before {
+      @include pseudo-class;
+      left: 0;
+      top: 50%;
+      margin-top: -7px;
+      border: 1px solid #c8c8c8;
+      @include border-form(14px, 14px, 50%);
+      box-sizing: border-box;
+      background: #fff;
+    }
+    &:after {
+      content: "";
+      display: none;
+      position: absolute;
+      margin-top: -4px;
+      left: 3px;
+      top: 50%;
+      @include border-form(8px, 8px, 50%);
+      background: #06a6b1;
+    }
+  }
+}
+input[type="radio"]:checked + .radio-mark:after {
+  display: inline-block;
+}
+input[type="radio"]:disabled + .radio-mark {
+  cursor: default;
+
+  &:before {
+    background: #e5e5e5;
+  }
+}
+
+input[type="text"] {
+  &:disabled {
+    cursor: default;
+    color: #969696;
+    background-color: #f5f5f5;
+  }
+  &::-ms-clear {
+    display: none;
+  }
+  &.right {
+    text-align: right;
+  }
+  &.bold {
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+input[type="number"] {
+  &.right {
+    text-align: right;
+  }
+  &.bold {
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  + .check-mark {
+    position: relative;
+    display: inline-block;
+    min-height: 16px;
+    padding-left: 16px;
+    line-height: 14px;
+    cursor: pointer;
+    vertical-align: 2px;
+
+    &:before {
+      @include pseudo-class;
+      left: 0;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      margin-top: -7px;
+      cursor: pointer;
+      border: 1px solid #ced3da;
+      box-sizing: border-box;
+      background: #fff;
+    }
+  }
+  + .check-mark-button {
+    position: relative;
+    display: inline-block;
+    min-height: 26px;
+    padding-left: 26px;
+    cursor: pointer;
+
+    &:before {
+      @include pseudo-class;
+      left: 0;
+      top: 50%;
+      width: 26px;
+      height: 26px;
+      margin-top: -13px;
+      cursor: pointer;
+      border: 1px solid #ced3da;
+      box-sizing: border-box;
+      background: #fff url("../images/icons/icon_ir_checked_none.png") no-repeat
+        0 0;
+      background-size: 100% auto;
+    }
+  }
+}
+
+input[type="checkbox"]:checked {
+  + .check-mark:before {
+    background: #fff url("../images/icons/icon_ir_checked.png") no-repeat 0 0;
+    background-size: 100% auto;
+  }
+  + .check-mark-button:before {
+    background-image: url("../images/icons/icon_ir_checked.png");
+  }
+}
+
+input[type="checkbox"]:disabled {
+  + .check-mark {
+    cursor: default;
+
+    &:before {
+      background: #e5e5e5;
+    }
+  }
+  + .check-mark-button {
+    cursor: default;
+
+    &:before {
+      background: #e5e5e5;
+    }
+  }
+  &:checked + .check-mark:before,
+  &:checked + .check-mark-button:before {
+    background: #e5e5e5 url("../images/icons/icon_ir_checked.png") 0 0 no-repeat;
+    background-size: 100% auto;
+  }
+}
+
+input {
+  &[type="text"],
+  &[type="password"],
+  &[type="date"],
+  &[type="tel"],
+  &[type="number"] {
+    width: 150px;
+    @include height(28px);
+    padding: 0 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 0;
+    font-size: 12px;
+    color: $secondary-text-color;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+  }
+}
+
+.small input {
+  &[type="text"],
+  &[type="password"],
+  &[type="date"],
+  &[type="tel"],
+  &[type="number"] {
+    width: 100px;
+  }
+}
+
+.biginput {
+  &[type="text"],
+  &[type="password"],
+  &[type="date"],
+  &[type="tel"],
+  &[type="number"] {
+    width: 200px;
+  }
+}
+
+.shortinput {
+  &[type="text"],
+  &[type="password"],
+  &[type="date"],
+  &[type="tel"],
+  &[type="number"] {
+    @include height(26px);
+  }
+}
+
+input.w200 {
+  &[type="text"],
+  &[type="password"],
+  &[type="date"],
+  &[type="tel"],
+  &[type="number"] {
+    width: 200px;
+  }
+}
+
+input {
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder,
+  &:-ms-input-placeholder {
+    color: #969696;
+  }
+}
+
+input[class*="select"] {
+  width: 150px;
+  padding-right: 34px;
+  cursor: pointer;
+  background: #fff url("../images/btn/btn_category.png") no-repeat right 50%;
+
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder,
+  &:-moz-placeholde {
+    color: #6c6c6c;
+  }
+  &:read-only {
+    background-color: #fff;
+  }
+  &.select-user-info {
+    background-image: url("../images/icons/icon_man.png");
+
+    &:disabled {
+      background-image: url("../images/icons/icon_man_disabled.png");
+    }
+  }
+  &.select-option {
+    background-image: url("../images/icons/icon_man.png");
+  }
+  &.select-srch {
+    background-image: url("../images/btn/btn_find.png");
+  }
+}
+
+label input.select + .btn-clear {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  width: 34px;
+  border-radius: 0 3px 3px 0;
+  border-left: 0;
+  background: #fff;
+
+  &:after {
+    top: 50%;
+    right: 5px;
+    height: 20px;
+    width: 20px;
+    margin-top: -10px;
+    border-radius: 50%;
+  }
+  &.square {
+    border-radius: 3px;
+
+    &:after {
+      border-radius: 3px;
+    }
+  }
+}
+
+label.clear-wrap {
+  display: inline-block;
+}
+
+button.btn-clear {
+  position: relative;
+  margin-left: 3px;
+  border-radius: 50%;
+  border: 1px solid #d0d0d0;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #999999 url("../images/btn/btn_layer_close.png") no-repeat 50%;
+    background-size: 40% auto;
+  }
+  &.square {
+    border-radius: 3px;
+  }
+}
+
+input.calendar {
+  width: 145px;
+  padding-right: 24px;
+  cursor: pointer;
+  background: #fff url("../images/icons/icon_cal.png") no-repeat 100% 50%;
+
+  &.border {
+    border: 1px solid #d0d0d0 !important;
+  }
+}
+
+input[class*="validate"] {
+  padding-right: 34px;
+  background: #fff url("../images/icons/icon_overlap.png") no-repeat 100% 50%;
+
+  &:read-only{ 
+    background-color:#f5f5f5 !important;
+    color:#444 !important; 
+  }
+  &:disabled{ 
+    background-color:#f5f5f5 !important;
+    color:#ccc;
+  }
+  &.warning{ 
+    background-image:url('../images/icons/icon_overlap_warning.png');
+    border-color:#ed1c24;
+    color:#444 !important; 
+  }
+  &.pass{ 
+    background-image:url('../images/icons/icon_overlap_pass.png'); 
+  }
+}
+
+.vertical > label {
+  display: block;
+
+  &.label-text + label {
+    margin-top: 0;
+  }
+  + label {
+    margin: 10px 0 0;
+  }
+}
+
+.vertical .label-text + label,
+.vertical .label-text + label ~ label {
+  line-height: 28px;
+}
+
+.period {
+  display: inline-block;
+  position: relative;
+  font-size: 0;
+  line-height: 0;
+  vertical-align: top;
+
+  &:after {
+    content: "~";
+    display: block;
+    position: absolute;
+    left: 49%;
+    top: 50%;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &.calendar {
+    border-right: 0;
+    border-radius: 5px 0 0 5px;
+
+    + .calendar {
+      padding-left: 15px;
+      border-left: 0;
+      border-right: 1px solid #d0d0d0;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
+
+.small .period input[type="text"] {
+  width: 110px;
+}
+%input-ml-outline {
+  margin-left: 3px;
+  outline: none;
+}
+.function-area input + input,
+.function-area input + button,
+.function-area input + select,
+.function-area input[type="text"] + label,
+.function-area input + .period {
+  @extend %input-ml-outline;
+}
+
+.function-area .period {
+  input {
+    border-radius: 5px 0 0 5px;
+
+    + input {
+      margin: 0;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+  .label-text {
+    line-height: 18px;
+  }
+  &:after {
+    top: auto;
+    bottom: 18px;
+  }
+  + button {
+    @extend %input-ml-outline;
+  }
+}
+
+.function-area.horizontal .period:after {
+  left: auto;
+  right: 140px;
+}
+
+.function-area button {
+  + button,
+  + input {
+    @extend %input-ml-outline;
+  }
+  + label {
+    margin-left: 10px;
+  }
+}
+
+.function-area select {
+  + input,
+  + select,
+  + .period,
+  + button {
+    @extend %input-ml-outline;
+  }
+}
+
+.function-area label {
+  + input[type="text"],
+  + .period {
+    @extend %input-ml-outline;
+  }
+  + select,
+  + button {
+    margin-left: 10px;
+  }
+}
+
+.function-area .label-text + select {
+  margin-left: 0;
+}
+
+.function-area input[type="text"],
+.function-area input[type="password"],
+.function-area input[type="date"],
+.function-area input[type="tel"] {
+  border: 0;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+input[type="text"],
+.function-area input[type="text"],
+select,
+button[class*="btn"] {
+  border: 1px solid #b3b3b3;
+}
+
+select {
+  position: relative;
+  z-index: 5;
+  width: 150px;
+  padding: 0 20px 0 10px;
+  @include height(28px);
+  font-size: 12px;
+  border: 0;
+  background: #fff url("../images/form/select_arrow.png") no-repeat;
+  background-size: 9px auto;
+  -o-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.06);
+  background-position: calc(100% - 10px) 50%;
+
+  &:focus {
+    outline: none;
+  }
+  &::-ms-expand {
+    display: none;
+  }
+  &:disabled {
+    color: #a2a2a2;
+    background-color: #f5f5f5;
+    cursor: default;
+    background-image: url("../images/form/select_arrow_disabled.png");
+  }
+}
+
+.small select {
+  width: 100px;
+}
+
+/* check, hover 스타일 설정 IE, Chrome */
+select option {
+  font-size: 14px;
+
+  &:checked {
+    @include checked-style;
+  }
+}
+
+select option:checked,
+select option:hover {
+  @include checked-style;
+  box-shadow: 0 0 10px 100px #eee inset;
+}
+
+select.border {
+  border: 1px solid #d0d0d0;
+}
+
+textarea {
+  padding: 6px;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  &[readonly="readonly"],
+  &[readonly] {
+    background: #f5f5f5;
+  }
+}
+
+.register-table .cont .line-wrap.vertical {
+  flex-flow: column;
+  align-items: start;
+}
+
+.line-wrap.vertical > label + label {
+  margin: 10px 0 0;
+}
+
+%select-border {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  box-shadow: none;
+  border: 1px solid #d0d0d0;
+}
+.register-table {
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  input[type="tel"] {
+    @include height(30px);
+  }
+  textarea {
+    height: 60px;
+    border: 1px solid #d0d0d0;
+  }
+  .cont input {
+    width: 100%;
+  }
+  label + button,
+  button + label {
+    margin-left: 10px;
+  }
+  select {
+    @extend %select-border;
+  }
+}
+
+.sfp-grid {
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  input[type="tel"] {
+    width: 100% !important;
+    @include height(30px);
+  }
+  select {
+    @extend %select-border;
+  }
+}
+
+.sfp-grid input[type="text"].crud-change-val,
+.sfp-grid select.crud-change-val {
+  color: red;
+  border-color: red;
+}
+
+.sfp-grid.small {
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  input[type="tel"] {
+    @include height(24px);
+  }
+  select {
+    @include height(24px);
+  }
+  select,
+  input[type="text"],
+  input[type="number"] {
+    vertical-align: top;
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  input[type="tel"] {
+    @include height(22px);
+  }
+  input[type="checkbox"] + .check-mark {
+    vertical-align: 0;
+  }
+}
+
+.sfp-grid tbody tr:hover input.no-style {
+  background-color: #e3f3f1;
+  color: #078f98;
+}
+.sfp-grid .selected input.no-style {
+  background-color: #d7edf6;
+  color: #076ea5;
+}
+
+.sfp-grid .crud-change-val input[type="checkbox"] + .check-mark:before,
+.sfp-grid .crud-change-val input[type="radio"] + .radio-mark:before {
+  border-color: red;
+}
+
+.sfp-grid.smaller {
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  input[type="tel"] {
+    @include height(22px);
+  }
+  select {
+    @include height(22px);
+  }
+  select,
+  input[type="text"],
+  input[type="number"] {
+    vertical-align: top;
+  }
+  input[type="checkbox"] + .check-mark {
+    vertical-align: -3px;
+  }
+}
+
+.sfp-grid.big {
+  input[type="checkbox"] + .check-mark {
+    min-height: 18px;
+    padding-left: 18px;
+    line-height: 16px;
+    vertical-align: -3px;
+
+    &:before {
+      width: 18px;
+      height: 18px;
+      margin-top: -9px;
+    }
+  }
+}
+
+.register-table.small {
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  input[type="tel"] {
+    @include height(24px);
+  }
+  select {
+    @include height(24px);
+  }
+}
+
+/* datepicker */
+body > .ui-datepicker {
+  display: none;
+}
+
+.ui-datepicker {
+  z-index: 20 !important;
+  background: #fff;
+  border: 1px solid #aaaaaa;
+  width: 196px;
+  padding: 6px 3px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.13);
+
+  a {
+    color: #888;
+    font-size: 11px;
+  }
+  &-week {
+    z-index: 20 !important;
+    background: #fff;
+    border: 1px solid #aaaaaa;
+    width: 218px;
+    padding: 6px 3px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.13);
+
+    tr:hover {
+      @include hover-color(#e3f3f1, #e1f4fc, #1f8bc5);
+    }
+  }
+  &-header {
+    position: relative;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  &-prev,
+  &-next {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 5px;
+    text-indent: -5000em;
+    overflow: hidden;
+    background: url("../images/btn/set_btn_cal.png") no-repeat;
+  }
+  &-prev {
+    left: 5px;
+    background-position: 1px 1px;
+  }
+  &-next {
+    right: 5px;
+    background-position: 1px -13px;
+  }
+  &-title {
+    @include height(26px);
+    color: #555;
+    text-align: center;
+    font-size: 12px;
+  }
+  select {
+    width: 51px;
+    height: 26px;
+    line-height: 18px;
+    font-family: "roboto";
+    font-weight: 700;
+    padding: 4px 10px;
+    box-shadow: none;
+    border-radius: 0;
+    background: url("../images/form/bul_datepicker_select.gif") right 11px
+      no-repeat;
+    vertical-align: top;
+  }
+  .ui-datepicker-year,
+  .ui-datepicker-month {
+    border: 0;
+  }
+  .ui-datepicker-year {
+    margin-right: 5px;
+  }
+  .ui-datepicker-month {
+    width: 48px;
+  }
+  .ui-datepicker-buttonpane {
+    background-image: none;
+    margin: 0.7em 0 0 0;
+    padding: 0 0.2em;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+
+    button {
+      float: right;
+      margin: 0.5em 0.2em 0.4em;
+      cursor: pointer;
+      padding: 0.2em 0.6em 0.3em 0.6em;
+      width: auto;
+      overflow: visible;
+
+      &.ui-datepicker-current {
+        float: left;
+      }
+    }
+  }
+}
+
+.ui-datepicker-calendar {
+  width: 183px;
+  margin: 6px 0 3px;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  th {
+    width: 26px;
+    font-weight: normal;
+    text-align: right;
+    padding: 0 4px 4px 0;
+    box-sizing: border-box;
+    font-size: 11px;
+  }
+  tr.ui-datepicker-current-day {
+    border-color: #00a4b9;
+    color: #fff !important;
+    background-color: #00a4b9;
+  }
+  td {
+    text-align: center;
+    padding: 0 0 1px;
+    box-sizing: border-box;
+
+    &:hover {
+      @include hover-color(#e3f3f1, #e1f4fc, #1f8bc5);
+    }
+  }
+}
+.ui-datepicker-calendar td {
+  &.ui-datepicker-today a {
+    color: #555;
+    background-color: #eaeaea;
+    border-color: #eaeaea;
+  }
+  &.ui-state-disabled {
+    opacity: 0.35;
+  }
+  &.ui-datepicker-current-day a {
+    border-color: #00a4b9;
+    color: #fff !important;
+    background-color: #00a4b9;
+  }
+  a {
+    display: inline-block;
+    width: 23px;
+    height: 22px;
+    padding-top: 1px;
+    color: #555;
+    font-family: tahoma;
+    font-size: 11px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    &.ui-state-active {
+      border-color: #009ac0;
+      color: #fff !important;
+      background-color: #009ac0;
+    }
+    &.ui-datepicker-current-day {
+      border-color: #00a4b9;
+      color: #fff !important;
+      background-color: #00a4b9;
+    }
+    &:hover {
+      @include hover-color(#e3f3f1, #e1f4fc, #1f8bc5);
+    }
+  }
+}
+
+.ui-datepicker-calendar tbody tr td {
+  &:first-child a,
+  &.ui-datepicker-sunday a,
+  &.ui-datepicker-holiday a {
+    color: #f20f08;
+  }
+  &.ui-datepicker-saturday a {
+    color: #2b58ff;
+  }
+}
+
+.hide-calendar .ui-datepicker-calendar {
+  display: none;
+}
+
+.ui-datepicker-buttonpane button {
+  color: #fff;
+  border-radius: 5px;
+  background-color: #009ac0;
+}
+
+/* login-box */
+.login-box {
+  input::-webkit-input-placeholder,
+  input::-moz-placeholder,
+  input:-ms-input-placeholder,
+  input:-moz-placeholder {
+    color: #bbbbbb;
+  }
+}
+
+.file-srch {
+  position: relative;
+  min-width: 63px;
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid;
+  border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8;
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.05);
+
+  em {
+    display: block;
+  }
+  input[type="file"] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    opacity: 0.01;
+    cursor: pointer;
+  }
+}
+
+.small .file-srch {
+  @include height(24px);
+}
+
+/* colorpicker */
+input.color {
+  cursor: pointer;
+  width: 100px;
+  border-right-width: 30px;
+}
+
+.small input.color {
+  border-right-width: 24px;
+}
+
+/* input look like span*/
+input.no-style {
+  border: 0;
+  color: $secondary-text-color;
+  font-family: "roboto", "notokr";
+
+  &:disabled {
+    color: $secondary-text-color;
+    background: #fff;
+  }
+}
+
+input[class^="multi-input"] {
+  width: 150px;
+  padding-right: 34px;
+  cursor: pointer;
+  background: #fff url("../images/btn/btn_multiple.png") no-repeat right 50%;
+  outline: none;
+}
+
+.multi-input-select-container {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  display: none;
+  background: #fff;
+  border-right: 1px solid #c1c1c1;
+  border-bottom: 1px solid #c1c1c1;
+  border-left: 1px solid #c1c1c1;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  outline: none;
+
+  li {
+    @include font-style(13.3px, normal, #555);
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 2px 0px 2px 11px;
+    cursor: pointer;
+
+    &.checked {
+      background-size: 15px 15px;
+      background-repeat: no-repeat;
+      background-position: 3px 3px;
+      color: #07aa9b;
+    }
+  }
+  &.ico li {
+    padding: 1px 0px 2px 22px;
+    background-image: url("../images/icons/empty-check-box.png");
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    background-position: 3px 3px;
+
+    &.checked {
+      background-image: url("../images/icons/checked-check-box.png");
+      filter: invert(55%) sepia(42%) saturate(5510%) hue-rotate(142deg)
+        brightness(93%) contrast(94%);
+      -webkit-filter: invert(55%) sepia(42%) saturate(5510%) hue-rotate(142deg)
+        brightness(93%) contrast(94%);
+    }
+  }
+}

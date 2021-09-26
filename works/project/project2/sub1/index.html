@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=1920, height=1080">
+<meta charset="utf-8">
+<title>Dashboard1</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery-1.12.4.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+    <header>
+        <h1>
+            <a href="#">
+                <img src="images/efficiency.png" alt="header-logo" class="header-logo">
+                <span id="dash-title">일일 지표</span>
+            </a>
+        </h1>
+        <div class="util-menu">
+                <time id="current">2021-06-14</time>
+        </div>
+    </header>
+    <main>
+        <div class="area-top">
+            <div class="area-top-left">
+                <em>당일 단포 출고</em>
+                <div class="area-item">
+                    <div class="item-block">
+                        <dl>
+                            <dt>Wave당 평균 주문 수</dt>
+                            <dd>Orders per a Wave</dd>
+                        </dl>
+                        <span class="order-rate">24</span>
+                    </div>
+                    <div class="item-block">
+                        <dl>
+                            <dt>Wave당 평균 PCS 수</dt>
+                            <dd>Pieces per a Wave</dd>
+                        </dl>
+                        <span class="order-rate">45</span>
+                    </div>
+                    <div class="item-block">
+                        <dl>
+                            <dt>일일 단포 주문 수</dt>
+                        </dl>
+                        <span class="order-rate">240</span>
+                    </div>
+                    <div class="item-block">
+                        <dl>
+                            <dt>일일 단포 PCS 수</dt>
+                        </dl>
+                        <span class="order-rate">450</span>
+                    </div>
+                </div>
+            </div>
+            <div class="area-top-right">
+                <em>당일 합포 출고</em>
+                <div class="area-item">
+                    <div class="item-block">
+                        <dl>
+                            <dt>Wave당 평균 주문 수</dt>
+                            <dd>Orders per a Wave</dd>
+                        </dl>
+                        <span class="order-rate">48</span>
+                    </div>
+                    <div class="item-block">
+                        <dl>
+                            <dt>Wave당 평균 PCS 수</dt>
+                            <dd>Pieces per a Wave</dd>
+                        </dl>
+                        <span class="order-rate">345</span>
+                    </div>
+                    <div class="item-block">
+                        <dl>
+                            <dt>일일 단포 주문 수</dt>
+                            <dd>Orders per a Wave</dd>
+                        </dl>
+                        <span class="order-rate">1,240</span>
+                    </div>
+                    <div class="item-block">
+                        <dl>
+                            <dt>일일 단포 PCS 수</dt>
+                            <dd>Pieces per a Wave</dd>
+                        </dl>
+                        <span class="order-rate">8,450</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="area-bottom">
+            <div class="area-bottom-left">
+                <em>출고 현황</em>
+                <div class="order-list-chart">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">구분</th>
+                                <th scope="col">주문 수</th>
+                                <th scope="col">PCS 수</th>
+                                <th scope="col">피킹 완료율</th>
+                                <th scope="col">피킹 소요 시간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="number">01</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">02</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">03</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">04</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">05</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">06</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">07</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">08</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">09</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">10</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">11</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">12</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">13</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">14</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">15</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">16</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">17</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">18</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">19</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+                            <tr>
+                                <td class="number">20</td>
+                                <td class="secction"></td>
+                                <td class="order-amount"></td>
+                                <td class="pcs-amount"></td>
+                                <td class="picking-complete-rate"></td>
+                                <td class="picking-time"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="area-bottom-right">
+                <div class="average-time clearfix">
+                    <div class="time-left-block">
+                        <em>단포 피킹<br>평균 시간</em>
+                        <time id="time-data1">00:12:00</time>
+                    </div>
+                    <div class="time-right-block">
+                        <em>합포 피킹<br>평균 시간</em>
+                        <time id="time-data2">00:38:00</time>
+                    </div>
+                </div>
+                <div class="enter-process">
+                    <em>당일 입고 처리</em>
+                    <div class="enter-item clearfix">
+                        <div class="enter-block">
+                            <dl>
+                                <dt>입고 SKU 수</dt>
+                                <dd>SKUs</dd>
+                            </dl>
+                            <span class="enter-rate">100</span>
+                        </div>
+                        <div class="enter-block">
+                            <dl>
+                                <dt>입고 적치 진척률 </dt>
+                                <dd>%</dd>
+                            </dl>
+                            <span class="enter-rate">50</span>
+                        </div>
+                        <div class="enter-block">
+                            <dl>
+                                <dt>입고 완료 PCS 수</dt>
+                                <dd>Pieces</dd>
+                            </dl>
+                            <span class="enter-rate">1,000</span>
+                        </div>
+                        <div class="enter-block">
+                            <dl>
+                                <dt>입고 계획 PCS 수</dt>
+                                <dd>Pieces</dd>
+                            </dl>
+                            <span class="enter-rate">2,000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="enter-list">
+                    <em>입고 현황</em>
+                    <div class="enter-list-chart">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">SKU 수</th>
+                                    <th scope="col">PCS 수</th>
+                                    <th scope="col">적치 지시 수량</th>
+                                    <th scope="col">적치 완료량</th>
+                                    <th scope="col">완료율</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="number">01</td>
+                                    <td class="sku-amount"></td>
+                                    <td class="pcs-amount"></td>
+                                    <td class="load-amount"></td>
+                                    <td class="complete-amount"></td>
+                                    <td class="complete-rate"></td>
+                                </tr>
+                                <tr>
+                                    <td class="number">02</td>
+                                    <td class="sku-amount"></td>
+                                    <td class="pcs-amount"></td>
+                                    <td class="load-amount"></td>
+                                    <td class="complete-amount"></td>
+                                    <td class="complete-rate"></td>
+                                </tr>
+                                <tr>
+                                    <td class="number">03</td>
+                                    <td class="sku-amount"></td>
+                                    <td class="pcs-amount"></td>
+                                    <td class="load-amount"></td>
+                                    <td class="complete-amount"></td>
+                                    <td class="complete-rate"></td>
+                                </tr>
+                                <tr>
+                                    <td class="number">04</td>
+                                    <td class="sku-amount"></td>
+                                    <td class="pcs-amount"></td>
+                                    <td class="load-amount"></td>
+                                    <td class="complete-amount"></td>
+                                    <td class="complete-rate"></td>
+                                </tr>
+                                <tr>
+                                    <td class="number">05</td>
+                                    <td class="sku-amount"></td>
+                                    <td class="pcs-amount"></td>
+                                    <td class="load-amount"></td>
+                                    <td class="complete-amount"></td>
+                                    <td class="complete-rate"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

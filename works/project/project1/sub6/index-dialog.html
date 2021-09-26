@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=1920, height=1080">
+    <meta charset="UTF-8">
+    <title>sub6</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="ilc/resources/images/favicon.ico">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/button.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/common.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/form.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/grid.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/sfp/sfp-dialog.css">
+    <link defer="" rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-grid.css">
+    
+    <script src="ilc/resources/js/lib/jquery/jquery.min.js"></script>
+    <script src="ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+    <script src="ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="ilc/resources/js/project/sfp-property-pattern.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-utils.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ajax.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-lang.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-template.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-box.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+    <script src="ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+
+    <script defer="" src="ilc/resources/js/sfp/sfp-datepicker.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-dateutils.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-websocket.js"></script>
+    <script defer="" src="ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+    <script defer="" src="ilc/resources/js/sfp/sfp-stringutils.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-dialog.js"></script>
+    <script defer="" src="ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery-barcode.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery.balloon.js"></script>
+    <script defer="" src="ilc/resources/js/lib/moment/moment.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+    <script defer="" src="ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+    <script defer="" src="ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+    <script src="ilc/resources/js/project/sfp-common.js"></script>
+
+    <script type="text/javascript">
+        sfp.context.setContextUrl("ilc");
+        sfp.context.setMenuUrl();
+        sfp.lang.init("ko");
+        $.sfp.grid.prototype.options.optCRUD.btn.text = sfp.lang.getInterpreter("작업");
+        $.sfp.template.prototype.options.emptyTxt = sfp.lang.getPhrase("no-data", "데이터가 존재하지 않습니다.");
+
+        $(function () {
+            $(".btn-reset").on("click", function () {
+                $(this).closest(".function-area").find("select, input:not([type=hidden])").each(function () {
+                    var $this = $(this);
+                    if ($this.hasClass("reset-ignore") == false) {
+                        $this.val("");
+                        $(".calendar").datepicker("option", { "minDate": null, "maxDate": null });
+
+                        if ($this.hasClass("multi-input-select") == true) {
+                            $this.data("val", "");
+                        }
+
+                    }
+                });
+            });
+        });
+
+        function showProgress() {
+            var $window = $(window);
+            var $loaderPanel = $("#loader-panel");
+            var $loader = $("#loader");
+            var windowWidth = $window.width();
+            var windowHeight = $window.height();
+            var loaderWidth = $loader.width();
+            var loaderHeight = $loader.height();
+
+            $loaderPanel.css("width", windowWidth).css("height", windowHeight);
+            $loader.css("left", (windowWidth / 2) - (loaderWidth / 2));
+            $loader.css("top", (windowHeight / 2) - (loaderHeight / 2));
+
+            $loaderPanel.fadeIn(100);
+            // 	$("#loader-panel").show();
+        }
+
+        function closeProgress() {
+            var $loaderPanel = $("#loader-panel");
+            $loaderPanel.fadeOut(100);
+            // 	$("#loader-panel").hide();
+        }
+
+    </script>
+    <style>
+        #loader-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            text-align: center;
+            vertical-align: middle;
+            display: none;
+        }
+
+        #loader {
+            position: absolute;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+        }
+
+        #layer-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            text-align: center;
+            vertical-align: middle;
+            display: none;
+        }
+
+        #big-image {
+            position: absolute;
+            z-index: 1001;
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader-panel" style="width: 1920px; height: 937px; display: none;">
+        <img id="loader" src="ilc/resources/images/ajax-loader.gif" alt="" style="left: 935px; top: 443.5px;">
+
+    </div>
+    <div id="layer-box">
+        <img id="big-image" src="ilc/resources/images/ajax-loader.gif" alt="">
+    </div>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ilc/resources/css/pop.css">
+    <link rel="stylesheet" href="ilc/resources/css/dialog_pop.css">
+    <link rel="stylesheet" href="ilc/resources/css/project/pop.css">
+
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-messagebox.css">
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-touch.css">
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-touch-pop.css">
+    <script src="ilc/resources/js/sfp/sfp-ui-touch.js"></script>
+
+    <script src="ilc/resources/js/project/sfp-barcode-pattern.js"></script>
+    <script src="ilc/resources/js/project/sfp-pop-header.js"></script>
+    <script src="ilc/resources/js/project/sfp-common-pop.js"></script>
+
+    <script>
+        window.locationType = "pop";
+        window.alert = function (msg) {
+            MessageBox.message(msg);
+        };
+
+        window.confirm = function (msg, cbFn) {
+            MessageBox.confirm(msg, cbFn);
+        };
+
+    </script>
+
+    <style>
+        .util-menu>ul>li>a.refresh {
+            background: url('ilc/resources/images/icons/refresh.png') center center no-repeat;
+        }
+
+        .util-menu>ul>li>a.ing-order {
+            background: url('ilc/resources/images/icons/icon_order_on.png') center center no-repeat;
+            background-size: 52px 52px;
+        }
+
+        .util-menu>ul>li>a.worker-setting {
+            background: url('ilc/resources/images/icons/icon_id.png') center center no-repeat;
+            background-size: 52px 52px;
+        }
+
+        .util-menu>ul>li>a.light-off {
+            background: url('ilc/resources/images/icons/light_off.png') center center no-repeat;
+            background-size: 52px 52px;
+        }
+
+        #worker-setting,
+        #setting,
+        #worker-out,
+        #light-off {
+            display: none;
+        }
+
+        #worker-out {
+            display: block;
+        }
+
+        .util-menu>ul>li.work-station-info {
+            padding-right: 30px;
+            text-align: right;
+        }
+
+        .util-menu>ul>li.work-station-info .order-no {
+            padding-right: 30px;
+        }
+
+        .util-menu>ul>li.work-station-info .order-no input {
+            width: 250px;
+        }
+
+        #stationInfo {
+            position: absolute;
+            left: 240px;
+        }
+
+        /* .work-station-info input{ background: #347dea; color : #ffffff; } */
+        .work-station-info input {
+            background: #00235D;
+            color: #ffffff;
+        }
+
+        #autoDistributionName {
+            animation: blink3 1.2s step-end infinite;
+        }
+
+        body>header h1 a {
+            color: white !important;
+            font-size: 30px;
+            text-align: center;
+            line-height: 3.5;
+            text-indent: 0em;
+        }
+    </style>
+    <header>
+        <h1><a href="#" id="txt-logo">DEALICIOUS</a></h1>
+
+        <h2 id="stationInfo"><span id="autoDistributionName"></span></h2>
+        <h2 id="header_title">피킹목록</h2>
+        <div class="util-menu">
+            <ul>
+                <li class="work-station-info">
+                    <div>
+                        <span>스테이션 : <input id="workStationName" name="workStationName" type="text" data-nokeypad="true"
+                                readonly="readonly"></span>
+                    </div>
+                </li>
+                <li id="light-off"><a href="#" class="light-off"><span>light off</span></a></li>
+                <li><a href="#" class="ing-order"><span>refresh</span></a></li>
+                <li><a href="#" class="refresh"><span>refresh</span></a></li>
+                <li id="setting"><a href="#" class="setting"><span>설정</span></a></li>
+                <li id="worker-out"><a href="#" class="logout"><span>로그아웃</span></a></li>
+            </ul>
+        </div>
+        <form action="ilc/logout" method="post" id="logoutForm">
+        </form>
+    </header>
+
+    <link rel="stylesheet" href="ilc/resources/css/sfp/sfp-ui-messagebox.css">
+    
+    <script>
+        $(function () {
+
+            window.PickingOrderList = (function ($) {
+                var init = function () {
+                    $("#picking-order-grid").grid({
+                        header: [
+                            [
+                                { name: "WAVE NO" },
+                                { name: "WAVE NAME" },
+                                { name: "피킹유형", width: "200px" },
+                                // 						{name : "SKU 구분", width: "120px"},
+                                { name: "주문수", width: "110px" },
+                                { name: "소봉수", width: "110px" },
+                                //						{name : "시작일시", width: "200px"},
+                                //						{name : "완료일시", width: "200px"},
+                                { name: "상태", width: "100px" },
+                                { name: "분배상태", width: "100px" },
+                                { name: "보류여부", width: "100px" },
+                                { name: "미분배 확인", width: "130px" },
+                                { name: "분배 확인", width: "114px" },
+                                { name: "상세", width: "80px" }
+                            ]
+                        ]
+                        , height: "625px"
+                        //	 			,addClasses : "border-style"
+                    });
+                    _setForm();
+                    _bindEvent();
+                    list();
+                }
+                    , _bindEvent = function () {
+
+                        //$("#picking-order-grid").on("click", ".sfp-template-el", function(e) {
+                        $("#picking-order-grid").on("click", "tbody > tr", function (e) {
+                            e.preventDefault();
+
+                            var $target = $(e.target)
+                            if ($target.hasClass("btn-distribution-move") || $target.hasClass("btn-distribution-check") || $target.hasClass("btn-detail")) {
+                                return;
+                            }
+
+                            var data = $("#picking-order-grid").grid("getData", this);
+                            // 그리드 Row 클릭 시
+                            if (data.pickingOrderStatusCd == "READY") {
+                                Dialog.open("ilc/solutions/pop/picking/picking-order-detail.popdialog", "full", data, function (data) {
+                                });
+                            }
+                            else if (data.pickingOrderStatusCd == "ING") {
+                                SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/picking/picking-order-shelf-processing.hpop"), data);
+                            }
+                        });
+
+
+                        //분배이동
+                        $("#picking-order-grid").on("click", ".btn-distribution-move", function (e) {
+                            e.preventDefault();
+                            // 				e.stopPropagation();
+                            var gridData = $("#picking-order-grid").grid("getData", this);
+                            if (gridData.distributionYn != 'Y' || gridData.internalRequestNo == null || gridData.internalRequestNo == '') {
+                                return;
+                            }
+
+                            SfpAjax.ajax("ilc/solutions/wmd/workstation/getDetail", { workStationId: POPHeader.getWorkStationId() }, function (data) {
+                                //진행중이 작업이 있는경우!
+                                if (data) {
+                                    if (data.workOrderNo != null && data.workOrderNo != '' && data.workOrderNo != gridData.pickingOrderId) {
+                                        MessageBox.message("[접근 불가] 현재 작업장에 진행중인 지시가 있습니다.", { isAutoHide: true, isClickHide: true });
+                                        return;
+                                    }
+                                    Dialog.open("ilc/solutions/pop/distribution/order-draft-main-distribution-das.popdialog", { width: "1300px", height: "800px" }, { orderDraftMainId: gridData.internalRequestNo, interfaceRequestName: gridData.interfaceRequestName }, function (result) {
+                                        list();
+                                    });
+                                    return;
+                                }
+                            });
+
+                            // 				Dialog.open("ilc/solutions/pop/distribution/order-draft-main-distribution-das.popdialog", { width : "1300px", height: "800px" }, {orderDraftMainId : gridData.internalRequestNo, interfaceRequestName : gridData.interfaceRequestName}, function(result){
+                            // 					list();
+                            // 				});
+                        });
+
+                        //분배체크
+                        $("#picking-order-grid").on("click", ".btn-distribution-check", function (e) {
+                            e.preventDefault();
+                            var gridData = $("#picking-order-grid").grid("getData", this);
+                            if (gridData.distributionYn != 'Y' || gridData.internalRequestNo == null || gridData.internalRequestNo == '') {
+                                return;
+                            }
+
+                            MessageBox.confirm("미완료 분배건을 확인 하시겠습니까?", {
+                                cbFn: function () {
+                                    SfpAjax.ajax("ilc/solutions/wmd/workstation/getDetail", { workStationId: POPHeader.getWorkStationId() }, function (data) {
+                                        //진행중이 작업이 있는경우!
+                                        if (data) {
+                                            if (data.workOrderNo != null && data.workOrderNo != '' && data.workOrderNo != gridData.pickingOrderId) {
+                                                MessageBox.message("[접근 불가] 현재 작업장에 진행중인 지시가 있습니다.", { isAutoHide: true, isClickHide: true });
+                                                return;
+                                            }
+                                            SfpAjax.ajax("ilc/solutions/wom/orderdraftmaindistribution/setDasDisplayByDistributionIncompleteForController"
+                                                , { orderDraftMainId: gridData.internalRequestNo }
+                                                , function (data) {
+                                                    if (data) {
+                                                    }
+                                                });
+                                        }
+                                    });
+                                }
+                            });
+
+                            // 				MessageBox.confirm("미완료 분배건을 확인 하시겠습니까?", {cbFn : function() {
+                            // 					SfpAjax.ajax("ilc/solutions/wom/orderdraftmaindistribution/setDasDisplayByDistributionIncomplete"
+                            // 					, { orderDraftMainId : gridData.internalRequestNo}
+                            // 					, function(data) {
+                            // 						if(data){
+                            // 						}
+                            // 					});
+                            // 				}});
+                        });
+
+                        $("#picking-order-grid").on("click", ".btn-detail", function (e) {
+                            e.preventDefault();
+                            // 				e.stopPropagation();
+                            var data = $("#picking-order-grid").grid("getData", this);
+                            if (data.pickingOrderStatusCd == "READY") {
+                                Dialog.open("ilc/solutions/pop/picking/picking-order-detail.popdialog", "full", data, function (data) {
+                                });
+                            }
+                            else if (data.pickingOrderStatusCd == "ING") {
+                                data.workStationId = POPHeader.getWorkStationId();
+                                Dialog.open("ilc/solutions/pop/picking/picking-ing-order-and-complete-detail.popdialog", { width: "1920px", height: "1000px" },
+                                    data, function (result) {
+                                        if (result && result.processStatus == "FORCE_COMPLETE" || result.processStatus == "PAUSE_START" || result.processStatus == "PAUSE_STOP") {
+                                            //해당 건이 있으면 현재 있는 컨테이너를 보낸다.
+                                            SfpAjax.ajax("ilc/solutions/wmd/workstation/getWorkStationDetailWithContainerOrder", { workStationId: POPHeader.getWorkStationId() }, function (workStation) {
+                                                unloadContainer(workStation);
+                                            });
+                                            if (result.processStatus == "FORCE_COMPLETE") {
+                                                MessageBox.message("피킹지시가 완료되었습니다.", { isAutoHide: true, isClickHide: true, isTop: true });
+                                            }
+                                            else if (result.processStatus == "PAUSE_START") {
+                                                MessageBox.message("보류처리가 완료되었습니다.", { isAutoHide: true, isClickHide: true, isTop: true });
+                                            }
+                                            else if (result.processStatus == "PAUSE_STOP") {
+                                                MessageBox.message("보류처리가 해제되었습니다.", { isAutoHide: true, isClickHide: true, isTop: true });
+                                                SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/picking/picking-order-shelf-processing.hpop"), data);
+                                            }
+                                            list();
+                                        }
+                                    });
+                            }
+                            if (data.pickingOrderStatusCd == "COMPLETE"
+                                || data.pickingOrderStatusCd == "FORCE_COMPLETE") {
+                                Dialog.open("ilc/solutions/pop/picking/picking-complete-order-detail.popdialog", "full", data, function (data) {
+                                });
+                            }
+                        })
+                        $(".btn-srch").click(function () {
+                            list();
+                        });
+                    }
+                    , _setForm = function () {
+                        //POPHeader.setTitle("피킹지시 - 목록");
+                        POPHeader.setTitle("피킹목록");
+                        BoxTag.selectBox.draw([
+                            {
+                                selector: "#pauseYn",
+                                firstTxt: "-보류상태-",
+                                masterCd: "del_yn",
+                            },
+                            // 				{
+                            // 					selector : "#pickingOrderTypeCd",
+                            // 					firstTxt : "-피킹유형-",
+                            // 					masterCd : "picking_order_type_cd"
+                            // 				},
+                            {
+                                selector: "#waveTypeCd",
+                                firstTxt: "-피킹유형-",
+                                masterCd: "wave_type_cd"
+                            }
+                        ]);
+                    }
+                    , startPicking = function (data) {
+                        SFPURL.locationHref(SFPURL.getUrl("/solutions/pop/picking/picking-order-shelf-processing.hpop"), data);
+                    }
+                    , unloadContainer = function (data) {
+                        if (data && data.bucket && data.bucket.containerId && data.bucket.containerFaceId) {
+                            SfpAjax.ajax("ilc/solutions/wpm/containerorderunload/unloadContainer",
+                                // 				SfpAjax.ajax("ilc/solutions/wom/pickingorder/unloadContainer",
+                                { containerId: data.bucket.containerId, containerFaceId: data.bucket.containerFaceId, workStationId: data.workStationId }
+                                , function (data) {
+                                    MessageBox.message("Shelf를 보냈습니다.");
+                                });
+                        }
+                    }
+                    , list = function () {
+                        if (!POPHeader.getWorkStationId()) {
+                            MessageBox.message("작업장을 설정하세요.", { isAutoHide: true, isClickHide: true });
+                            return;
+                        }
+
+                        var data = $(".function-area").find("input, select").serializeObject();
+                        data.workStationId = POPHeader.getWorkStationId()
+                        //워킹스테이션 별로 가능한 오더를 조회
+                        SfpAjax.ajax("ilc/solutions/wom/pickingorder/getStartPossiblePickingOrderList",
+                            data
+                            , function (list) {
+                                $("#totalRows").text(0);
+                                $("#totalRows").text(list.length);
+                                $("#picking-order-grid").grid("draw", list, function (row) {
+
+                                    if (row.distributionYn == "Y" && row.pickingOrderStatusCd != "READY") {
+                                        if (row.distributionStatusCd != "COMPLETE") {
+                                            row.distributionMoveHtml = "<button class='btn-distribution-move blue row'>분배 확인</button>";
+                                            row.distributionCheckHtml = "<button class='btn-distribution-check blue row'>미완료 분배</button>";
+                                        }
+                                    }
+
+                                    //진행중
+                                    if (row.pickingOrderStatusCd == "ING") {
+                                        //보류 N
+                                        if (row.pauseYn == null || row.pauseYn == '' || row.pauseYn == 'N') {
+                                            row.pauseStatus = 'pauseN';
+                                            //보류 Y
+                                        } else {
+                                            row.pauseStatus = 'pauseY';
+                                        }
+                                    }
+
+                                    if (row.distributionStatusCd == null) {
+                                        row.distributionStatusNameCache = 'N/A';
+                                    }
+
+                                });
+                            });
+                    };
+                init();
+                return {
+                    list: list
+                    , startPicking: startPicking
+                }
+            })(jQuery);
+        });
+    </script>
+    <style>
+        .function-area {
+            display: flex !important;
+            width: 100%;
+        }
+
+        .sfp-grid tbody tr.pauseY td {
+            background: #FF8A80;
+        }
+
+        .sfp-grid tbody tr.pauseN td {
+            background: #BBDEFB;
+        }
+    </style>
+    <main>
+        <div class="contents-wrap">
+            <section>
+                <div class="function-area">
+                    <div class="align-left">
+                        <select id="pickingOrderStatusCd" name="pickingOrderStatusCd" class="reset-ignore">
+                            <option value="ING">대기/진행중</option>
+                            <option value="COMPLETE">완료/강제완료</option>
+                        </select>
+                        <select id="waveTypeCd" name="waveTypeCd">
+                            <option value="" selected="selected">-피킹유형-</option>
+                            <option value="COMBINATION">일반/당특</option>
+                            <option value="EXPRESS">당특</option>
+                            <option value="NORMAL">일반</option>
+                            <option value="ORDER_STOP">주문중단</option>
+                        </select>
+                        <select id="pauseYn" name="pauseYn">
+                            <option value="" selected="selected">-보류상태-</option>
+                            <option value="N">N</option>
+                            <option value="Y">Y</option>
+                        </select>
+                        <button class="btn-srch ico">조회</button>
+                    </div>
+                    <div class="align-center"></div>
+                    <div class="align-right">
+
+                    </div>
+                </div>
+                <div id="picking-order-grid" class="sfp-grid-panel">
+                    <div class="sfp-grid-header-panel" style="overflow: hidden scroll;">
+                        <table class="sfp-grid">
+                            <colgroup>
+                                <col style="width:200px">
+                                <col style="width:110px">
+                                <col style="width:110px">
+                                <col style="width:100px">
+                                <col style="width:100px">
+                                <col style="width:100px">
+                                <col style="width:130px">
+                                <col style="width:114px">
+                                <col style="width:80px">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>WAVE NO</th>
+                                    <th>WAVE NAME</th>
+                                    <th>피킹유형</th>
+                                    <th>주문수</th>
+                                    <th>소봉수</th>
+                                    <th>상태</th>
+                                    <th>분배상태</th>
+                                    <th>보류여부</th>
+                                    <th>미분배 확인</th>
+                                    <th>분배 확인</th>
+                                    <th>상세</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="sfp-grid-body-panel" style="overflow: hidden scroll; min-height: 625px; height: 625px;">
+                        <table class="sfp-grid">
+                            <colgroup>
+                                <col style="width:200px">
+                                <col style="width:110px">
+                                <col style="width:110px">
+                                <col style="width:100px">
+                                <col style="width:100px">
+                                <col style="width:100px">
+                                <col style="width:130px">
+                                <col style="width:114px">
+                                <col style="width:80px">
+                            </colgroup>
+                            <thead style="display: none;">
+                                <tr>
+                                    <th>WAVE NO</th>
+                                    <th>WAVE NAME</th>
+                                    <th>피킹유형</th>
+                                    <th>주문수</th>
+                                    <th>소봉수</th>
+                                    <th>상태</th>
+                                    <th>분배상태</th>
+                                    <th>보류여부</th>
+                                    <th>미분배 확인</th>
+                                    <th>분배 확인</th>
+                                    <th>상세</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="sfp-template-el R">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>3</td>
+                                    <td>준비</td>
+                                    <td>N/A</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>N/A</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>N/A</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>N/A</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>N/A</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>2</td>
+                                    <td>준비</td>
+                                    <td>N/A</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2002-3-001</td>
+                                    <td>202106101900-3-001</td>
+                                    <td>당특</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2001-2-001</td>
+                                    <td>202106101757-2-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2000-6-001</td>
+                                    <td>202106101750-6-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2000-4-001</td>
+                                    <td>202106101332-4-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2000-3-001</td>
+                                    <td>202106101322-3-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2000-2-001</td>
+                                    <td>202106101314-2-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>2000-1-001</td>
+                                    <td>202106101131-1-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="pauseN sfp-template-el R">
+                                    <td>20210511-3-001</td>
+                                    <td>202105111526-3-001</td>
+                                    <td>일반</td>
+                                    <td>2</td>
+                                    <td>6</td>
+                                    <td>진행</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td><button class="btn-distribution-check blue row">미완료 분배</button></td>
+                                    <td><button class="btn-distribution-move blue row">분배 확인</button></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>20210511-2-001</td>
+                                    <td>202105111520-2-001</td>
+                                    <td>일반</td>
+                                    <td>3</td>
+                                    <td>8</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>1794-3-001</td>
+                                    <td>202105062055-3-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>TESTTTTTTT-2232-001</td>
+                                    <td>202105041640-2232-001</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>1740-4-001</td>
+                                    <td>202104211544-4-001</td>
+                                    <td>일반</td>
+                                    <td>32</td>
+                                    <td>130</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="sfp-template-el R">
+                                    <td>WAVE_20210421_0002</td>
+                                    <td>20210421_0001 2차</td>
+                                    <td>당특</td>
+                                    <td>2</td>
+                                    <td>5</td>
+                                    <td>준비</td>
+                                    <td>준비</td>
+                                    <td>-</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                                <tr class="pauseY sfp-template-el R">
+                                    <td>WAVE0423-0001</td>
+                                    <td>0423 1차</td>
+                                    <td>일반</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>진행</td>
+                                    <td>준비</td>
+                                    <td>보류중</td>
+                                    <td><button class="btn-distribution-check blue row">미완료 분배</button></td>
+                                    <td><button class="btn-distribution-move blue row">분배 확인</button></td>
+                                    <td><button class="btn-detail green row">상세</button></td>
+                                </tr>
+                            </tbody>
+                            <tfoot style="display: none;"></tfoot>
+                        </table>
+                    </div>
+                    <div class="sfp-grid-footer-panel" style="overflow: hidden scroll;">
+                        <table class="sfp-grid">
+                            <colgroup>
+                                <col style="width:200px">
+                                <col style="width:110px">
+                                <col style="width:110px">
+                                <col style="width:100px">
+                                <col style="width:100px">
+                                <col style="width:100px">
+                                <col style="width:130px">
+                                <col style="width:114px">
+                                <col style="width:80px">
+                            </colgroup>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="footer-wrap">
+                    <div class="btn-area">
+                        <div class="cnt">총 <strong id="totalRows">20</strong> 건</div>
+                        <ul class="updown">
+                            <li class="up"><a href="#">위로</a></li>
+                            <li class="down"><a href="#">아래로</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </main>
+    
+    <div class="sfp-message-box-list" style="display: none;"></div>
+    <div class="sfp-message-balloon small" style="display: none;"><span></span></div>
+
+    <div class="layer-dimmed"></div>
+    <div class="layer-wrap">
+        <div class="layer-inside ui-draggable" style="opacity: 1; width: 1920px; left: 0px; top: 0px;">
+            <div class="layer-handle ui-draggable-handle"></div>
+            <div class="iframe-wrap">
+                <iframe src="dialog/index-dialog.html" name="layer-iframe" width="100%" height="1000px" frameborder="0"
+                    scrolling="no" allowtransparency="true"></iframe>
+            </div>
+        </div>
+        <p class="close">
+            <button type="button">닫기</button>
+        </p>
+    </div>
+    </div>
+</body>
+
+</html>

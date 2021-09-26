@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+/* layout */
+body{background:#d7d7d7;
+scrollbar-face-color:#888;
+scrollbar-3dlight-color:#d7d7d7;
+scrollbar-darkshadow-color:#d7d7d7;
+scrollbar-shadow-color:#888;
+scrollbar-arrow-color:#d7d7d7;
+scrollbar-track-color:#d7d7d7;
+}
+
+/*header*/
+body >header{background-color:#009dd0;background-image:-webkit-linear-gradient( left, #07aa9b, #009dd0 );background-image:linear-gradient( to right, #07aa9b, #009dd0 );}
+
+.link-select{border:1px solid #36b9a1;background-color:#06877e;}
+.link-select button{color:#fff;}
+.link-select button:after{border-top-color:#fff}
+.link-select button:focus:after{border-bottom-color:#fff;}
+
+
+.link-select li{background:#06877e}
+.link-select li a:hover{color:#fff;background:#035e58}
+
+/* gnb common */
+.util-menu > ul > li time{color:#fff}
+
+/*title-bar*/
+main > header{color:#fff;background-color:#2b2f31}
+main > header span{color:#777}
+main footer{background-color:#f2f2f2}
+
+
+/* grid - 예외 */
+*::-webkit-scrollbar-track{ background:#d7d7d7; }
+*::-webkit-scrollbar-track-piece{ background:#d7d7d7; }
+*::-webkit-scrollbar-corner{ background:#d7d7d7; }

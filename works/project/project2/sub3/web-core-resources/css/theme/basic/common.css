@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+/* initialize */
+*::-webkit-scrollbar-button{background: #d7d7d7; }
+*::-webkit-scrollbar-thumb{ background: #888; }
+
+/* footer */
+
+/*paging*/
+.footer-wrap .footer-title strong{color:#078f98}
+
+.paging-wrap a{border:1px solid #e3e3e3;background-color:#fff;}
+.paging-wrap a.on,
+.paging-wrap a:hover{color:#078f98;border-color:#b1dadd;background-color:#cae9eb; }
+.paging-wrap a[disabled]{color:#ccc; }
+.paging-wrap a[disabled]:hover{ border-color:#e3e3e3;background-color:#fff; }
+
+/* .function-area{padding:10px;margin-bottom:10px;} */
+div + .function-area{margin-top:10px}

@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+body { background:#FFF;  }
+/* body > main > header { border-bottom:none; background:#ff3131; height:55px; position:fixed; border-bottom-right-radius:5px; border-bottom-left-radius:5px; border-top-right-radius:0px; border-top-left-radius:0px; padding-left:0px;  } */
+body > main > header { border-bottom:none; background:#00235D; height:55px; position:fixed; border-bottom-right-radius:5px; border-bottom-left-radius:5px; border-top-right-radius:0px; border-top-left-radius:0px; padding-left:0px;  }
+body > main > header h1 a,
+body > main > header h1 { color:#FFF; font-size:20px; line-height:55px; font-weight:normal; text-align:center; }
+body > main > header a.back { display:block; width:33px; height:33px; text-indent:-5000em; overflow:hidden; background:url('../../../images/10x10/icon_back_pda.png') no-repeat 0 0; background-size:100% auto; position:absolute; top:11px; right:20px; padding-left:0px; }
+
+main .contents-wrap { padding:75px 20px 90px; height:100%; overflow-y:auto; position:relative; background:#FFF;  }
+main > header > h2 { color:#fff; border-bottom:2px solid #fff; background:#0099d9; }
+
+main > .contents-wrap > footer { background:#a0b5c7; height:75px; bottom:0px; padding:2.5px 15px; border-top-left-radius:5px; border-top-right-radius:5px; z-index: 201; }
+.contents-wrap > section { padding:25px 20px 0px; }
+
+footer button[class*="btn"].btn-call { width:92px; height:47px; font-size:16px; color:#FFF; background:url('../../../images/10x10/btn_call.png') right center no-repeat; background-size:44px 34px; text-align:left; padding-left:10px; margin:13px auto 0; border:none; }
+
+
+/* */
+h3.line { font-size:16px; color:#969696; width:100%; margin-right:10px; background:url('../../../images/10x10/bg_h3line.png') center center repeat-x;   }
+h3.line span { padding-right:15px; background:#FFF; }
+
+
+.tbl-cont { position:relative; margin-bottom:10px;  }
+.tbl-cont + .tbl-cont { margin-bottom:20px; }
+
+.shelf-inp { width:100%; margin:10px 0 10px;}
+.shelf-inp input { width:100%; border:none; background:none; font-family:NotoSansKR; font-weight:500; font-size:32px; text-align:center; height:30px; }
+
+.gr-sq-wrap { display:inline-block; width:100%; margin-top:15px;  }
+.gr-sq-wrap a { display:inline-block; width:calc(50% - 16px); margin:0 7px;   }
+.gr-sq-wrap .gr-sq { display:block; border:2px solid #bbbbbb; border-radius:5px; color:#959595; font-size:13px; font-family:NotoSansKR; font-weight:400; text-align:center; box-sizing:border-box; margin-bottom:10px; }
+.gr-sq-wrap .gr-sq.on { border:3px solid #a0b5c7; border-radius:5px; background:#FFF; color:#a0b5c7; font-weight:700;   }
+.gr-sq .cate1 { background:url('../../../images/10x10/img_shelf01_off.png') center 10px no-repeat; background-size:93px 56px; min-height:100px;  }
+.gr-sq.on .cate1 { background:url('../../../images/10x10/img_shelf01_on.png') center 10px no-repeat; background-size:93px 56px;   }
+.gr-sq .cate1 p { padding-top:70px; text-align:center;   }
+.gr-sq .cate2 { background:url('../../../images/10x10/img_shelf02_off.png') center 10px no-repeat; background-size:93px 56px; min-height:100px;  }
+.gr-sq.on .cate2 { background:url('../../../images/10x10/img_shelf02_on.png') center 10px no-repeat; background-size:93px 56px;  }
+.gr-sq .cate2 p { padding-top:70px; text-align:center;  }
+
+.gr-sq .type { min-height:55px; position:relative;  }
+.gr-sq .type p { font-family:NotoSansKR; font-size:18px; font-weight:400; position:absolute; left:0; right:0; top:0; bottom:0; text-align:center; line-height:55px;   }
+.gr-sq .type span { position:absolute; bottom:5px; right:10px; font-size:12px; font-weight:400; }
+
+.gr-sq .item1 { background:url('../../../images/10x10/icon_shelf01.png') center 35px no-repeat; background-size:32px 42px; min-height:100px; box-sizing:border-box; position:relative;  }
+.gr-sq .item1 p { text-indent:-5000em; border-top:1px solid #bbbbbb; padding:0 12px; position:absolute; top:18px; left:12px; width:calc(100% - 48px);  }
+.gr-sq.on .item1 p { border-top:1px solid #a0b5c7; }
+.gr-sq .item2 { background:url('../../../images/10x10/icon_shelf02.png') center 35px no-repeat; background-size:48px 31px; min-height:100px; box-sizing:border-box; position:relative;  }
+.gr-sq .item2 p { text-indent:-5000em; border-top:1px solid #bbbbbb; padding:0 12px; position:absolute; top:18px; left:12px; width:calc(100% - 48px);     }
+.gr-sq.on .item2 p { border-top:1px solid #a0b5c7;  }
+
+
+ /* */
+.layerPop { display:none; position:fixed; left:0; right:0; top:0; bottom:0; text-align:center; background-color:rgba(0, 0, 0, 0.5); z-index:999; }
+.layerPop:before { content:""; display:inline-block; height:100%; vertical-align:middle;   }
+.pop-layer { display:inline-block; vertical-align:middle; width:80%; background-color:#FFF;border-radius:5px; z-index:10; box-shadow:10px 10px 10px rgba(0,0,0,0.2); }
+
+.layerPop.layerKeypad { display:block; position:fixed; left:0; right:0; top:0; bottom:0; text-align:center; background-color:rgba(0, 0, 0, 0.3); z-index:999; }
+.layerPop.layerKeypad:before { content:""; display:inline-block; height:100%; vertical-align:middle; }
+.layerPop.layerKeypad .pop-layer { display:inline-block; vertical-align:middle; width:290px; height:550px; border-radius:5px; z-index:10; background:transparent; box-shadow:none; }
+
+.layerPop.layerKeypad.number{ display:none; }
+.layerPop.layerKeypad.txt{ display:none; }
+.layerPop.layerKeypad.float{ display:none; }
+
+
+.layerPop.layerKeypad .pop-conts { position:relative;  }
+.layerPop.layerKeypad .pop-conts header { height:41px; background:transparent; width:100%; position:relative; }
+.layerPop.layerKeypad .pop-conts header .close-keypad { display:block; position:absolute; top:0; left:50%; margin-left:-20.5px; width:41px; height:41px; background:url('../../../images/10x10/icon_keypad_close.png') center top no-repeat; background-size:100% auto; text-indent:-5000em; }
+
+
+.keypad { margin-top:15px; }
+.keypad.number { width:290px; }
+.keypad ul { text-align: center; }
+.keypad .inp { margin-bottom:10px; border:1px solid #959595; border-radius:3px; height:90px; line-height:90px; box-sizing:border-box; background:#FFF; }
+.keypad input[type='text'] { height:45px; font-size:40px; font-family:NotoSansKR; font-weight:300; width:calc(100% - 50px); color:#959595; text-align:right; margin:0 25px; padding-bottom:15px; background:#FFF; border:none; border-bottom:1px solid #959595; border-radius:0px;  }
+.keypad .keybtn { font-size:40px; font-family:NotoSansKR; font-weight:300; color:#959595; display:inline-block; text-align:center; width:90px; height:90px; line-height:90px; margin-right:10px; border:1px solid #959595; background:#fff; box-shadow:none; border-radius:3px; overflow:hidden; vertical-align:middle; box-sizing:border-box; }
+.keypad .keybtn.del { background:#FFF url('../../../images/10x10/keypad_delete.png') center center no-repeat; background-size:42px auto; text-indent:-5000em; }
+.keypad .keybtn.ok { background:#FFF url('../../../images/10x10/keypad_enter.png') center center no-repeat; background-size:42px auto; text-indent:-5000em; }
+
+.keypad .keybtn:HOVER { cursor: pointer; }
+.keypad .keybtn:ACTIVE { background-color:#DDD; }
+.keypad div { text-align:center; }
+
+.keypad > ul > li { font-size:0; }
+.keypad > ul > li > ul { margin-bottom:10px; }
+.keypad > ul > li > ul > li:last-child { margin-right:0px;}

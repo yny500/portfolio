@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/* .sfp-grid tbody tr:hover td{ background-color:#49555e;color:#f68e1f; }
+.sfp-grid tbody tr.selected td{ background-color:#544a31;color:#e7ebea; } */
+/* .sfp-grid tbody tr:hover td{ background-color:#49555e;color:#078f98; }
+.sfp-grid tbody tr.selected td{ background-color:#134f53;color:#aec0c9; } */
+
+/* .sfp-grid thead th{color:#fff;background-color:#107178;} */
+.sfp-grid thead th{background-color:#0075c2;border-left-color:#d2d1d6;border-top-color:#d2d1d6}
+.sfp-grid tbody td{border-top:1px solid #0075c2;border-right-color:#0075c2;border-left-color:#d2d1d6}
+/* .sfp-grid tfoot td{color:#444;border-top:1px solid #0075c2; background-color:#f1f1f1;} */
+.sfp-grid tfoot td{color:#444;border-top:1px solid #0075c2; background-color:#fff;}
+.sfp-grid tbody tr:hover td{color:#0075c2;background-color:#dbebf9}
+.sfp-grid tbody tr.selected td{background-color:#cce7e2;}
+/* .border-style.sfp-grid th,.border-style.sfp-grid td,.border-style .sfp-grid th, .border-style .sfp-grid td{border-top: 1px solid #676767;} */
+/* .border-style.sfp-grid tbody td,.border-style .sfp-grid tbody td{border-top: 1px solid #d2d1d6;border-left: 1px solid #d2d1d6;border-right: 1px solid #d2d1d6;} */
+
+.sfp-grid-body-panel{background-color:#EFF4F8 !important; }
+
+
+
+/* register-table */
+.register-table ul{border-top:1px solid #0075c2;border-bottom:1px solid #0075c2}
+.register-table .title{color:#fff;border-color:#d2d1d6;background-color:#0075c2}
+.register-table .title > em{color:#ed1c24;}
+.register-table .cont{border-bottom:1px solid #d2d1d6;}
+/* .register-table .cont{border-bottom:1px solid #514c46;background-color:#3f464c} */
+.register-table .vertical .cont{border-right-color:#514c46}
+
+
+/* static-table */
+.static-table th, .static-table td{}
+.static-table th{color:#fff;border-right:1px solid #d2d1d6;border-bottom:0;background-color:#0075c2}
+.static-table td{border-right:1px solid #d2d1d6;background-color:#f1f7fc}
+
+.static-table button[class*="btn"]{border:1px solid;border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8;}
+.static-table.type2 th{background-color:#fff}
+.static-table.type2 th:after{background-color:#929292}
+.static-table.type2 th,.static-table.type2 td{border-top:1px dotted #c5c5c5}

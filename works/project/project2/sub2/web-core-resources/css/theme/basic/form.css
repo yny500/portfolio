@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+
+/*input */
+input[readonly="readonly"],input[readonly]{}
+input[type="text"]:disabled{}
+
+input[type="radio"] + .radio-mark:before{border-color:#c8c8c8;background-color:#fff}
+input[type="radio"] + .radio-mark:after{background-color:#06a6b1}
+input[type="radio"]:disabled + .radio-mark:before{background-color:#f5f5f5;}
+
+/* input[type="checkbox"] + .check-mark:before{border-color:#ced3da;background-color:#fff} */
+input[type="checkbox"]:checked + .check-mark:before{background-position:0 0}
+/* input[type="checkbox"]:disabled + .check-mark:before{background-color:#f5f5f5;}
+input[type="checkbox"]:disabled:checked + .check-mark:before{background-color:#f5f5f5;background-image: url('../../../images/icons/icon_ir_checked.png')}
+
+input[type="checkbox"] + .check-mark-button:before{background-image:url('../../../images/icons/icon_ir_checked_none.png')}
+input[type="checkbox"]:checked + .check-mark-button:before{background-image: url('../../../images/icons/icon_ir_checked.png')}
+input[type="checkbox"]:disabled:checked + .check-mark-button:before{background-image: url('../../../images/icons/icon_ir_checked.png')}
+ */
+
+input::-webkit-input-placeholder {color: #969696;}
+input::-moz-placeholder {color: #969696;}
+input:-ms-input-placeholder {color: #969696;}
+input:-moz-placeholder {color: #969696;}
+
+input[class*="select"]{background-color:#fff;background-image:url('../../../images/btn/btn_category.png')}
+input[class*="select"]::-webkit-input-placeholder {color: #6c6c6c;}
+input[class*="select"]::-moz-placeholder {color: #6c6c6c;}
+input[class*="select"]:-ms-input-placeholder {color: #6c6c6c;}
+input[class*="select"]:-moz-placeholder {color: #6c6c6c;}
+input[class*="select"]:read-only{background-color:#fff}
+/* input[class*="select"].select-user-info{background-image:url('../images/icons/icon_man.png')}
+input[class*="select"].select-user-info:disabled{background-image:url('../images/icons/icon_man_disabled.png')}
+input[class*="select"].select-option{background-image:url('../images/icons/icon_man.png')}
+input[class*="select"].select-srch{background-image:url('../images/btn/btn_find.png')} */
+label input.select + .btn-clear{background:#fff;}
+button.btn-clear{border:1px solid #d0d0d0;}
+button.btn-clear:after{background-color:#999999;}
+
+input.calendar{background-color:#fff;background-image:url('../../../images/icons/icon_cal.png')}
+input[class*="validate"]{background-color:#fff}
+input[class*="validate"]:read-only{ background-color:#f5f5f5 !important;color:#444 !important; }
+input[class*="validate"]:disabled{ background-color:#f5f5f5 !important;color:#ccc}
+input[class*="validate"].pass{}
+.period:after{color:#969696}
+.period .calendar + .calendar{border-right:1px solid #d0d0d0;}
+
+
+select{background-color:#fff;}
+select:disabled{color:#a2a2a2;background-color:#f5f5f5;}
+
+/* check, hover 스타일 설정 IE, Chrome */
+select option:checked, select option:hover {background-color:#eee; color: #444;border-color:1px solid #d0d0d0}
+select option:checked, select option:hover { color: #444;}
+select.border{border-color:#d0d0d0}
+/*
+.function-area input[type="text"],
+.function-area input[type="password"],
+.function-area input[type="date"],
+.function-area input[type="tel"]{box-shadow: 1px 1px 2px rgba(0,0,0,0.06);}
+
+.register-table textarea{border-color:#d0d0d0}*/
+
+.sfp-grid select,
+.register-table select{border-color:#d0d0d0}
+
+
+/* datepicker*/
+/* .ui-datepicker a{ color:#888;}
+.ui-datepicker-title{color:#555;} */
+.ui-datepicker-calendar td a:hover{ border-color:#e3f3f1;background-color:#e1f4fc;color:#1f8bc5; }
+.ui-datepicker-calendar td a.ui-state-active{ border-color:#009ac0;background-color:#009ac0; }
+/*
+.login-box input::-webkit-input-placeholder {color: #bbbbbb;}
+.login-box input::-moz-placeholder {color: #bbbbbb;}
+.login-box input:-ms-input-placeholder {color: #bbbbbb;}
+.login-box input:-moz-placeholder {color: #bbbbbb;}
+ */
+.file-srch{border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8;}
+
+
+/* input look like span*/
+/* input.no-style{color:#444;}
+input.no-style:disabled{color:#444;background:#fff}
+.sfp-grid tbody tr:hover input.no-style{background-color: #e3f3f1; color:#078f98;}
+.sfp-grid .selected input.no-style {background-color: #d7edf6; color: #076ea5;} */
+
+
+.multi-input-select-container li.checked { color:#07aa9b !important; }
+.multi-input-select-container.ico li.checked { filter: invert(55%) sepia(42%) saturate(5510%) hue-rotate(142deg) brightness(93%) contrast(94%) !important; -webkit-filter: invert(55%) sepia(42%) saturate(5510%) hue-rotate(142deg) brightness(93%) contrast(94%) !important; }
+
+

@@ -121,7 +121,6 @@ body.fixed {
 	padding: 53px 20px 0;
 	width: 240px;
 	height: 100vh;
-	text-align: left;
 	background-color: #fff;
 	box-sizing: border-box;
 	transition: right 0.4s;
@@ -144,8 +143,8 @@ body.fixed {
 	transition: right 0.4s;
 }
 .main_tab.active {
-	background: url(../images/ico_tab_close.png) no-repeat 0 0;
-	right: 250px;
+	background-image: url(../images/ico_tab_close.png);
+	right: 260px;
     width: 25px;
     height: 25px;
 }

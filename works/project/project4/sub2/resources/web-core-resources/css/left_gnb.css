@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+nav ~ main{padding-left:95px}
+nav ~ main header{left:95px}
+
+/*left gnb*/
+body > nav{left:0;box-shadow:2px 0 4px rgba(0,0,0,0.2);}
+body > nav > ul ul{left:95px;border-left:1px solid #d7d7d7;box-shadow:2px 0 4px rgba(0,0,0,0.2);}
+body > nav > ul ul ul {left:100%}
+body > nav > ul ul li a{padding:0 35px 0 20px;}
+body > nav > ul ul li a.has-depth:after{right:20px;}
+nav > ul ul li:hover > a{color:#16838a;border-color:#e3f3f1;background-color:#e3f3f1;}
+body > nav ul li:hover > a{color:#16838a;background-color:#e3f3f1;}
+
+nav + main .function-area.fix-position{left:95px}

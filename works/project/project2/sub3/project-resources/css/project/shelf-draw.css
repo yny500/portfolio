@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+main > section{position:relative;display:flex;width:100%;height:calc(100% - 50px);padding-bottom:30px;box-sizing:border-box;flex-direction:row}
+main > section .col{display:flex;flex: 1 1 auto;flex-direction:column;}
+main > section .row{display:flex;flex: 1 1 auto;}
+main > section .item-wrap{padding:10px;box-sizing:border-box}
+main > header + section{height:calc(100% - 50px)}
+
+/* .item-inner > h3{height:50px;line-height:50px;} */
+.item-inner .item-cont{height:calc(100% - 50px);}
+
+.shelf-face-type{height:570px;}
+.shelf-face-type > ul{height:100%;overflow:hidden;}
+.shelf-face-type > ul > li{float:left;width:50%;height:50%;padding:10px;box-sizing:border-box}
+.shelf-face-type .inner{position:relative;height:100%;padding-top:40px;box-sizing:border-box}
+.shelf-face-type .inner:after{content:'';display:block;position:absolute;top:35px;right:15px;width:40px;height:40px;border-radius:50%;background:#b6b6b6 url('../../images/icons/icon_ir_checked_w.png') 50% 50% no-repeat}
+.shelf-face-type .inner .shelf-info{position:absolute;top:0;left:0;right:0;height:30px;font-size:24px;line-height:30px}
+.shelf-face-type .inner .shelf-info > strong{display:inline-block;padding-right:10px}
+.shelf-face-type .inner .face-grid-wrap{width:100%;height:100%;padding:10px 30px;box-sizing:border-box;}
+.shelf-face-type .select .face-grid-wrap{background:#cef6fe}
+.shelf-face-type .select .inner:after{background-color:#328fee}
+.shelf-face-type .disable .inner:after{display:none}
+.shelf-face-type .disable .face-grid-wrap{position:relative}
+.shelf-face-type .disable .face-grid-wrap:after{content:'';display:block;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3) url('../../images/icons/ico_lock.png') no-repeat 50% 50%; background-size:100px auto}
+main > section .item-wrap.face-detail{padding-left:20px;border-left:1px dashed #a2a2a2;}
+.face-detail .function-area{padding-bottom:5px}
+.draw-option .function-area + .function-area{margin-top:0;padding-bottom:0}
+.face-detail .function-area + .grid-draw-wrap{height:calc(100% - 50px)}
+.face-detail .grid-draw-wrap .draw-option + .draw-canvas{height:calc(100% - 155px)}
+.face-detail .draw-canvas{position:relative;padding:15px 50px 110px;}
+.face-detail .draw-canvas .canvas-apply{position:absolute;bottom:10px;left:0;right:0;}
+.draw-canvas .canvas-apply button{margin-left:10px;padding:0 20px;vertical-align:middle}
+
+.grid-draw-wrap .grid > span.select{border-color:#fff;background:#6086b8}

@@ -1,0 +1,6 @@
+@charset "utf-8";
+
+/*left gnb*/
+/* body > nav > ul ul{border-left:1px solid #d7d7d7;box-shadow:2px 0 4px rgba(0,0,0,0.2);} */
+nav > ul ul li:hover > a{color:#16838a;border-color:#e3f3f1;background-color:#e3f3f1;}
+body > nav ul li:hover > a{color:#16838a;background-color:#e3f3f1}

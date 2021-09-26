@@ -1,0 +1,4 @@
+@charset "utf-8";
+body > nav{}
+body > nav > ul {border-right:0;border-left: 1px solid #f58d1e;}
+body > nav ul li:hover > a{color:#fff;background-color:#f58d1e}

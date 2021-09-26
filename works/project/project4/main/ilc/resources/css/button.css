@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+button[class*="btn"] { min-width: 35px; height: 28px; overflow: hidden; padding: 0 5px; font-size: 12px; font-weight: 500; color: #555; border-radius: 0; vertical-align: top; background-color: #fff; }
+
+button[class*="sky"] { background-color: #1e8bc3 !important; color: #fff; border: 0 !important; }
+button[class*="white"] { background-color: #fff !important; }
+button[class*="blue"] { background-color: #0e6eb8 !important; color: #fff; border: 0 !important; }
+button[class*="black"] { background-color: #000 !important; color: #fff; border: 0 !important; }
+button[class*="gray"] { background-color: #696d6f !important; color: #fff; border: 0 !important; }
+button[class*="orange"] { background-color: #f89406 !important; color: #fff; border: 0 !important; }
+button[class*="green"] { background-color: #016936 !important; color: #fff; border: 0 !important; }
+button[class*="red"] { background-color: #ff3131 !important; color: #fff; border: 0 !important; }
+button[class*="yellow"] { background-color: #ffd700 !important; color: #fff; border: 0 !important; }
+button[class*="olive"] { background-color: #32cd32 !important; color: #fff; border: 0 !important; }
+button[class*="teal"] { background-color: #008080 !important; color: #fff; border: 0 !important; }
+button[class*="violet"] { background-color: #ee82ee !important; color: #fff; border: 0 !important; }
+button[class*="purple"] { background-color: #b413ec !important; color: #fff; border: 0 !important; }
+button[class*="pink"] { background-color: #ff1493 !important; color: #fff; border: 0 !important; }
+button[class*="brown"] { background-color: #a52a2a !important; color: #fff; border: 0 !important; }
+
+button.btn-add { background-color: #f89406; color: #fff; border: 0 !important; }
+button.btn-srch { background-color: #696d6f; color: #fff; border: 0 !important; }
+button.btn-save { background-color: skyblue; color: #fff; border: 0 !important; }
+button.btn-mod { color: #fff; background-color: #2ecc71; }
+button.btn-cancel { background-color: #696d6f; color: #fff; border: 0 !important; }
+button.btn-close { background-color: #696d6f; color: #fff; border: 0 !important; }
+button.btn-copy { background-color: #0e6eb8; color: #fff; border: 0 !important; }
+button.btn-del, button.btn-delete { color: #fff; background-color: #ff3131; }
+button.btn-add, button.btn-srch, button.btn-mod, button.btn-save, button.btn-cancel, button.btn-del, button.btn-delete { border: 0 !important; }
+
+/* TODO요건 체크 */
+button[class*="wide"] { position: relative; min-width: 85px; height: 40px; padding: 0 15px; border: 1px solid #d8d8d8; font-size: 13px; }
+
+button[class*="ico"][class*="add"]:before, button[class*="image"][class*="add"]:before { background-position: 2px 0; }
+button[class*="ico"][class*="-srch"]:before, button[class*="image"][class*="srch"]:before { background-position: 0 -70px; }
+button[class*="ico"][class*="-reset"]:before, button[class*="image"][class*="reset"]:before { background-position: 0 -175px; }
+button[class*="ico"][class*="-del"]:before, button[class*="image"][class*="del"]:before { background-position: 0 -210px; }
+button[class*="ico"][class*="upload"]:before, button[class*="image"][class*="upload"]:before { background-position: 0 -105px; }
+button[class*="ico"][class*="download"]:before, button[class*="image"][class*="download"]:before { background-position: 0 -140px; }
+button[class*="ico"][class*="save"]:before, button[class*="image"][class*="save"]:before { background-position: 0 -246px; }
+button[class*="ico"][class*="list"]:before, button[class*="image"][class*="list"]:before { background-position: 0 -280px; }
+button[class*="ico"][class*="help"]:before, button[class*="image"][class*="help"]:before { background-position: 0 -317px; }
+button[class*="ico"][class*="print"]:before, button[class*="image"][class*="print"]:before { background-position: 0 -350px; }
+button[class*="ico"][class*="capture"]:before, button[class*="image"][class*="capture"]:before { background-position: 0 -385px; }
+button[class*="ico"][class*="select"]:before, button[class*="image"][class*="select"]:before { background-image: url("../images/icons/bg_list_node.png"); background-position: 0 50%; background-size: 14px auto; }
+
+button.ver2[class*="ico"][class*="-mod"]:before, button.ver2[class*="image"][class*="mod"]:before { background-position: 1px -580px; }
+button.ver2.small[class*="ico"][class*="-mod"]:before, button.ver2.small[class*="image"][class*="mod"]:before { background-position: 1px -585px; }
+button.ver2[class*="ico"][class*="-reset"]:before, button.ver2[class*="ico"][class*="-del"]:before, button.ver2[class*="image"][class*="reset"]:before, button.ver2[class*="image"][class*="del"]:before { background-image: url("../images/btn/set_btn_function_w.png"); }
+button.ver2[class*="ico"][class*="setup"]:before, button.ver2[class*="image"][class*="setup"]:before { background-image: url("../images/btn/btn_setup_w.png"); background-position: 0 50%; }
+
+button[class*="ico"]:before { content: ""; display: inline-block; margin-top: -7px; width: 23px; height: 28px; background: url("../images/btn/set_btn_function.png") no-repeat; vertical-align: middle; }
+button[class*="ico"][class*="-mod"]:before { background-image: url("../images/btn/set_tbtn.png"); background-position: 1px -580px; }
+button[class*="ico"][class*="-mod"][class*="small"]:before { background-position: 1px -585px; }
+button[class*="ico"][class*="-dialog"]:before { background-image: url("../images/btn/set_tbtn.png"); background-position: 2px, -380px; }
+button[class*="ico"][class*="-move"]:before { background-image: url("../images/btn/set_tbtn.png"); background-position: 4px, -508px; }
+button[class*="ico"][class*="setup"]:before { width: 20px; background-image: url("../images/btn/set_tbtn.png"); background-position: 0, -540px; }
+button[class*="ico"][class*="copy"]:before { background: url("../images/btn/btn_copy.png") no-repeat !important; }
+
+button[class*="ico"][class*="-reset"].ver2 { color: #fff; background-color: #696d6f; }
+button[class*="ico"][class*="setup"].ver2:before, button[class*="ico"][class*="select"]:before, button[class*="ico"][class*="select"].ver2:before, button[class*="ico"][class*="select"][class*="small"]:before { margin-top: -1px; }
+
+button[class*="image"] { font-size: 0 !important; min-width: 30px; padding: 1px 0 0; }
+button[class*="image"]:before { content: ""; display: inline-block; margin-top: -7px; width: 15px; height: 28px; background: url("../images/btn/set_btn_function.png") no-repeat; }
+button[class*="image"][class*="small"] { padding: 7px 0 0; }
+button[class*="image"][class*="small"]:before { height: 24px; line-height: 24px; }
+button[class*="image"][class*="mod"]:before { background-image: url("../images/btn/set_tbtn.png"); background-position: 1px -580px; }
+button[class*="image"][class*="mod"][class*="small"]:before { background-position: 1px -585px; }
+button[class*="image"][class*="upload"]:before { width: 19px; }
+button[class*="image"][class*="download"]:before { width: 19px; }
+button[class*="image"][class*="save"]:before { width: 11px; }
+button[class*="image"][class*="list"]:before { width: 9px; }
+button[class*="image"][class*="help"]:before { width: 17px; }
+button[class*="image"][class*="print"]:before { width: 20px; }
+button[class*="image"][class*="capture"]:before { width: 19px; }
+button[class*="image"][class*="dialog"]:before { background-image: url("../images/btn/set_tbtn.png"); background-position: 2px, -380px; }
+button[class*="image"][class*="-move"]:before { width: 20px; background-image: url("../images/btn/set_tbtn.png"); background-position: -4px, -508px; }
+button[class*="image"][class*="setup"]:before { background-image: url("../images/btn/set_tbtn.png"); background-position: 0, -540px; }
+button[class*="image"][class*="select"]:before { margin-top: -2px; }
+button[class*="image"][class*="reset"].ver2 { color: #fff; background-color: #696d6f; }
+
+button[class*="-move"][class*="reverse"]:before { transform: scaleX(-1); filter: FlipH; -ms-filter: "FlipH"; }
+
+button[class*="small"] { height: 24px; line-height: 24px; padding: 0 6px; }
+button[class*="small"][class*="-add"]:before { background-position: 2px -5px; }
+button[class*="small"][class*="-srch"]:before { background-position: 0 -76px; }
+button[class*="small"][class*="-mod"]:before { background-position: 0 5px; }
+button[class*="small"][class*="-del"]:before { background-position: 0px -216px; }
+button[class*="small"][class*="upload"]:before { background-position: 0 -112px; }
+button[class*="small"][class*="-dialog"]:before { background-position: 2px -386px; }
+button[class*="small"][class*="-move"]:before { background-position: -4px -513px; }
+button[class*="small"][class*="reset"]:before { background-position: 0 -180px; }
+button[class*="small"][class*="download"]:before { background-position: 0 -147px; }
+button[class*="small"][class*="save"]:before { background-position: 0 -252px; }
+button[class*="small"][class*="list"]:before { background-position: 0 -286px; }
+button[class*="small"][class*="help"]:before { background-position: 0 -322px; }
+button[class*="small"][class*="print"]:before { background-position: 0 -355px; }
+button[class*="small"][class*="capture"]:before { background-position: 0 -390px; }
+button[class*="small"][class*="upload"]:before { background-position: 0 -111px; }
+button[class*="small"][class*="select"]:before { margin-top: -7px; }
+button[class*="small"][class*="setup"]:before { background-position: 1px -545px; }
+button[class*="small"][class*="setup"].ver2:before { background-position: 0 5px; }
+button[class*="small"][class*="setup"].ver2[class*="image"]:before { margin-top: -7px; }
+button[class*="small"][class*="dialog"]:before { background-position: 1px -385px; }
+
+button:disabled { opacity: 0.4; cursor: default; }
+.function-area button { box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.06); }
+button.btn-del:before, button.btn-delete:before { background-image: url(../images/btn/set_btn_function_w.png); }
+
+.sfp-grid button[class*="btn"] { height: 30px; min-height: 30px; border: 1px solid; border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8; }
+.sfp-grid button[class*="image"]:before, .sfp-grid button[class*="ico"]:before { height: 30px; margin-top: -5px; }
+button[class*="ico"][class*="small"]:before { height: 24px; line-height: 24px; margin-top: 0; }
+.sfp-grid button + button { margin-left: 5px; }
+
+.sfp-grid.big button[class*="btn"] { height: 35px; line-height: 35px; }
+.sfp-grid.big button[class*="image"]:before, .sfp-grid.big button[class*="ico"]:before { height: 35px; margin-top: 0; }
+.sfp-grid.big button[class*="image"][class*="small"]:before, .sfp-grid.big button[class*="ico"][class*="small"]:before { height: 24px; margin-top: -1px; }
+
+.sfp-grid.small button[class*="btn"] { min-height: 0; height: 24px; line-height: 24px; }
+.sfp-grid.small button[class*="image"]:before, .sfp-grid.small button[class*="ico"]:before { height: 24px; margin-top: -11px; }
+.sfp-grid.small button[class*="image"][class*="small"]:before, .sfp-grid.small button[class*="ico"][class*="small"]:before { margin-top: -1px; }
+
+.sfp-grid.smaller button[class*="btn"] { min-height: 0; height: 20px; }
+.sfp-grid.smaller button[class*="btn"]:before { margin-top: -1px; }
+.sfp-grid.smaller button[class*="image"]:before, .sfp-grid.smaller button[class*="ico"]:before { height: 20px; margin-top: -11px; }
+.sfp-grid.smaller button[class*="image"][class*="small"]:before, .sfp-grid.smaller button[class*="ico"][class*="small"]:before { margin-top: -1px; }
+
+.register-table button[class*="btn"] { min-width: 63px; height: 30px; padding: 0 9px; line-height: 28px; border: 1px solid; border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8; box-sizing: border-box; box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.05); }
+.register-table button[class*="btn"].btn-clear { min-width: 35px; border: 1px solid #b3b3b3; border-left: 0; }
+.register-table button[class*="btn"][class*="image"] { min-width: 30px; }
+.register-table.small button[class*="btn"] { padding: 0 5px; height: 24px; line-height: 24px; }
+
+button[class*="grid-line"] { position: relative; width: 100%; height: 35px; border-radius: 0 0 3px 3px; font-weight: 500; color: #555; border: 1px solid; border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8; box-sizing: border-box; background-color: #fff; box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.05); }
+button[class*="grid-line"]:before { content: ""; position: absolute; display: inline-block; top: 10px; width: 10px; height: 15px; margin-left: -18px; background: url("../images/btn/set_tbtn.png") 0 0 no-repeat; }
+button[class*="grid-line"][class*="-add"]:before { background-position: 0 -120px; }
+
+button[class*="arrow"] { display: inline-block; width: 50px; height: 50px; font-size: 0; background: url("../images/arrow/chevron-down.png") no-repeat 50% 50%; }
+button[class*="arrow"].square { width: 80px; height: 40px; }
+
+button.arrow-top { background-image: url("../images/arrow/chevron-up.png"); }
+button.arrow-right { transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); }
+button.arrow-left { transform: rotate(90deg); -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); }
+
+button[class^="period-"] { display: inline-block; min-width: 35px; height: 35px; border-radius: 3px; font-size: 0; background: #fff url("../images/arrow/set_arr_pg.png") no-repeat; }
+button.period-prev { background-position: 1px -58px; }
+button.period-next { background-position: 1px -88px; }

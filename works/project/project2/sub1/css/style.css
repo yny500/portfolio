@@ -1,0 +1,89 @@
+.clearfix::before, .clearfix::after { content: ""; display: block; }
+
+.clearfix::after { clear: both; }
+
+.wrap { min-width: 1200px; padding: 10px; height: 100vh; background-color: #1E262D; box-sizing: border-box; }
+
+header { height: 40px; margin-bottom: 10px; }
+
+header h1 { float: left; }
+
+header h1 .header-logo { display: inline-block; vertical-align: middle; width: 40px; }
+
+header h1 .header-logo img { max-width: 100%; }
+
+header h1 span { display: inline-block; vertical-align: middle; padding-left: 10px; font-size: 30px; font-weight: 700; color: #fff; }
+
+header .util-menu { float: right; }
+
+header .util-menu time { line-height: 40px; font-size: 12px; color: #fff; }
+
+main .area-top { height: 30vh; }
+
+main .area-top em { display: block; padding: 3px 0; text-align: center; font-size: 20px; color: #fff; background-color: #383B48; }
+
+main .area-top > div[class^="area-top"] { float: left; margin-left: 10px; width: calc((100% - 10px)/2); height: 30vh; }
+
+main .area-top > div[class^="area-top"]:first-child { margin-left: 0; }
+
+main .area-top .area-item { margin-top: 10px; height: calc(30vh - 44px); overflow: hidden; }
+
+main .area-top .area-item > div[class=item-block] { float: left; margin-left: 10px; padding: 10px; width: calc((100% - 30px)/4); height: calc(30vh - 44px); background-color: #383B48; box-sizing: border-box; }
+
+main .area-top .area-item > div[class=item-block]:first-child { margin-left: 0; }
+
+main dt { font-size: 20px; color: #fff; }
+
+main dd { padding-top: 5px; font-size: 20px; color: #737375; }
+
+main span { display: block; padding-top: 20px; text-align: right; font-size: 60px; color: #fff; }
+
+main .area-top .area-top-left .area-item .item-block:nth-child(3) span, main .area-top .area-top-left .area-item .item-block:nth-child(4) span { padding-top: 53px; }
+
+main .area-bottom { margin-top: 10px; height: 60vh; }
+
+main .area-bottom div[class^=area-bottom] { float: left; margin-left: 10px; width: calc((100% - 10px)/2); height: 60vh; overflow: hidden; }
+
+main .area-bottom div[class^=area-bottom]:first-child { margin-left: 0; }
+
+main .area-bottom .area-bottom-left { padding: 15px 20px; background-color: #383B48; box-sizing: border-box; }
+
+main .area-bottom em { font-size: 20px; color: #fff; }
+
+main .area-bottom .area-bottom-left .order-list-chart { padding-top: 5px; height: calc(60vh - 53px); overflow: hidden; }
+
+main .area-bottom table { width: 100%; border-spacing: 0; border-collapse: collapse; }
+
+main .area-bottom table thead { background-color: #737375; border-top: 1px solid #fff; }
+
+main .area-bottom table th { padding: 5px 0; font-size: 16px; font-weight: 400; color: #fff; text-align: center; border-left: 1px solid #9d9d9e; border-bottom: 1px solid #9d9d9e; box-sizing: border-box; }
+
+main .area-bottom table th:first-child { border-left: none; border-right: 1px solid #fff; }
+
+main .area-bottom table td { padding: 1.2px 0; font-size: 14px; font-weight: 400; text-align: center; color: #fff; border-left: 1px solid #9d9d9e; border-bottom: 1px solid #9d9d9e; box-sizing: border-box; }
+
+main .area-bottom table tbody tr:last-child td { border-bottom: 1px solid #fff; }
+
+main .area-bottom table td:first-child { border-left: none; border-right: 1px solid #fff; }
+
+main .area-bottom .area-bottom-right .average-time > div[class^=time] { float: left; padding: 0 10px; margin-left: 10px; width: calc((100% - 10px)/2); background-color: #383B48; box-sizing: border-box; }
+
+main .area-bottom .area-bottom-right .average-time > div[class^=time]:first-child { margin-left: 0; }
+
+main .area-bottom .area-bottom-right .average-time em { float: left; padding-top: 13px; }
+
+main .area-bottom .area-bottom-right .average-time time { float: right; font-size: 60px; color: #fff; }
+
+main .area-bottom .area-bottom-right .enter-process { margin-top: 10px; }
+
+main .area-bottom .area-bottom-right .enter-process em { display: block; padding: 3px 0; text-align: center; background-color: #383B48; }
+
+main .area-bottom .area-bottom-right .enter-process .enter-item { margin-top: 10px; }
+
+main .area-bottom .area-bottom-right .enter-process .enter-item > div[class=enter-block] { float: left; padding: 10px 10px 30px 10px; margin-left: 10px; width: calc((100% - 30px)/4); background-color: #383B48; box-sizing: border-box; }
+
+main .area-bottom .area-bottom-right .enter-process .enter-item > div[class=enter-block]:first-child { margin-left: 0; }
+
+main .area-bottom .area-bottom-right .enter-list { padding: 15px 20px 9999px 20px; margin-top: 10px; background-color: #383B48; }
+
+main .area-bottom .area-bottom-right .enter-list .enter-list-chart { padding-top: 5px; }

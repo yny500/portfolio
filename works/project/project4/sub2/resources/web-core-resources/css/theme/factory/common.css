@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+body{color:#6f6f6f;background:#fff}
+.function-area{padding:10px;margin-bottom:10px;border:1px solid #d2d2d2;background:#f9f9f9}
+.function-area.horizontal .label-text { line-height:28px; }
+
+div + .function-area{margin-top:10px}
+.contents-wrap > section .footer-wrap{border-top:0}
+.contents-wrap > section .footer-wrap:after{border:0}
+.footer-wrap .footer-title strong{color:#707171}
+
+.paging-wrap a.on, .paging-wrap a:hover{color:#707171;border-color:#bfb3a9;background-color:#ffe4e1}
+.paging-wrap a.first{border-radius:0}
+.paging-wrap a.first:hover{background-position:0 -61px}
+.paging-wrap a.first[disabled]{background-position:-62px -61px}
+.paging-wrap a.prev:hover{background-position:0 -30px}
+.paging-wrap a.prev[disabled]{background-position:-62px -30px;}
+.paging-wrap a.next:hover{background-position:0 0}
+.paging-wrap a.next[disabled]{ background-position:-62px 0; }
+.paging-wrap a.last{border-radius:0}
+.paging-wrap a.last:hover{background-position:0 -91px}
+.paging-wrap a.last[disabled]{ background-position:-62px -91px; }
+.paging-wrap a[disabled]:hover{cursor: default;color: #ccc;}
+
+.tab-container > label{border-radius:0;border:1px solid #d2d2d2;border-bottom:0;background-color:#e0e0e0}
+.tab-container > label:after{background-color:#e0e0e0}
+.tab-container > label + input + label{margin:0;border-left:0}
+.tab-container [id^="tab"]:checked + label{color:#000;font-weight:500;background-color:#f7f5f1}
+.tab-content{border:1px solid #d2d2d2;background-color:#f7f5f1}
+
+.label-text + label,.label-text + label ~ label{line-height:28px;}

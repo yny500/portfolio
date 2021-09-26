@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+/* 스크롤 바 컬러 */
+*::-webkit-scrollbar-thumb {
+	background: #07aa9b !important;
+}
+
+/* 최상단 헤더 컬러 */
+body>header {
+	background:linear-gradient( to right, #07aa9b, #009dd0 ) !important
+}
+
+/* 최하단 푸터 컬러 */
+.footer-wrap {
+	background:linear-gradient( to right, #07aa9b, #009dd0 ) !important;
+}
+
+/* 버튼 */
+button[class*="btn"] {
+	background-color: #07aa9b;
+}

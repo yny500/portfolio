@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080" />
+    <meta charset="UTF-8" />
+    <title>LGL Test</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="../ilc/resources/images/favicon.ico" />
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/button.css">
+    <link rel="stylesheet" href="../ilc/resources/css/page.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/common.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/form.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/grid.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-dialog.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-ui-grid.css">
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/button.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/common.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/form.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/grid.css">
+
+    <script src="../ilc/resources/js/lib/jquery/jquery.min.js"></script>
+    <script src="../ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+    <script src="../ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/moment/moment.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+    <script defer src="../ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+    <script src="../ilc/resources/js/project/sfp-property-pattern.js"></script>
+
+    <script defer src="../ilc/resources/js/sfp/sfp-stringutils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-utils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ajax.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dialog.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-template.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-box.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-datepicker.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dateutils.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-websocket.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-multi-input.js"></script>
+
+    <script defer src="../ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+    <script defer src="../ilc/resources/js/lib/jquery-barcode.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery.balloon.js"></script>
+
+    <script defer src="../ilc/resources/js/project/sfp-common.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-lang.js"></script>
+</head>
+
+<main>
+    <div class="contents-wrap no-footer">
+        <section>
+            <div class="function-area horizontal">
+                <div class="align-left">
+
+
+
+
+
+
+
+
+                    <span>
+                        <label class="label-text">작업장유형</label>
+                        <select id="workStationType">
+                            <option value="" selected="selected">전체</option>
+                            <option value="BUCKET_PUTDOWN_WORKING">오프라인 작업장</option>
+                            <option value="STATION_WORKING">온라인 작업장</option>
+                        </select>
+                    </span>
+                    <button class="btn-shelf-call">Shelf Call</button>
+                </div>
+                <div class="align-center">
+                </div>
+                <div class="align-right">
+                    <button class="btn-agv-list olive">AGV 목록</button>
+                    <button class="btn-shelf-list">Shelf 목록</button>
+                    <button class="btn-station-list orange">Station 목록</button>
+
+                </div>
+            </div>
+
+            <div class="fix-card three-col oee-group-list">
+                <ul id="work-station-grid" style="height: 750px;">
+                    <li id="13" class="STATION_WORKING sfp-template-el R">
+                        <h3 class="fix-title">온라인 작업장 / 13 / 13</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="13-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer0">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="17" class="STATION_WORKING sfp-template-el R">
+                        <h3 class="fix-title">온라인 작업장 / 17 / 17</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="17-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer1">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="21" class="STATION_WORKING sfp-template-el R">
+                        <h3 class="fix-title">온라인 작업장 / 21 / 21</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="21-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer2">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="25" class="STATION_WORKING sfp-template-el R">
+                        <h3 class="fix-title">온라인 작업장 / 25 / 25</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="25-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer3">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="47" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 47 / 47</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="47-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer4">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="50" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 50 / 50</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="50-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer5">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="eXr5Jw" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 121 / eXr5Jw</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="eXr5Jw-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer6">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="JHiaS3" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 123 / JHiaS3</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="JHiaS3-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer7">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="nAzjxG" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 125 / nAzjxG</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="nAzjxG-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer8">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="128" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 128 / 128</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="128-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer9">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="130" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 130 / 130</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="130-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer10">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="132" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 132 / 132</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="132-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer11">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="135" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 135 / 135</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="135-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer12">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="137" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 137 / 137</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="137-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer13">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="139" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 139 / 139</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="139-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer14">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="142" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 142 / 142</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="142-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer15">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="144" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 144 / 144</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="144-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer16">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="146" class="BUCKET_PUTDOWN_WORKING sfp-template-el R">
+                        <h3 class="fix-title">오프라인 작업장 / 146 / 146</h3>
+                        <div class="btn-wrap">
+                            <button class="btn-call">Shelf Call</button>
+                            <button class="btn-send" disabled="">보내기</button>
+                            <button class="btn-fail-history sky">실패이력</button>
+                            <input name="containerId" type="text" readonly="readonly" style="width: 200px;">
+                        </div>
+                        <div class="card-cont">
+                            <div class="register-table small">
+                                <ul>
+                                    <li class="vertical">
+                                        <div class="title">Shelf</div>
+                                        <div class="title">Face</div>
+                                    </li>
+                                    <li class="vertical">
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="cont">
+                                            <div class="line-wrap">
+                                                <input name="containerFaceId" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="grid-title">이력</h1>
+                            <div class="history-grid sfp-grid-panel" id="146-grid">
+                                <div class="sfp-grid-header-panel" style="overflow: hidden; display: none;">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>JOB NO</th>
+                                                <th>Shelf</th>
+                                                <th>Face</th>
+                                                <th>jobState</th>
+                                                <th>AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-body-panel"
+                                    style="overflow-y:hidden; overflow-x:hidden;min-height: 210px;height: 210px">
+                                    <div class="JCLRgrips" style="width: 493.375px;">
+                                        <div class="JCLRgrip" style="left: 147.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 187.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 227.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip" style="left: 347.688px; height: 31px;">
+                                            <div class="JColResizer"></div>
+                                        </div>
+                                        <div class="JCLRgrip JCLRLastGrip" style="left: 494.375px; height: 31px;"></div>
+                                    </div>
+                                    <table class="sfp-grid small JColResizer" id="JColResizer17">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 146.688px;">JOB NO</th>
+                                                <th style="width: 40px;">Shelf</th>
+                                                <th style="width: 40px;">Face</th>
+                                                <th style="width: 120px;">jobState</th>
+                                                <th style="width: 146.688px;">AGV Code</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="5">데이터가 존재하지 않습니다.</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot style="display: none;"></tfoot>
+                                    </table>
+                                </div>
+                                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                                    <table class="sfp-grid small">
+                                        <colgroup>
+                                            <col style="width:*">
+                                            <col style="width:40px">
+                                            <col style="width:40px">
+                                            <col style="width:120px">
+                                            <col style="width:*">
+                                        </colgroup>
+                                        <tfoot></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</main>
+
+</html>

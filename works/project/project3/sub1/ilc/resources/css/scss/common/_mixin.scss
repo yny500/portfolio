@@ -1,0 +1,202 @@
+// mixin
+
+// common.scss
+@mixin drag-set($prop) {
+    user-select: $prop;
+    -ms-user-select: $prop;
+    -webkit-user-select: $prop;
+    -khtml-user-select: $prop;
+    @content;
+}
+@mixin table-reset {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+@mixin line-break {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+@mixin drag-color {
+  color: #fff;
+  background: #189d99;
+}
+@mixin pseudo-class {
+  content: "";
+  display: block;
+  position: absolute;
+}
+@mixin border-style {
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  padding: 4px 4px 4px;
+}
+@mixin after-style {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+@mixin text-bottom {
+	display: inline-block;
+	vertical-align: bottom;
+}
+@mixin required-after {
+  content: "*";
+  display: inline-block; 
+  color: #ed1c24;
+}
+@mixin width-height($size) {
+  width: $size;
+  height: $size;
+}
+
+// form.scss
+@mixin checked-style {
+  background: #eee;
+  color: #444;
+  border: 1px solid #d0d0d0;
+}
+@mixin height($h) {
+  height: $h;
+  line-height: $h;
+}
+@mixin hover-color($b-c, $bg-c, $c) {
+  border-color: $b-c;
+  background-color: $bg-c;
+  color: $c;
+}
+
+
+// pages.scss
+@mixin nav-2dep-a {
+  display: block;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  color: $secondary-text-color;
+  font-weight: 400;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #f2f2f2;
+}
+@mixin font-style($s, $w, $c) {
+  font-size: $s;
+  font-weight: $w;
+  color: $c;
+}
+@mixin after {
+  content: "";
+  display: block;
+  clear: both;
+}
+@mixin link-select-button {
+  height: 24px;
+  padding-left: 9px;
+  line-height: 24px;
+  color: #707171;
+  font-size: 11px;
+  box-sizing: border-box;
+}
+@mixin border-form($w, $h, $br) {
+  width: $w;
+  height: $h;
+  border-radius: $br;
+}
+@mixin bg-color-shadow($bg, $s) {
+  background-color: $bg;
+  box-shadow: $s;
+}
+
+// button.scss
+@mixin button-color ($bg) {
+  background-color: $bg !important;
+  color: #fff;
+  border: 0 !important; 
+}
+@mixin btn-color($bg) {
+  background-color: $bg;
+  color: #fff;
+  border: 0 !important;
+}
+@mixin button-before($mt, $w, $h) {
+  content: "";
+  display: inline-block;
+  margin-top: $mt;
+  width: $w;
+  height: $h;
+  background: url("../images/btn/set_btn_function.png") no-repeat;
+}
+@mixin set-btn-img($x, $y) {
+	background-image: url("../images/btn/set_tbtn.png");
+	background-position: $x $y;
+}
+@mixin button-transform($r) {
+  transform: rotate($r);
+  -webkit-transform: rotate($r);
+  -moz-transform: rotate($r);
+}
+
+// grid.scss
+@mixin padding-font($p, $s) {
+	padding: $p;
+	font-size: $s;
+}
+
+// left_hidden_tree.scss
+@mixin transition {
+	transition: all 300ms ease-in-out 0s;
+}
+@mixin box-shadow {
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+}
+@mixin gradient-style($c, $bc, $bg) {
+	color: $c;
+	border-bottom: 1px solid $bc;
+	background-color: $bg;
+  background-image: linear-gradient(to bottom, $bg, $bg);
+}
+@mixin toggle-menu__size-pos {
+  left: 50%;		
+  top: 50%;
+  width: 22px;
+  height: 2px;
+}
+@mixin toggle-menu-bg {
+  background: #fff;
+}
+
+// dialog.scss
+@mixin footer-button-btn($mw, $p, $h) {
+	min-width: $mw;
+	padding: $p;
+	height: $h;
+	line-height: $h;
+}
+@mixin tbl-data-style($bg, $p) {
+	background: $bg;
+	font-weight: 400;
+	color: #555;
+	font-size: 13px;
+	padding: $p;
+	border-bottom: 1px dotted #c8c8c8;	
+}
+@mixin title-style {
+	font-size: 16px;
+	font-weight: 600;
+	padding-left: 0px;
+}
+@mixin top-title-style($c, $p) {
+	display: table-cell;
+	color: $c;
+	font-weight: 500;
+	padding: $p;
+	width: 10%;
+	font-size: 16px;
+}
+@mixin col-sp($w) {
+	display: inline-block;
+	width: $w;
+	box-sizing: border-box;
+	vertical-align: top;
+}

@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+/*left gnb*/
+body > nav{background-color:rgba(56,64,74,0.8) !important}
+body > nav > ul{background-color:rgba(56,64,74,0.5) !important}
+
+nav > ul ul li:hover > a{color:#fff;border-color:#e3f3f1;background-color:#f58d1e !important;}
+body > nav ul li:hover > a{color:#fff;background-color:#f58d1e !important;}
+
+body > nav > ul > li:hover > a[disabled], body > nav > ul > li > a[disabled]{background-color:rgba(88,88,97,0.9) !important}
+
+.gnb-button{background-color:rgba(245,141,30,0.6)}
+

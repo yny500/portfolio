@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+main { height: 100%; background-color: #1e262d; }
+main > header { height: 34px; line-height: 34px; color: #fff; background-color: #383b48; }
+main > header h2 { padding-left: 10px; font-size: 18px; font-weight: 700; text-align: left; float: left; }
+
+.contents-wrap { padding-top: 34px !important; }
+.contents-wrap > section { padding: 20px 10px; overflow-y: hidden; height: auto; }
+
+/* dash-1 css */
+.dash-1 div[class^="item-block"] { float: left; margin-top: 10px; margin-left: 10px; width: calc((100% - 40px) / 5); height: calc((100vh - 94px) / 3); box-sizing: border-box; border-radius: 10px 10px 0 0; background-color: #4b4e5a; }
+.dash-1 > div[class^="item-block"]:nth-child(-n+5) { margin-top: 0; }
+.dash-1 div[class^="item-block"]:nth-child(5n+1) { margin-left: 0; }
+
+.dash-1 div[class^="item-block"] p.title { height: 70px; line-height: 70px; text-indent: 5px; text-align: center; font-size: 30px; font-weight: 500; color: #fff; background-color: #929395; border-radius: 10px 10px 0 0; box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3); }
+.dash-1 div[class^="item-block"] p.title.error { background-color: #f00; }
+
+.dash-1 div[class^="item-block"] .shuttle-box { margin-top: 20px; padding: 0 5px; }
+
+.dash-1 div[class^="item-block"] table tr:first-child td { border-top: 1px solid #fff; }
+.dash-1 div[class^="item-block"] table tr:last-child td { border-bottom: 1px solid #fff; }
+.dash-1 div[class^="item-block"] table td { width: 5vw; height: 36px; line-height: 36px; text-indent: 8px; font-size: 16px; font-weight: 500; color: #fff; border-bottom: 1px solid #a2a3a7; }
+.dash-1 div[class^="item-block"] table td.title { text-indent: 0; text-align: center; background-color: #8b8d94; }
+.dash-1 div[class^="item-block"] table th { width: 80px; height: 30px; text-align: center; font-size: 12px; font-weight: 500; color: #fff; border-top: 1px solid #fff; border-left: 1px solid #c3c4c7; border-bottom: 1px solid #8b8d92; background-color: #8b8d94; }
+.dash-1 div[class^="item-block"] table th:first-child { border-left: 0; }
+
+.dash-1 div[class="item-block-plc"] { width: 39.6%; margin-top:10px !important; }
+.dash-1 div[class="item-block-plc"] table td { width: 10vw; text-indent: 0; text-align: center; }
+.dash-1 div[class="item-block-plc"] .list { margin-top: 10px; padding: 5px; }
+
+/* dash-2 css */
+.dash-2 div[class^="area"] { float: left; margin-top: 10px; width: 100%; height: calc((100vh - 84px)/2); }
+.dash-2 div[class^="area"]:first-child { margin-top: 0; }
+
+.dash-2 div div[class^="item"] { position: relative; padding: 10px 20px; margin-left: 10px; float: left; width: calc((100% - 20px)/3); height: calc((100vh - 84px)/2); background-color: #383b48; box-sizing: border-box; }
+.dash-2 div div[class^="item"]:first-child { margin-left: 0; }
+.dash-2 div div[class^="item"] p.title { float: left; font-size: 38px; font-weight: 500; color: #fff; }
+.dash-2 div div[class^="item"] .sub_title { position: absolute; top: 40%; right: 10%; letter-spacing: 1px; text-align: center; font-size: 38px; font-weight: 500; color: #fff; }
+.dash-2 div div[class^="item"] .sub_title .amount-wrap { padding-top: 10px; font-size: 50px; }
+.dash-2 div div[class^="item"] .sub_title .amount-wrap span { font-size: 50px; }
+.dash-2 div div[class^="item"] dt { float: left; font-size: 38px; font-weight: 500; color: #fff; }
+.dash-2 div div[class^="item"] dd { float: right; padding-top: 10px; letter-spacing: 1px; font-size: 26px; font-weight: 500; color: #fff; }
+
+.dash-2 div div[class^="item"] .block-wrap { padding-top: 140px; }
+.dash-2 div div[class^="item"] .block-row { padding-top: 40px; height: 50px; }
+.dash-2 div div[class^="item"] .block-row:first-child { padding-top: 0; }
+.dash-2 div div[class^="item"] .block-row .name { float: left; width: 6vw; line-height: 50px; font-size: 24px; font-weight: 500; color: #fff; }
+.dash-2 div div[class^="item"] .block-row .progress-bar { float: left; width: 23vw; height: 50px; background-color: #000; }
+.dash-2 div div[class^="item"] .block-row .progress-bar .progress-rate { width: 0%; height: 100%; background-color: #00e7ff; transition: width 0.8s; transition-timing-function: ease-out; transition-duration: 0.8s; transition-delay: 0.1s; }
+
+.dash-2 div div[class^="item"]:nth-child(2) .progress-bar .progress-rate { background-color: #0ae1a1; }
+.dash-2 div div[class^="item"]:nth-child(3) .progress-bar .progress-rate { background-color: #ed207b; }
+
+.dash-2 div div[class^="item"] .block-row .progress-bar .progress-rate span { display: inline-block; width: 100%; line-height: 50px; text-align: center; font-size: 25px; font-weight: 500; color: #fff; }
+.dash-2 div div[class^="item"] .block-row .progress-total { float: right; line-height: 50px; font-size: 20px; font-weight: 500; color: #fff; }
+
+@media only screen and (max-width: 1920px) { .dash-1 div[class^="item-block"] p.title { font-size: 26px; }
+  .dash-1 div[class^="item-block"] table td { height: 32px; line-height: 32px; font-size: 14px; } }
+
+/* highchart */
+.highcharts-figure { position: absolute; left: -10%; top: 24%; }
+.highcharts-figure, .highcharts-data-table table { min-width: 360px; width: 600px; }
+.highcharts-figure .value { position: absolute; left: 50%; top: 50%; margin-top: -44px; margin-left: -94px; width: 180px; text-align: center; color: #fff; }
+.highcharts-figure .value span { font-size: 64px; }
+.highcharts-figure .value span.percent { position: absolute; top: 33px; right: 0; font-size: 28px; }
+
+.highcharts-data-table table { font-family: Verdana, sans-serif; border-collapse: collapse; border: 1px solid #ebebeb; margin: 10px auto; text-align: center; width: 100%; max-width: 500px; }
+.highcharts-data-table caption { padding: 1em 0; font-size: 1.2em; color: #555; }
+.highcharts-data-table th { font-weight: 600; padding: 0.5em; }
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption { padding: 0.5em; }
+
+/* PC해상도 */
+@media only screen and (max-width: 1920px) { .highcharts-figure { left: -18%; }
+  .highcharts-figure, .highcharts-data-table table { width: 500px; }
+  .highcharts-figure .value { margin-top: -38px; margin-left: -98px; }
+  .highcharts-figure .value span { font-size: 54px; }
+  .dash-2 div div[class^="item"] p.title { font-size: 24px; }
+  .highcharts-figure .value span.percent { top: 30px; right: 9px; font-size: 24px; }
+  .dash-2 div div[class^="item"] dt { font-size: 24px; }
+  .dash-2 div div[class^="item"] dd { padding-top: 3px; font-size: 20px; }
+  .dash-2 div div[class^="item"] .sub_title { font-size: 30px; }
+  .dash-2 div div[class^="item"] .sub_title .amount-wrap { font-size: 42px; }
+  .dash-2 div div[class^="item"] .sub_title .amount-wrap span { font-size: 42px; }
+  .dash-2 div div[class^="item"] .block-row .name { width: 6vw; font-size: 20px; }
+  .dash-2 div div[class^="item"] .block-row .progress-bar { margin-left: 1vw; width: 21vw; } }

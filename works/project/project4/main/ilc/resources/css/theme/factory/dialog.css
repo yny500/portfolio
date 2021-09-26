@@ -1,0 +1,6 @@
+@charset "utf-8";
+
+header{background-color:#000}
+*::-webkit-scrollbar-track-piece{background-color:##d7d7d7}
+.tab-content *::-webkit-scrollbar-track-piece{background-color:#f7f5f1}
+main .contents-wrap + .contents-wrap + footer { background: #fff; }

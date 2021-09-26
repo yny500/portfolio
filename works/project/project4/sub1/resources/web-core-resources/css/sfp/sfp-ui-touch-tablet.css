@@ -1,0 +1,11 @@
+.keypad{display:none; position: absolute;z-index:999 ;background-color: #EEEEEE;width:155px;top:15%;left:45%;padding-top: 10px;border:3px solid;border-color:#AAA #999 #999 #AAA;border-radius:5px;overflow:hidden;vertical-align:middle;box-sizing:border-box;box-shadow: inset -3px -3px 3px #e3e3e3}
+.keypad.number, .keypad.float{width:350px;}
+.keypad.text{width:780px;left : 10%;}
+.keypad ul {text-align: center;}
+.keypad input[type='text'], .keypad input[type='password']{margin-bottom:10px;font-size : 35px;width: 85%; height: 60px;}
+.keypad .keybtn{font-size:40px;display:inline-block;text-align:center;width:90px;height:90px;line-height:90px; margin:5px;border:1px solid;border-color:#b8b8b8 #a0a0a0 #a0a0a0 #b8b8b8;background:#fff;box-shadow:inset -3px -3px 3px rgba(0,0,0,0.1);border-radius:5px;overflow:hidden;vertical-align:middle;box-sizing:border-box;}
+.keypad .keybtn.wide{width:120px;}
+.keypad .keybtn:HOVER {	cursor: pointer;}
+.keypad .keybtn:ACTIVE{ background-color: #DDD;}
+.keypad div {text-align: center;}
+/* .keybtn.enter{width:100px;} */

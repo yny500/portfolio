@@ -1,0 +1,19 @@
+table.sfp-crud[class*='sfp-grid'] td .select-title{height:30px;}
+table.sfp-crud span[class*="crud-"]{cursor:pointer}
+table.sfp-crud td span.crud-icon{min-width: 20px;display: inline-block;height: 15px;  padding-top: 5px;}
+table.sfp-crud td span.crud-btn{min-width: 20px;display: inline-block;height: 15px;  padding-top: 5px;}
+table tr.clickable{cursor: pointer}
+table.sfp-crud tr.C td span.crud-icon{ background-image: url('../../images/btn/crud-c.png');}
+table.sfp-crud tr.C td span.crud-btn{ background-image: url('../../images/btn/btn_delete.png');}
+
+table.sfp-crud tr.R td span.crud-icon{ background-image: url('../../images/btn/crud-r.png')}
+table.sfp-crud tr.R td span.crud-btn{ background-image: url('../../images/btn/btn_delete.png');}
+
+table.sfp-crud tr.U td span.crud-icon{ background-image: url('../../images/btn/crud-u.png');}
+table.sfp-crud tr.U td span.crud-btn{ background-image: url('../../images/btn/btn_restore.png');}
+
+table.sfp-crud tr.D td span.crud-icon{ background-image: url('../../images/btn/crud-d.png');}
+table.sfp-crud tr.D td span.crud-btn{ background-image: url('../../images/btn/btn_restore.png');}
+
+table.sfp-crud tr.crud-none td span.crud-icon{background-image :none;}
+table.sfp-crud tr.crud-none td span.crud-btn{background-image :none;}

@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+body > header{border-bottom:2px solid #0075c2;background:#fff;}
+body > header h1 a,body > header h1{color:#0075c2;}
+
+header .btn-menu:after,header .btn-menu:before{background:#0075c2;}
+header .btn-menu span{background:#0075c2;}
+header.active{border:none}
+header.active .btn-menu:after,header.active .btn-menu:before,header.active .btn-menu span{background:#0075c2}
+
+header.active .btn-menu:after,header.active .btn-menu:before{background:#fff}
+header.active .btn-menu span{background:#fff}
+
+header .gnb-wrap{background:none}
+header .gnb-wrap .user-info{color:#fff;background: rgb(0,153,217);
+    background: -moz-linear-gradient(left, rgba(0,153,217,1) 0%, rgba(0,117,194,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,153,217,1) 0%,rgba(0,117,194,1) 100%);
+    background: linear-gradient(to right, rgba(0,153,217,1) 0%,rgba(0,117,194,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0099d9', endColorstr='#0075c2',GradientType=1 );}
+.gnb-wrap .user-info:after{display:none}
+.gnb-wrap .user-info .user-btn{background:#0075C2;border-top:1px solid #b7c4cd;border-bottom:0}
+.gnb-wrap .user-info .user-btn button{height:41px;line-height:41px;color:#fff;}
+.gnb-wrap .user-info .user-btn button + button:after{background:#fff}
+
+main > header > h2{color:#fff;border-bottom:2px solid #fff;background:#0099d9;}
+
+body > footer{background:#242424}
+body > footer .copy path{fill:#C2C2C2}
+
+/* button */
+/* button[class*="btn"]{background-color:#0099D9} */
+
+.sfp-grid-panel{border:1px solid #e7e7e7}
+
+/* form */
+.card-area .card-inner{border:1px solid #efefef}
+.big-calendar .ui-datepicker-header a.ui-datepicker-prev, .weekly-calendar .week-header .week-btn button.prev{border-right-color:#0075c2}
+.big-calendar .ui-datepicker-header a.ui-datepicker-next, .weekly-calendar .week-header .week-btn button.next{border-left-color:#0075c2}

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080">
+    <meta charset="utf-8">
+    <title>Dashboard3</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="web-core-resources/css/common.css">
+    <link rel="stylesheet" href="project-resources/css/project/dash.css">
+    <link rel="stylesheet" href="web-core-resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+    <link rel="stylesheet" href="web-core-resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/button.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/common.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/form.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/grid.css">
+    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="web-core-resources/js/accessibility.js"></script>
+    <script src="web-core-resources/js/export-data.js"></script>
+    <script src="web-core-resources/js/exporting.js"></script>
+    <script src="web-core-resources/js/solid-gauge.js"></script>
+    
+    <link rel="stylesheet" href="web-core-resources/css/project/button.css">
+    <link rel="stylesheet" href="web-core-resources/css/project/common.css">
+    <link rel="stylesheet" href="web-core-resources/css/project/form.css">
+    <link rel="stylesheet" href="web-core-resources/css/project/grid.css">
+    <link rel="stylesheet" href="web-core-resources/css/common.css">
+    <link rel="stylesheet" href="web-core-resources/css/dash.css"> 
+    <link rel="stylesheet" href="project-resources/css/project/dash.css"> 
+
+    <script src="project-resources/js/project/jquery-1.12.4.min.js"></script>
+    <script src="project-resources/js/project/main.js"></script>
+</head>
+
+<body>
+     <main>
+        <header>
+            <h2>장비 현황</h2>
+        </header>
+        <div class="contents-wrap">
+            <section class="dash-1">
+                <div class="item-block">
+                    <p class="title">셔틀 01</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 02</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 03</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 04</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 05</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 06</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 07</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 08</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 09</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 10</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 11</p>
+                    <div class="shuttle-box">
+                        <div class="shuttle-box">
+                            <table>
+                                <tr>
+                                    <td class="title">셔틀상태</td>
+                                    <td>완료</td>
+                                    <td class="title">박스적재</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="title">박스번호</td>
+                                    <td colspan="3"></td>
+                                    <!-- <td>0</td>
+                                    <td>0</td> -->
+                                </tr>
+                                <tr>
+                                    <td class="title">작업유형</td>
+                                    <td></td>
+                                    <td class="title">작업상태</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="title">시작지점</td>
+                                    <td colspan="3"></td>
+                                    <!-- <td>0</td>
+                                    <td>0</td> -->
+                                </tr>
+                                <tr>
+                                    <td class="title">종료지점</td>
+                                    <td colspan="3"></td>
+                                    <!-- <td>0</td>
+                                    <td>0</td> -->
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 12</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <p class="title">셔틀 13</p>
+                    <div class="shuttle-box">
+                        <table>
+                            <tr>
+                                <td class="title">셔틀상태</td>
+                                <td>완료</td>
+                                <td class="title">박스적재</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">박스번호</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">작업유형</td>
+                                <td></td>
+                                <td class="title">작업상태</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">시작지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                            <tr>
+                                <td class="title">종료지점</td>
+                                <td colspan="3"></td>
+                                <!-- <td>0</td>
+                                <td>0</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="item-block-plc">
+                    <p class="title">PLC</p>
+                    <div class="list">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="title">상태</td>
+                                    <td>가동</td>
+                                    <td class="title">자동/수동</td>
+                                    <td>자동</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">입고OUT박스 유무</td>
+                                    <td>V</td>
+                                    <td class="title">입고 바코드</td>
+                                    <td>BX-0001</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">피킹1박스 유무</td>
+                                    <td>V</td>
+                                    <td class="title">피킹1 바코드</td>
+                                    <td>BX-0002</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">피킹2박스 유무</td>
+                                    <td>V</td>
+                                    <td class="title">피킹2 바코드</td>
+                                    <td>BX-0003</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">메뉴얼 박스 유무</td>
+                                    <td>V</td>
+                                    <td class="title">메뉴얼 바코드</td>
+                                    <td>BX-0004</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

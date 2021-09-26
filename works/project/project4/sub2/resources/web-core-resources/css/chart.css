@@ -1,0 +1,136 @@
+@charset "utf-8";
+
+/* progress bar */
+progress{width:100%;height:20px;background:#f5f5f5;}
+progress::-webkit-progress-bar{background:#f5f5f5}
+progress::-webkit-progress-value{background:#dadada;-webkit-box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);}
+::-moz-progress-bar{-moz-box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);background:#dadada}
+progress::-ms-fill {background-color: #dadada;border:0;box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);}
+.auto progress::-ms-fill{background:#b7ce01}
+.auto progress::-webkit-progress-value{background:#b7ce01}
+.auto ::-moz-progress-bar{background:#b7ce01}
+.idle progress::-ms-fill{background:#f7ce4d}
+.idle progress::-webkit-progress-value{background:#f7ce4d}
+.idle ::-moz-progress-bar{background:#f7ce4d}
+.setup progress::-ms-fill{background:#898889}
+.setup progress::-webkit-progress-value{background:#898889}
+.setup ::-moz-progress-bar{background:#898889}
+.alarm progress::-ms-fill{background:#e75b5c}
+.alarm progress::-webkit-progress-value{background:#e75b5c}
+.alarm ::-moz-progress-bar{background:#e75b5c}
+.off progress::-ms-fill{background:#e75b5c}
+.off progress::-webkit-progress-value{background:#e75b5c}
+.off ::-moz-progress-bar{background:#e75b5c}
+.change progress::-ms-fill{background:#4db5e5}
+.change progress::-webkit-progress-value{background:#4db5e5}
+.change ::-moz-progress-bar{background:#4db5e5}
+
+.progress-bar{position:relative;height:20px;border-radius:3px;background:#f5f5f5;text-align:left}
+.progress-bar > span{position:absolute;left:0;top:0;bottom:0;display:inline-block;height:100%;width:0;max-width:100% !important;border-radius:3px;background:#dadada;-webkit-box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);-moz-box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);box-shadow: inset -1px -1px 10px 0px rgba(0,0,0,0.19);}
+.auto .progress-bar > span,.progress-bar > span.auto{background:#b7ce01}
+.idle .progress-bar > span,
+.delay .progress-bar > span,
+.yellow .progress-bar > span,
+.progress-bar > span.idle,
+.progress-bar > span.yellow{background:#f7ce4d}
+.setup .progress-bar > span,.progress-bar > span.setup{background:#898889}
+.alarm .progress-bar > span,.progress-bar > span.alarm {background:#e75b5c}
+.off .progress-bar > span,.progress-bar > span.off {background:#e75b5c}
+.change .progress-bar > span{background:#4db5e5}
+.green .progress-bar > span{background:#37a017}
+.red .progress-bar > span{background:#dc2c2c}
+.progress-bar > span .bar-value{position:absolute;right:0;top:0;bottom:0;padding:0 15px;color:#fff;line-height:20px}
+.bar-wrap{position:relative;padding:20px}
+.bar-wrap:after{content:'';display:block;clear:both}
+.bar-wrap span[class^="label-"]{font-size:14px}
+.bar-wrap span.label-left{float:left;margin-left:-10px}
+.bar-wrap span.label-right{float:right;margin-right:-10px}
+.bar-wrap span strong{font-size:1rem}
+.progress-bar.dotted{background-image:linear-gradient(45deg, #DEDEDE 50%, transparent 50%),linear-gradient(-45deg, #DEDEDE 50%, transparent 50%),linear-gradient(45deg, transparent 50%, #DEDEDE 50%),linear-gradient(-45deg, transparent 50%, #DEDEDE 50%);background-size:2px 2px;background-position:0 0, 1px 0, 1px -1px, 0 1px}
+.progress-bar.dotted > span{background-size: 2px 2px;background-position: 0 0, 1px 0, 1px -1px, 0px 1px;background-color:transparent !important}
+.progress-bar.dotted > span.red,
+.red .progress-bar.dotted > span{background-image:linear-gradient(45deg, #F45152 50%, transparent 50%),linear-gradient(-45deg, #F45152 50%, transparent 50%),linear-gradient(45deg, transparent 50%, #F45152 50%),linear-gradient(-45deg, transparent 50%, #F45152 50%)}
+.progress-bar.dotted > span.green,
+.green .progress-bar.dotted > span{background-image:linear-gradient(45deg, #18AC96 50%, transparent 50%),linear-gradient(-45deg, #18AC96 50%, transparent 50%),linear-gradient(45deg, transparent 50%, #18AC96 50%),linear-gradient(-45deg, transparent 50%, #18AC96 50%)}
+.progress-bar.dotted > span.yellow,
+.yellow .progress-bar.dotted > span{background-image:linear-gradient(45deg, #FFBD20 50%, transparent 50%), linear-gradient(-45deg, #FFBD20 50%, transparent 50%), linear-gradient(45deg, transparent 50%, #FFBD20 50%), linear-gradient(-45deg, transparent 50%, #FFBD20 50%)}
+
+.progress-bar.dotted > span.standard-progress{background-image:linear-gradient(45deg, #18AC96 50%, transparent 50%),linear-gradient(-45deg, #18AC96 50%, transparent 50%),linear-gradient(45deg, transparent 50%, #18AC96 50%),linear-gradient(-45deg, transparent 50%, #18AC96 50%)}
+.progress-bar.dotted > span.bad{background-image: linear-gradient(45deg, #F45152 50%, transparent 50%),linear-gradient(-45deg, #F45152 50%, transparent 50%),linear-gradient(45deg, transparent 50%, #F45152 50%),linear-gradient(-45deg, transparent 50%, #F45152 50%);background-size: 2px 2px;background-position: 0 0, 1px 0, 1px -1px, 0px 1px;}
+.progress-bar.dotted > span.good{background-image: linear-gradient(45deg, #65B8E2 50%, transparent 50%),linear-gradient(-45deg, #65B8E2 50%, transparent 50%),linear-gradient(45deg, transparent 50%, #65B8E2 50%),linear-gradient(-45deg, transparent 50%, #65B8E2 50%);background-size: 2px 2px;background-position: 0 0, 1px 0, 1px -1px, 0px 1px;}
+.progress-bar.dotted > span.notbad{background-image: linear-gradient(45deg, #FFBD20 50%, transparent 50%), linear-gradient(-45deg, #FFBD20 50%, transparent 50%), linear-gradient(45deg, transparent 50%, #FFBD20 50%),linear-gradient(-45deg, transparent 50%, #FFBD20 50%);background-size: 2px 2px;background-position: 0 0, 1px 0, 1px -1px, 0px 1px;}
+
+.progress-bar.both-side{}
+.progress-bar.both-side .left{background:#35b575}
+.progress-bar.both-side .right{left:auto;right:0;background:#0092c9}
+
+.progress-bar.square, .progress-bar.square > span{box-shadow:none;border-radius:0}
+
+.progress-bar.multi{font-size:0;overflow:hidden;}
+.progress-bar.multi > span{position:static;}
+
+
+.round-chart {position: relative;width: 240px;height: 240px;}
+.round-chart:before {content: '';position:absolute; left:0; right:0; top:0; bottom:0; border:25px solid #e4e4e4;border-radius: 100%;}
+.round-chart svg {position: absolute;left: 0;right:0;top:0;bottom:0;overflow:hidden}
+.round-chart path {stroke-width: 25px;stroke-linecap: round;/* stroke-dasharray:1000;stroke-dashoffset:1000; */fill: none;}
+/* -webkit-animation:2s draw linear forwards;-moz-animation:2s draw linear forwards;-ms-animation:2s draw linear forwards;-o-animation:2s draw linear forwards;animation:2s draw linear forwards */
+.round-chart:not([data-color]) path {stroke: #009ac0;}
+.round-chart .chart-text{position:absolute;top:50%;left:0;right:0;display:block;width:100%;font-weight:700;font-size:30px;text-align:center;transform:translateY(-50%)}
+.round-chart.small{width:140px;height:140px}
+.round-chart.small .chart-text{font-size:28px}
+
+@-webkit-keyframes draw {
+  100% {
+	stroke-dashoffset:0;
+  }
+}
+@-moz-keyframes draw {
+  100% {
+	stroke-dashoffset:0;
+  }
+}
+@-ms-keyframes draw {
+  100% {
+	stroke-dashoffset:0;
+  }
+}
+@-o-keyframes draw {
+  100% {
+	stroke-dashoffset:0;
+  }
+}
+@keyframes draw {
+  100% {
+	stroke-dashoffset:0;
+  }
+}
+
+
+
+[class^='graph-'] .gauge { width:233px;height:136px;}
+[class^='graph-'] .gauge dl{ position:relative;width:233px;height:116px;padding-top:22px; }
+[class^='graph-'] .gauge dt{width:100%}
+[class^='graph-'] .gauge dt span{ position:absolute;font-size:11px;color:#777;top:27px; }
+[class^='graph-'] .gauge dt span:nth-of-type(1){ left:10px; }
+[class^='graph-'] .gauge dt span:nth-of-type(2){ left:50%;top:0;transform:translateX(-50%);-webkit-transform:translateX(-50%); }
+[class^='graph-'] .gauge dt span:nth-of-type(3){ right:10px; }
+[class^='graph-'] .gauge dd{ position:absolute;width:173px;height:86px;border-radius:50% 50% 0 0; }
+[class^='graph-'] .gauge .fill{ overflow:hidden; }
+[class^='graph-'] .gauge .fill span{ position:absolute;bottom:-75px;display:block;width:150px;height:75px;transform-origin:center top;-webkit-transform-origin:center top;border-radius:0 0 75px 75px; }
+[class^='graph-'] .down .gauge .fill span{ background-color:#e65559; }
+[class^='graph-'] .up .gauge .fill span{ background-color:#1098d2; }
+[class^='graph-'] .gauge dd.bg{width:233px;height:116px;background: url('../images/chart/bg_gauge.png') no-repeat 0 100%}
+[class^='graph-'] .gauge .needle{ position:absolute;left:50%;bottom:-33px;display:block;width:83px;height:83px;margin-left:-42px;background: url('../images/chart/img_needle.png') 50% 50% no-repeat;border-radius:50%;z-index:5; }
+[class^='graph-'] .gauge.animate .needle{ transition:transform 1.25s 0.25s cubic-bezier(0.680, -0.250, 0.3, 1); }
+[class^='graph-'] .gauge:not(.animate) .needle{ -webkit-transform:rotate(0) !important;transform:rotate(0) !important; }
+[class^='graph-'].type2 .gauge{width:345px;height:172px}
+[class^='graph-'].type2 .gauge dl{width:265px;height:132px;padding:40px 40px 0;overflow:hidden}
+[class^='graph-'].type2 .gauge dd.bg{width:265px;height:132px;background-image:url('../images/chart/bg_gauge_2.png')}
+[class^='graph-'].type2 .gauge dd.needle{bottom:2px;width:3px;height:170px;margin-left:-1px;border-radius:0;background:#000;
+    -ms-transform-origin: 50% 100%; /* IE 9 */
+    -webkit-transform-origin: 50% 100%; /* Safari 3-8 */
+    transform-origin: 50 100%;
+}
+.graph-gauge.right{text-align:right}
+.graph-gauge.right .gauge{display:inline-block;}

@@ -1,0 +1,7 @@
+@charset "utf-8";
+
+body { background:#FFF;  }
+body > header { background:#00235D; }
+main > header > h2 { color:#fff; border-bottom:2px solid #fff; background:#0099d9; }
+main > .contents-wrap > footer { background:#00235D; height:75px; bottom:0px; padding:2.5px 15px; border-top-left-radius:5px; border-top-right-radius:5px;  }
+main > .contents-wrap > footer.dialog { background:#a0b5c7; }

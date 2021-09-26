@@ -1,0 +1,3197 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> Sass 정리 </title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script src="resources/js/lib/jquery/jquery.min.js"></script>
+<script src="resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+<script src="resources/js/lib/moment/moment.min.js"></script>
+<script src="resources/js/lib/moment/moment-with-locales.min.js"></script>
+<script src="resources/js/sfp/sfp-utils.js"></script>
+<script src="resources/js/sfp/sfp-ajax.js"></script>
+<script src="resources/js/sfp/sfp-dialog.js"></script>
+<script src="resources/js/sfp/sfp-ui-grid.js"></script>
+<script src="resources/js/sfp/sfp-ui-box.js"></script>
+<script src="resources/js/sfp/sfp-ui-pager.js"></script>
+<script src="resources/js/sfp/sfp-datepicker.js"></script>
+
+<link rel="stylesheet" href="resources/css/common.css">
+<link rel="stylesheet" href="resources/css/button.css">
+<link rel="stylesheet" href="resources/css/form.css">
+<link rel="stylesheet" href="resources/css/grid.css">
+<link rel="stylesheet" href="resources/css/chart_sass.css">
+<link href="../resources/css/lib/jquery-colpick/colpick.css" rel="stylesheet">
+<style>
+	body{ overflow:auto;background:#d7d7d7}
+	body > h2{ height:23px;padding:3px 0 3px 20px;background-color:#4b4e51;color:#fff;font-size:11px;font-family:'notokr-medium';border-top:1px solid #e7e7e7;margin:30px 0 10px;text-transform:uppercase; }
+	body h2:first-child{ margin-top:0; }
+	body > h2 strong{ display:inline-block;font-weight:normal;font-size:16px; }
+
+	p[class^='null-']{ position:static; }
+	p[class^='null-'] span{ position:static; }
+</style>
+</head>
+
+<body>
+
+<h2><strong>PAGING</strong></h2>
+<div class="footer-wrap">
+	<div class="footer-title">Total <strong>35</strong></div>
+	<div class="paging-wrap">
+		<a href="#" class="first">처음</a>
+		<a href="#" class="prev">이전</a>
+		<a href="#" class="on">1</a>
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#" class="next">다음</a>
+		<a href="#" class="last">끝</a>
+	</div>
+</div>
+<div class="footer-wrap">
+	<div class="footer-title">Total <strong>35</strong></div>
+	<div class="paging-wrap">
+		<a href="#" class="first">처음</a>
+		<a href="#" class="prev">이전</a>
+		<a href="#" class="on">1</a>
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#" class="next">다음</a>
+		<a href="#" class="last">끝</a>
+	</div>
+</div>
+<div class="footer-wrap">
+	<div class="footer-title">Total <strong>35</strong></div>
+	<div class="paging-wrap">
+		<a href="#" class="first"disabled="disabled">처음</a>
+		<a href="#" class="prev">이전</a>
+		<a href="#" class="on">1</a>
+		<a href="#" >2</a>
+		<a href="#">3</a>
+		<a href="#"disabled="disabled">4</a>
+		<a href="#"disabled="disabled">5</a>
+		<a href="#" class="next"disabled="disabled">다음</a>
+		<a href="#" class="last"disabled="disabled">끝</a>
+	</div>
+</div>
+<h2><strong>버튼 모음</strong></h2>
+<div>
+    <button class="btn">기본버튼</button>
+    <button class="btn sky">sky 버튼</button>
+    <button class="btn blue">blue 버튼</button>
+    <button class="btn black">black 버튼</button>
+    <button class="btn gray">gray 버튼</button>
+    <button class="btn orange">orange 버튼</button>
+    <button class="btn green">green 버튼</button>
+
+    <button class="btn red">red 버튼</button>
+    <button class="btn yellow">yellow 버튼</button>
+    <button class="btn olive">olive 버튼</button>
+    <button class="btn teal">teal 버튼</button>
+    <button class="btn violet">violet 버튼</button>
+    <button class="btn purple">purple 버튼</button>
+    <button class="btn pink">pink 버튼</button>
+    <button class="btn brown">brown 버튼</button>
+</div>
+<h2><strong>invert 버튼 모음</strong></h2>
+<div style="padding:20px 0;background:rgba(0,0,0,0.2)">
+    <button class="btn invert">기본버튼</button>
+    <button class="btn sky invert">sky 버튼</button>
+    <button class="btn white invert">white 버튼</button>
+    <button class="btn blue invert">blue 버튼</button>
+    <button class="black btn  invert">black 버튼</button>
+    <button class="btn gray invert">gray 버튼</button>
+    <button class="btn orange invert">orange 버튼</button>
+    <button class="btn green invert">green 버튼</button>
+    <button class="btn red invert">red 버튼</button>
+    <button class="btn yellow invert">yellow 버튼</button>
+    <button class="btn olive invert">olive 버튼</button>
+    <button class="btn teal invert">teal 버튼</button>
+    <button class="btn violet invert">violet 버튼</button>
+    <button class="btn purple invert">purple 버튼</button>
+    <button class="btn pink invert">pink 버튼</button>
+    <button class="btn brown invert">brown 버튼</button>
+</div>
+<h2><strong>Function area</strong></h2>
+<div class="function-area">
+	<div class="align-left">
+		왼쪽 영역
+	</div>
+	<div class="align-center">
+		가운데 영역
+	</div>
+	<div class="align-right">
+		오른쪽 영역
+	</div>
+</div>
+
+<h2><strong>Function area - search</strong></h2>
+<div class="function-area">
+	<div class="align-left">
+		<select>
+			<option value="6" selected>부서</option>
+			<option value="7">부서2</option>
+		</select>
+		<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		<button class="btn-srch ico black">조회</button>
+		<button class="btn-reset image">초기화</button>
+	</div>
+	<div class="align-center">
+		<button class="btn">기본버튼</button>
+		<button class="btn blue">블루버튼</button>
+		<button class="btn sky">스카이버튼</button>
+		<button class="btn gray">그레이버튼</button>
+		<button class="btn black">블랙버튼</button>
+		<button class="btn orange">오렌지버튼</button>
+		<button class="btn green">그린버튼</button>
+	</div>
+	<div class="align-right">
+		<button class="btn-download ico">엑셀다운로드</button>
+		<button class="btn-del ico">삭제</button>
+		<button class="btn-register ico blue">등록</button>
+	</div>
+</div>
+
+<h2><strong>Function area - multi-line</strong></h2>
+<div class="function-area">
+	<div class="align-left">
+		<select>
+			<option value="6" selected>부서</option>
+			<option value="7">부서2</option>
+		</select>
+		<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		<button class="btn-srch ico black">조회</button>
+		<button class="btn-reset image">초기화</button>
+		<div class="under-line">
+			<button class="btn-srch ico black">조회</button>
+			<button class="btn-reset image">초기화</button>
+		</div>
+	</div>
+	<div class="align-center">
+		<button class="btn">기본버튼</button>
+		<button class="btn blue">블루버튼</button>
+		<button class="btn sky">스카이버튼</button>
+		<button class="btn gray">그레이버튼</button>
+		<button class="btn black">블랙버튼</button>
+		<button class="btn orange">오렌지버튼</button>
+		<button class="btn green">그린버튼</button>
+		<div class="under-line">
+			<button class="btn-srch ico black">조회</button>
+			<button class="btn-reset image">초기화</button>
+		</div>
+	</div>
+	<div class="align-right">
+		<button class="btn-download ico">엑셀다운로드</button>
+		<button class="btn-del ico">삭제</button>
+		<button class="btn-register ico blue">등록</button>
+		<div class="under-line">
+			<button class="btn-srch ico black">조회</button>
+			<button class="btn-reset image">초기화</button>
+		</div>
+	</div>
+</div>
+<h2><strong>Function area</strong></h2>
+<div class="function-area">
+	<div class="align-left">
+		<span>
+			<label class="label-text">부서선택</label>
+			<select>
+				<option value="6" selected>부서</option>
+				<option value="7">부서2</option>
+			</select>
+        </span>
+		<span>
+			<label class="label-text">사원</label>
+			<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		</span>
+		
+		<button class="btn-srch ico black">조회</button>
+		<button class="btn-reset image">초기화</button>
+	</div>
+	<div class="align-center">
+		<button class="btn">기본버튼</button>
+		<button class="btn blue">블루버튼</button>
+		<button class="btn sky">스카이버튼</button>
+		<button class="btn gray">그레이버튼</button>
+		<button class="btn black">블랙버튼</button>
+		<button class="btn orange">오렌지버튼</button>
+		<button class="btn green">그린버튼</button>
+	</div>
+	<div class="align-right vertical-bottom">
+        <label><input type="radio" disabled=""><span class="radio-mark">text</span></label>
+        <label><input type="checkbox" disabled=""><span class="check-mark">text</span></label>
+        <input type="text"/>
+		<button class="btn-download ico">엑셀다운로드</button>
+		<button class="btn-del ico">삭제</button>
+		<button class="btn-register ico blue">등록</button>
+	</div>
+</div>
+<h2><strong>Function area label example</strong></h2>
+<div class="function-area">
+	<div class="align-left">
+		<span>
+			<label class="label-text">부서선택</label>
+			<select>
+				<option value="6" selected>부서</option>
+				<option value="7">부서2</option>
+			</select>
+		</span>
+		<span>
+			<label class="label-text">사원</label>
+			<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		</span>
+		<span>
+			<label class="label-text">회의실사용여부</label>
+			<label><input type="radio" name="used"><span class="radio-mark">text</span></label>
+			<label><input type="radio" name="used"><span class="radio-mark">text2</span></label>
+        </span>
+        <span class="period">
+            <label class="label-text">날짜 선택</label>
+            <input type="text" class="calendar hasDatepicker" placeholder="생산 시작일" id="dp1560148319340">
+            <input type="text" class="calendar hasDatepicker" placeholder="생산 종료일" id="dp1560148319341">
+        </span>
+		<span>
+			<label class="label-text">사원2</label>
+			<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		</span>
+	</div>
+	<div class="align-center">
+		<button class="btn">기본버튼</button>
+		<button class="btn blue">블루버튼</button>
+		<button class="btn sky">스카이버튼</button>
+		<span>
+			<span class="label-text">식사여부</span>
+			<label><input type="checkbox" name="used"><span class="check-mark">text</span></label>
+			<label><input type="checkbox" name="used"><span class="check-mark">text2</span></label>
+		</span>
+		<button class="btn gray">그레이버튼</button>
+		<button class="btn black">블랙버튼</button>
+	</div>
+	<div class="align-right vertical-bottom">
+		<label><input type="radio" disabled=""><span class="radio-mark">text</span></label>
+		<button class="btn-download ico">엑셀다운로드</button>
+		<button class="btn-del ico">삭제</button>
+		<button class="btn-register ico blue">등록</button>
+	</div>
+</div>
+<h2><strong>Function area label horizontal example</strong></h2>
+<div class="function-area horizontal">
+	<div class="align-left">
+		<span>
+			<label class="label-text">부서선택</label>
+			<select>
+				<option value="6" selected>부서</option>
+				<option value="7">부서2</option>
+			</select>
+        </span>
+        <span class="period">
+            <label class="label-text">날짜 선택</label>
+            <input type="text" class="calendar hasDatepicker" placeholder="생산 시작일" id="dp1560148319340">
+            <input type="text" class="calendar hasDatepicker" placeholder="생산 종료일" id="dp1560148319341">
+        </span>
+		<!-- <span>
+			<label class="label-text">사원</label>
+			<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		</span> -->
+		<span>
+			<span class="label-text">회의실사용여부</span>
+			<label><input type="radio" name="used"><span class="radio-mark">text</span></label>
+			<label><input type="radio" name="used"><span class="radio-mark">text2</span></label>
+		</span>
+		<label>
+			<span class="label-text">사원2</span>
+			<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+		</label>
+	</div>
+	<div class="align-center">
+		<button class="btn">기본버튼</button>
+		<button class="btn blue">블루버튼</button>
+		<button class="btn sky">스카이버튼</button>
+		<span>
+			<span class="label-text">식사여부</span>
+			<label><input type="checkbox" name="used"><span class="check-mark">text</span></label>
+			<label><input type="checkbox" name="used"><span class="check-mark">text2</span></label>
+		</span>
+		<button class="btn gray">그레이버튼</button>
+		<button class="btn black">블랙버튼</button>
+	</div>
+	<div class="align-right vertical-bottom">
+		<label><input type="radio" disabled=""><span class="radio-mark">text</span></label>
+		<button class="btn-download ico">엑셀다운로드</button>
+		<button class="btn-del ico">삭제</button>
+		<button class="btn-register ico blue">등록</button>
+	</div>
+</div>
+<h2><strong>Function area - border</strong></h2>
+<!--<script>
+	$( document ).ready( function() {
+		$( '.function-area:has(.label-text)' ).css( 'background', 'red' );
+	} );
+</script>-->
+<style>
+	
+	/*.function-area.ver2:has(div){background:red}
+	.function-area:has(label) button{vertical-align:bottom}*/
+	
+</style>
+<div style="padding:20px;">
+	<div class="function-area border">
+		<div class="align-left">
+			<label>
+				<span class="label-text">부서선택</span>
+				<select>
+					<option value="6" selected>부서</option>
+					<option value="7">부서2</option>
+				</select>
+			</label>
+			<label>
+				<span class="label-text">사원</span>
+				<input type="text" placeholder="사원명, 사번" readonly="readonly"/>
+			</label>
+			<button class="btn-srch ico black">조회</button>
+			<button class="btn-reset image">초기화</button>
+		</div>
+		<div class="align-center">
+			<button class="btn">기본버튼</button>
+			<button class="btn blue">블루버튼</button>
+			<button class="btn sky">스카이버튼</button>
+			<button class="btn gray">그레이버튼</button>
+			<button class="btn black">블랙버튼</button>
+			<button class="btn orange">오렌지버튼</button>
+			<button class="btn green">그린버튼</button>
+		</div>
+		<div class="align-right vertical-bottom">
+			<button class="btn-download ico">엑셀다운로드</button>
+			<button class="btn-del ico">삭제</button>
+			<button class="btn-register ico blue">등록</button>
+		</div>
+	</div>
+</div>
+
+<!-- <h2><strong>Function area - button</strong></h2>
+<div class="function-area">
+	<button type="button" class="search">조회</button>
+	<button type="button" class="search minimum">조회</button>
+	<button type="button" class="reset minimum">초기화</button>
+	<button type="button" class="del">삭제</button>
+	<button type="button" class="del minimum">삭제</button>
+	<button type="button" class="register">등록</button>
+	<button type="button" class="list">목록</button>
+	<button type="button" class="save">저장</button>
+	<button type="button" class="upload">엑셀 업로드</button>
+	<button type="button" class="download">엑셀 다운로드</button>
+	<button type="button" class="capture">화면캡쳐</button>
+	<button type="button" class="print">인쇄</button>
+	<button type="button" class="help">도움말</button>
+</div> -->
+<!-- <h2><strong>TABLE BUTTON</strong></h2>
+<button type="button" class="tbtn-edit">수정</button>
+<button type="button" class="tbtn-select">선택</button>
+<button type="button" class="tbtn-minidel">삭제</button>
+<button type="button" class="tbtn-add">신규 BOP 등록</button>
+<button type="button" class="tbtn-start">생산시작</button>
+<button type="button" class="tbtn-restart">재시작</button>
+<button type="button" class="tbtn-pause">계획정지</button>
+<button type="button" class="tbtn-end">생산종료</button>
+<button type="button" class="tbtn-man">담당자</button>
+<button type="button" class="tbtn-size">LOT SIZE 수정</button> -->
+<h2><strong>C,R,U,D button</strong></h2>
+<strong>기본 버튼</strong><br/>
+<button type="button" class="btn-add">등록</button>
+<button type="button" class="btn-srch">조회</button>
+<button type="button" class="btn-mod">수정</button>
+<button type="button" class="btn-del">삭제</button>
+<br/>
+<strong>색상 넣은 버튼</strong><br/>
+<button type="button" class="btn-add blue">등록</button>
+<button type="button" class="btn-srch sky">조회</button>
+<button type="button" class="btn-mod black">수정</button>
+<button type="button" class="btn-del orange">삭제</button>
+<br/>
+<strong>icon + text 버튼</strong><br/>
+<button type="button" class="btn-add ico">등록</button>
+<button type="button" class="btn-srch ico">조회</button>
+<button type="button" class="btn-mod ico">수정</button>
+<button type="button" class="btn-mod ico green ver2">수정</button>
+<button type="button" class="btn-del ico">삭제</button>
+<button type="button" class="btn-del ico ver2 gray">삭제</button>
+<br/>
+<strong>icon + text small 버튼</strong><br/>
+<button type="button" class="btn-add ico small">등록</button>
+<button type="button" class="btn-srch ico small">조회</button>
+<button type="button" class="btn-mod ico small">수정</button>
+<button type="button" class="btn-mod ico ver2 green small">수정</button>
+<button type="button" class="btn-del ico small">삭제</button>
+<button type="button" class="btn-del ico small ver2 gray">삭제</button>
+<br/>
+<strong>icon 버튼</strong><br/>
+<button type="button" class="btn-add image">등록</button>
+<button type="button" class="btn-srch image">조회</button>
+<button type="button" class="btn-mod image">수정</button>
+<button type="button" class="btn-mod image green ver2">수정</button>
+<button type="button" class="btn-del image">삭제</button>
+<button type="button" class="btn-del image ver2 gray">삭제</button>
+<br/>
+<strong>icon small 버튼</strong><br/>
+<button type="button" class="btn-add image small">등록</button>
+<button type="button" class="btn-srch image small">조회</button>
+<button type="button" class="btn-mod image small">수정</button>
+<button type="button" class="btn-mod image small green ver2">수정</button>
+<button type="button" class="btn-del image small">삭제</button>
+<button type="button" class="btn-del image ver2 small gray">삭제</button>
+<h2><strong>button Guide</strong></h2>
+<div style="padding-left:10px">
+	<strong style="display:block;font-size:14px;font-weight:normal">버튼 클래스명: 'btn-종류 사이즈 색상', "btn" 외 버튼타입, 사이즈, 색상, 종류 생략가능 (버튼타입: ico, image, 사이즈:small,wide 색상:blue, gray, sky, orange, black, 종류: srch, mod, add, del)</strong>
+	<p>*image, icon을 넣었는데 이미지가 안보이는 경우, 이미지가 흰색일 수 있습니다. 색상 class넣어 주세요</p>
+	ex) btn-add <br/><button class="btn-add ico small">아이콘있는 작은 파란색 등록버튼</button><br/>
+	ex) btn-mod small ico <br/>
+	<button class="btn-mod small ico">아이콘있는 작은 수정버튼</button><br/>
+	ex) btn <br/>
+	<button class="btn">기본스타일버튼</button><br/>
+	ex) btn wide sky, wide는 icon, image가 없습니다. <br/>
+	<button class="btn wide sky">기본스타일버튼</button><br/>
+	ex) btn small<br/>
+	<button class="btn small">작은버튼</button><button class="btn small gray">작은버튼</button><button class="btn-del small orange">작은 삭제버튼</button><br/>
+	ex) disable button, 속성에  "disabled" 추가<br/>
+	<button class="btn small" disabled>작은버튼</button><button class="btn small gray" disabled>작은버튼</button><button class="btn-del small orange" disabled>작은 삭제버튼</button><br>
+	<button type="button" class="btn-add image small" disabled>등록</button>
+	<button type="button" class="btn-srch image small" disabled>조회</button>
+	<button type="button" class="btn-mod image small" disabled>수정</button>
+	<button type="button" class="btn-del image small" disabled>삭제</button>
+</div>
+<h2><strong>Fix Buttons</strong></h2>
+<!-- <div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-ico-download">엑셀다운로드</button>
+		<button type="button" class="btn-ico-upload">엑셀업로드</button>
+		<button type="button" class="btn-ico-list">목록</button>
+		<button type="button" class="btn-ico-blue-save">저장</button>
+		<button type="button" class="btn-image-reset">초기화</button>
+		<button type="button" class="btn-ico-print">인쇄</button>
+		<button type="button" class="btn-ico-help">도움말</button>
+		<button type="button" class="btn-ico-capture">화면캡쳐</button>
+	</div>
+</div> -->
+<div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-download">엑셀다운로드</button>
+		<button type="button" class="btn-upload ">엑셀업로드</button>
+		<button type="button" class="btn-list">목록</button>
+		<button type="button" class="btn-save">저장</button>
+		<button type="button" class="btn-reset">초기화</button>
+		<button type="button" class="btn-print">인쇄</button>
+		<button type="button" class="btn-help">도움말</button>
+		<button type="button" class="btn-capture">화면캡쳐</button>
+        <button type="button" class="btn-setup blue">설정</button>
+		<button type="button" class="btn-select">선택</button>
+		<button type="button" class="btn-dialog">다이얼로그</button>
+	</div>
+</div>
+<div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-download small">엑셀다운로드</button>
+		<button type="button" class="btn-upload small">엑셀업로드</button>
+		<button type="button" class="btn-list small">목록</button>
+		<button type="button" class="btn-save small">저장</button>
+		<button type="button" class="btn-reset small">초기화</button>
+		<button type="button" class="btn-print small">인쇄</button>
+		<button type="button" class="btn-help small">도움말</button>
+		<button type="button" class="btn-capture small">화면캡쳐</button>
+		<button type="button" class="btn-setup small blue">설정</button>
+		<button type="button" class="btn-select small">선택</button>
+		<button type="button" class="btn-dialog small">다이얼로그</button>
+	</div>
+</div>
+<div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-download ico">엑셀다운로드</button>
+		<button type="button" class="btn-upload ico">엑셀업로드</button>
+		<button type="button" class="btn-list ico">목록</button>
+		<button type="button" class="btn-list ico ver2">목록</button>
+		<button type="button" class="btn-save ico">저장</button>
+		<button type="button" class="btn-save ico ver2">저장</button>
+		<button type="button" class="btn-reset ico">초기화</button>
+		<button type="button" class="btn-reset ico ver2">초기화</button>
+		<button type="button" class="btn-print ico">인쇄</button>
+		<button type="button" class="btn-print ico ver2">인쇄</button>
+		<button type="button" class="btn-help ico">도움말</button>
+		<button type="button" class="btn-help ico ver2">도움말</button>
+		<button type="button" class="btn-capture ico">화면캡쳐</button>
+		<button type="button" class="btn-capture ico ver2">화면캡쳐</button>
+        <button type="button" class="btn-setup ico">설정</button>
+        <button type="button" class="btn-setup ver2 ico blue">설정</button>
+		<button type="button" class="btn-select ico">선택</button>
+		<button type="button" class="btn-select ico ver2">선택</button>
+		<button type="button" class="btn-dialog ico">다이얼로그</button>
+		<button type="button" class="btn-dialog ico ver2">다이얼로그</button>
+	</div>
+</div>
+<div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-download small ico">엑셀다운로드</button>
+		<button type="button" class="btn-upload small ico">엑셀업로드</button>
+		<button type="button" class="btn-list small ico">목록</button>
+		<button type="button" class="btn-list small ver2 ico">목록</button>
+		<button type="button" class="btn-save small ico">저장</button>
+		<button type="button" class="btn-save small ver2 ico">저장</button>
+		<button type="button" class="btn-reset small ico">초기화</button>
+		<button type="button" class="btn-reset small ver2 ico">초기화</button>
+		<button type="button" class="btn-print small ico">인쇄</button>
+		<button type="button" class="btn-print small ver2 ico">인쇄</button>
+		<button type="button" class="btn-help small ico">도움말</button>
+		<button type="button" class="btn-help small ver2 ico">도움말</button>
+		<button type="button" class="btn-capture small ico">화면캡쳐</button>
+		<button type="button" class="btn-capture small ver2 ico">화면캡쳐</button>
+        <button type="button" class="btn-setup small ico">설정</button>
+        <button type="button" class="btn-setup small ver2 ico blue">설정</button>
+		<button type="button" class="btn-select small ico">선택</button>
+		<button type="button" class="btn-select small ver2 ico">선택</button>
+		<button type="button" class="btn-dialog small ico">다이얼로그</button>
+		<button type="button" class="btn-dialog small ver2 ico">다이얼로그</button>
+	</div>
+</div>
+<div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-download image">엑셀다운로드</button>
+		<button type="button" class="btn-upload image">엑셀업로드</button>
+		<button type="button" class="btn-list image">목록</button>
+		<button type="button" class="btn-list ver2 image">목록</button>
+		<button type="button" class="btn-save image">저장</button>
+		<button type="button" class="btn-save ver2 image">저장</button>
+		<button type="button" class="btn-reset image">초기화</button>
+		<button type="button" class="btn-reset ver2 image">초기화</button>
+		<button type="button" class="btn-print image">인쇄</button>
+		<button type="button" class="btn-print ver2 image">인쇄</button>
+		<button type="button" class="btn-help image">도움말</button>
+		<button type="button" class="btn-help ver2 image">도움말</button>
+		<button type="button" class="btn-capture image">화면캡쳐</button>
+		<button type="button" class="btn-capture ver2 image">화면캡쳐</button>
+        <button type="button" class="btn-setup image">설정</button>
+        <button type="button" class="btn-setup image ver2 blue">설정</button>
+		<button type="button" class="btn-select image">선택</button>
+		<button type="button" class="btn-select ver2 image">선택</button>
+		<button type="button" class="btn-dialog image">다이얼로그</button>
+		<button type="button" class="btn-dialog ver2 image">다이얼로그</button>
+	</div>
+</div>
+<div class="function-area">
+	<div class="align-left">
+		<button type="button" class="btn-download image small">엑셀다운로드</button>
+		<button type="button" class="btn-upload image small">엑셀업로드</button>
+		<button type="button" class="btn-list image small">목록</button>
+		<button type="button" class="btn-list ver2 image small">목록</button>
+		<button type="button" class="btn-save image small">저장</button>
+		<button type="button" class="btn-save ver2 image small">저장</button>
+		<button type="button" class="btn-reset image small">초기화</button>
+		<button type="button" class="btn-reset ver2 image small">초기화</button>
+		<button type="button" class="btn-print image small">인쇄</button>
+		<button type="button" class="btn-print ver2 image small">인쇄</button>
+		<button type="button" class="btn-help image small">도움말</button>
+		<button type="button" class="btn-help ver2 image small">도움말</button>
+		<button type="button" class="btn-capture image small">화면캡쳐</button>
+		<button type="button" class="btn-capture ver2 image small">화면캡쳐</button>
+        <button type="button" class="btn-setup image small">설정</button>
+        <button type="button" class="btn-setup ver2 image small ver2 blue">설정</button>
+		<button type="button" class="btn-select image small">선택</button>
+		<button type="button" class="btn-select ver2 image small">선택</button>
+		<button type="button" class="btn-dialog image small">다이얼로그</button>
+		<button type="button" class="btn-dialog ver2 image small">다이얼로그</button>
+	</div>
+</div>
+<h2><strong>Form요소</strong></h2>
+<div>
+	<label><input type="checkbox"/><span class="check-mark">text</span></label>
+	<label><input type="checkbox" checked /><span class="check-mark">text</span></label>
+	<label><input type="checkbox" disabled /><span class="check-mark">text</span></label>
+	<label><input type="checkbox" checked disabled /><span class="check-mark">text</span></label>
+</div>
+<div style="margin-top:20px">
+	<label><input type="checkbox" /><span class="check-mark"></span></label>
+	<label><input type="checkbox" checked /><span class="check-mark"></span></label>
+	<label><input type="checkbox" disabled /><span class="check-mark"></span></label>
+	<label><input type="checkbox" checked disabled /><span class="check-mark"></span></label>
+</div>
+<div style="margin-top:20px">
+	<label><input type="radio" /><span class="radio-mark">text</span></label>
+	<label><input type="radio" checked /><span class="radio-mark">text</span></label>
+	<label><input type="radio" disabled /><span class="radio-mark">text</span></label>
+	<label><input type="radio" checked disabled /><span class="radio-mark">text</span></label>
+</div>
+<div style="margin-top:20px">
+	<label><input type="radio" /><span class="radio-mark"></span></label>
+	<label><input type="radio" checked /><span class="radio-mark"></span></label>
+	<label><input type="radio" disabled /><span class="radio-mark"></span></label>
+	<label><input type="radio" checked disabled /><span class="radio-mark"></span></label>
+</div>
+<h2><strong>Form요소 - vertical</strong></h2>
+<style>
+    .vertical > label{display:block}
+    .vertical > label + label{margin:10px 0 0}
+</style>
+<div class="vertical">
+	<label><input type="checkbox"/><span class="check-mark">text</span></label>
+	<label><input type="checkbox" checked /><span class="check-mark">text</span></label>
+	<label><input type="checkbox" disabled /><span class="check-mark">text</span></label>
+	<label><input type="checkbox" checked disabled /><span class="check-mark">text</span></label>
+</div>
+<div class="vertical" style="margin-top:20px">
+	<label><input type="checkbox" /><span class="check-mark"></span></label>
+	<label><input type="checkbox" checked /><span class="check-mark"></span></label>
+	<label><input type="checkbox" disabled /><span class="check-mark"></span></label>
+	<label><input type="checkbox" checked disabled /><span class="check-mark"></span></label>
+</div>
+<div class="vertical" style="margin-top:20px">
+	<label><input type="radio" /><span class="radio-mark">text</span></label>
+	<label><input type="radio" checked /><span class="radio-mark">text</span></label>
+	<label><input type="radio" disabled /><span class="radio-mark">text</span></label>
+	<label><input type="radio" checked disabled /><span class="radio-mark">text</span></label>
+</div>
+<div class="vertical" style="margin-top:20px">
+	<label><input type="radio" /><span class="radio-mark"></span></label>
+	<label><input type="radio" checked /><span class="radio-mark"></span></label>
+	<label><input type="radio" disabled /><span class="radio-mark"></span></label>
+	<label><input type="radio" checked disabled /><span class="radio-mark"></span></label>
+</div>
+<select>
+	<option>셀렉트 select</option>
+</select>
+<select disabled>
+	<option>disabled 셀렉트</option>
+</select>
+<h2><strong>Input Box 종류</strong></h2>
+<div>
+	<div>기본 input(class없음)</div>
+	<input type="text" placeholder="placeholder값" /> <input type="text" placeholder="disabled" disabled/> <input type="text" placeholder="readonly" readonly/>
+	<div>새창열림 input (class명 : select , select-user-info )</div>
+	<input type="text" class="select" placeholder="자재유형선택" readonly/>
+	<input type="text" class="select-user-info" placeholder="사용자정보"/>
+	<input type="text" class="select-srch" placeholder="검색"/>
+	<br/>
+	<!-- <input type="text" class="select-option" placeholder="설정"/> -->
+	<div>datepicker input (class명 : calendar )</div>
+	<input type="text" class="calendar" placeholder="일자를 선택하세요."/>
+	<span class="period">
+		<input type="text" class="calendar" placeholder="생산 시작일" />
+		<input type="text" class="calendar" placeholder="생산 종료일" />
+    </span>
+	<div>validate input (class명 : validate )</div>
+	<input type="text" class="validate" placeholder="작업장 코드 입력" />
+	<input type="text" class="validate" placeholder="작업장 코드 입력" disabled />
+	<input type="text" class="validate" placeholder="작업장 코드 입력" readonly />
+	<input type="text" class="validate pass" placeholder="작업장 코드 입력" />
+	<input type="text" class="validate warning" placeholder="작업장 코드 입력" />
+	<div>수량 input (class명 : unit )</div>
+	<label><input type="text" class="unit" /><em>mm</em></label>
+	<div>input - 오른쪽 정렬 (class명 : right)</div>
+	<input type="text" class="right" placeholder="오른쪽정렬" />
+	<div>input type Color</div>
+	<div style="padding:0 20px"><input type="color"></div>
+	<div style="margin-top:20px;">
+		<label><span class="label-text">사원명</span> <input type="text" /></label>
+		<label>
+			<span class="label-text">부서</span>
+			<select>
+				<option>부서선택</option>
+				<option value="0">IMC</option>
+				<option value="1">마케팅</option>
+			</select>
+		</label>
+		<label><span class="label-text">label text</span> <input type="text" class="select" placeholder="자재유형선택" readonly="readonly" /></label>
+		<label><input type="checkbox"/><span class="check-mark">1</span></label><label><input type="checkbox"/><span class="check-mark">2</span></label>
+	</div>
+	<div style="margin:20px 0 5px">새창열림 input with clear button(class명 : select)</div>
+	<input type="text" class="select" placeholder="자재유형선택" readonly/><button class="btn-clear"></button>
+	<input type="text" class="select" placeholder="자재유형선택" readonly/><button class="btn-clear square"></button>
+
+	<div style="margin:20px 0 5px">새창열림 input with clear button(class명 : select)</div>
+	<label class="clear-wrap"><input type="text" class="select" placeholder="자재유형선택" readonly/><button class="btn-clear"></button></label>
+	<label class="clear-wrap"><input type="text" class="select" placeholder="자재유형선택" readonly/><button class="btn-clear square"></button></label>
+
+
+</div>
+
+<!-- color picker  -->
+<h2><strong>Color picker with jquery</strong></h2>
+<div>
+	<input type="text" id="picker" class="color" />
+	<p style="padding:10px;font-size:20px"><strong>other Demo:</strong>
+		<a href="http://www.htmldrive.net/items/demo/1358/colpick-A-jQuery-RGB-HEX-and-HSB-Color-Picker-plugin-is-free-lightweight-and-customizable" style="font-size:24px" target="_blank">Go to Demo</a>
+	</p>
+</div>
+<script src="../resources/js/lib/jquery-colpick/colpick.js"></script>
+<script>
+	/* $('.btn-colpick').colpick(); */
+	$('#picker').colpick({
+
+		submit:0,
+		onChange:function(hsb,hex,rgb) {
+			$('#picker').val('#'+hex).css('border-color','#'+hex);
+		}
+	});
+	$('#picker').keyup(function(){
+		$(this).colpickSetColor(this.value);
+	});
+</script>
+<!-- // color picker -->
+<h2><strong>Table : default sfp-grid </strong></h2>
+<div class="sfp-grid-panel">
+	<div class="sfp-grid-header-panel">
+		<table class="sfp-grid">
+			<colgroup>
+				<col style="width:34px">
+				<col>
+				<col style="width:200px">
+				<col>
+				<col style="width:100px">
+				<col style="width:100px">
+				<col style="width:100px">
+				<col style="width:100px">
+			</colgroup>
+			<thead>
+				<tr>
+					<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+					<th class="order">자재내역</th>
+					<th class="order reverse">저장빈</th>
+					<th>설명</th>
+					<th>조달유형</th>
+					<th>자재유형</th>
+					<th>처리유형</th>
+					<th>작업</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="sfp-grid-body-panel" style="height: 200px">
+		<table class="sfp-grid">
+			<colgroup>
+				<col style="width:34px">
+				<col>
+				<col style="width:200px">
+				<col>
+				<col style="width:100px">
+				<col style="width:100px">
+				<col style="width:100px">
+				<col style="width:100px">
+			</colgroup>
+			<thead style="display: none;">
+				<tr>
+					<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+					<th>자재내역</th>
+					<th>저장빈</th>
+					<th>설명</th>
+					<th>조달유형</th>
+					<th>자재유형</th>
+					<th>처리유형</th>
+					<th>작업</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line" disabled>선택</button></td>
+				</tr>
+				<tr class="selected">
+					<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type2">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type2" disabled>선택</button></td>
+				</tr>
+				<tr class="selected">
+					<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type2">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type3">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type3" disabled>선택</button></td>
+				</tr>
+				<tr class="selected">
+					<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type3">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type4">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type4" disabled>선택</button></td>
+				</tr>
+				<tr class="selected">
+					<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="select-line type4">선택</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td></td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="btn-small-mod">수정</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+					<td>1</td>
+					<td>2</td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="btn-ico-small-mod">수정</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R39-DMRFMTSBMDNAAHNA</td>
+					<td>
+						<select>
+							<option>셀렉트</option>
+						</select>
+					</td>
+					<td><input type="text"></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="btn-mod image small">수정</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R41-MTRFMTAGMDNASHNA</td>
+					<td>
+						<select style="width:80px;">
+							<option>셀렉트01</option>
+						</select>
+						<select style="width:80px;">
+							<option>셀렉트02</option>
+						</select>
+					</td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="btn-del small">삭제</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>TR-R41-ERFFMTSBMDNASHNA</td>
+					<td></td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="btn-del ico small">삭제</button></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+					<td>*TR-R39-DMRFMTSBMDNAAHNA</td>
+					<td></td>
+					<td></td>
+					<td>E</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td><button class="btn-del image small">삭제</button></td>
+				</tr>
+			</tbody>
+			<tfoot style="display: none;"></tfoot>
+		</table>
+	</div>
+	<div class="sfp-grid-footer-panel">
+		<table class="sfp-grid">
+			<colgroup>
+				<col style="width:34px">
+				<col>
+				<col style="width:200px">
+				<col>
+				<col style="width:100px">
+				<col style="width:100px">
+				<col style="width:100px">
+				<col style="width:100px">
+			</colgroup>
+			<tfoot>
+				<tr>
+					<td colspan="5">합계</td>
+					<td>MFER</td>
+					<td>C</td>
+					<td>수정</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+<h2><strong>Table : default sfp-grid - small </strong></h2>
+<div>
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid small">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th class="order reverse">자재내역</th>
+						<th class="order">저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 200px">
+			<table class="sfp-grid small">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line" disabled>선택</button></td>
+					</tr>
+					<tr class="selected">
+						<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type2">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type2" disabled>선택</button></td>
+					</tr>
+					<tr class="selected">
+						<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type2">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type3">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type3" disabled>선택</button></td>
+					</tr>
+					<tr class="selected">
+						<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type3">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type4">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type4" disabled>선택</button></td>
+					</tr>
+					<tr class="selected">
+						<td><label><input type="checkbox" checked><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line type4">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>1</td>
+						<td>2</td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-ico-small-mod">수정</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R39-DMRFMTSBMDNAAHNA</td>
+						<td>
+							<select>
+								<option>셀렉트</option>
+							</select>
+						</td>
+						<td><input type="text"></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-mod image small">수정</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R41-MTRFMTAGMDNASHNA</td>
+						<td></td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del small">삭제</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>TR-R41-ERFFMTSBMDNASHNA</td>
+						<td></td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ico small">삭제</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R39-DMRFMTSBMDNAAHNA</td>
+						<td></td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del image small">삭제</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+		<div class="sfp-grid-footer-panel">
+			<table class="sfp-grid small">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<tfoot>
+					<tr>
+						<td colspan="5">합계</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td>수정</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>Table : default &amp; no-border </strong></h2>
+<p style="margin-bottom:10px;padding-left:10px">일반 page 꽉찬 table일경우(기본 높이 821px인 경우), 한페이지당 20개 라인 출력 </p>
+<div class="no-border">
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-add ico">추가</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-srch ico">검색</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-mod ico">수정</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ico">삭제</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ver2 ico blue">삭제</button></td>
+					</tr>
+					
+					
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+		<div class="sfp-grid-footer-panel">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<tfoot>
+					<tr>
+						<td colspan="5">합계</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td>수정</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>Table : small </strong></h2>
+<p style="margin-bottom:10px;padding-left:10px">일반 page 꽉찬 table일경우(기본 높이 821px인 경우), 한페이지당 25개 라인 출력</p>
+<div class="border-style">
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid small">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid small">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-add ico">추가</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-srch ico">검색</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-mod ico">수정</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ico">삭제</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ver2 ico blue">삭제</button></td>
+					</tr>
+					
+					
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+		<div class="sfp-grid-footer-panel">
+			<table class="sfp-grid small">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<tfoot>
+					<tr>
+						<td colspan="5">합계</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td>수정</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>Table : big &amp; no-border </strong></h2>
+<p style="margin-bottom:10px;padding-left:10px">일반 page 꽉찬 table일경우(기본 높이 821px인 경우), 한페이지당 15개 라인 출력 </p>
+<div class="no-border">
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid big">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid big">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-add ico">추가</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-srch ico">검색</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-mod ico">수정</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ico">삭제</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="btn-del ver2 ico blue small">삭제</button></td>
+					</tr>
+					
+					
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+		<div class="sfp-grid-footer-panel">
+			<table class="sfp-grid big">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<tfoot>
+					<tr>
+						<td colspan="5">합계</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td>수정</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>Table : table-style-type2</strong></h2>
+<div class="sfp-grid-panel">
+	<div class="sfp-grid-header-panel" >
+		<table class="sfp-grid style-type2">
+			<colgroup>
+				<col style="width:34px">
+				<col style="width:100px">
+				<col style="width:160px">
+				<col style="width:230px">
+				<col style="width:160px">
+				<col style="width:227px">
+				<col style="width:62px">
+			</colgroup>
+			<thead>
+				<tr>
+					<th><label><input type="checkbox" /><span class="check-mark"></span></label></th>
+					<th>차수</th>
+					<th class="required">납기 요청일 </th>
+					<th class="required">납기 요청 수량</th>
+					<th>유형</th>
+					<th>실제 납기 수량</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="sfp-grid-body-panel" style="height:150px">
+		<table class="sfp-grid">
+			<colgroup>
+				<col style="width:34px">
+				<col style="width:100px">
+				<col style="width:160px">
+				<col style="width:230px">
+				<col style="width:160px">
+				<col style="width:227px">
+				<col style="width:62px">
+			</colgroup>
+			<thead style="display: none;">
+				<tr>
+					<th><input type="checkbox"></th>
+					<th>차수</th>
+					<th class="required">납기 요청일</th>
+					<th class="required">납기 요청 수량</th>
+					<th>유형</th>
+					<th>실제 납기 수량</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+				<tr>
+					<td>
+						<label><input type="checkbox" /><span class="check-mark"></span></label>
+					</td>
+					<td>1차</td>
+					<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td>
+						<select>
+							<option value="0">유형선택</option>
+							<option value="1">유형1</option>
+							<option value="2">유형2</option>
+						</select>
+					</td>
+					<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+					<td><button type="button" class="btn-image-small-del">삭제</button></td>
+				</tr>
+			</tbody>
+			<tfoot style="display: none;"></tfoot>
+		</table>
+	</div>
+</div>
+<h2><strong>Table : table-style-type2 - small</strong></h2>
+<div>
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel" >
+			<table class="sfp-grid small style-type2">
+				<colgroup>
+					<col style="width:34px">
+					<col style="width:100px">
+					<col style="width:160px">
+					<col style="width:230px">
+					<col style="width:160px">
+					<col style="width:227px">
+					<col style="width:62px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox" /><span class="check-mark"></span></label></th>
+						<th>차수</th>
+						<th class="required">납기 요청일 </th>
+						<th class="required">납기 요청 수량</th>
+						<th>유형</th>
+						<th>실제 납기 수량</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height:150px">
+			<table class="sfp-grid small style-type2">
+				<colgroup>
+					<col style="width:34px">
+					<col style="width:100px">
+					<col style="width:160px">
+					<col style="width:230px">
+					<col style="width:160px">
+					<col style="width:227px">
+					<col style="width:62px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><input type="checkbox"></th>
+						<th>차수</th>
+						<th class="required">납기 요청일 </th>
+						<th class="required">납기 요청 수량</th>
+						<th>유형</th>
+						<th>실제 납기 수량</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<label><input type="checkbox" /><span class="check-mark"></span></label>
+						</td>
+						<td>1차</td>
+						<td><input type="text" class="calendar" placeholder="날짜 입력" value="" readonly="readonly"></td>
+						<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+						<td>
+							<select>
+								<option value="0">유형선택</option>
+								<option value="1">유형1</option>
+								<option value="2">유형2</option>
+							</select>
+						</td>
+						<td><label><input type="text" class="unit" placeholder="수량 입력"><em>ea</em></label></td>
+						<td><button type="button" class="btn-image-small-del">삭제</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>Table : select-yellow</strong></h2>
+<div>
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid select-yellow">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid select-yellow">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="selected">
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>Table : select-green</strong></h2>
+<div>
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid select-green">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid select-green">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="selected">
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>sfp-grid blue-style</strong></h2>
+<div>
+	<div class="sfp-grid-panel blue-style">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="selected">
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>sfp-grid orange-style</strong></h2>
+<div>
+	<div class="sfp-grid-panel orange-style border-style">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="selected">
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>sfp-grid blue-style</strong></h2>
+<div>
+	<div class="sfp-grid-panel">
+		<div class="sfp-grid-header-panel">
+			<table class="sfp-grid yellow-style">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="sfp-grid-body-panel" style="height: 80px">
+			<table class="sfp-grid yellow-style">
+				<colgroup>
+					<col style="width:34px">
+					<col>
+					<col style="width:200px">
+					<col>
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+					<col style="width:100px">
+				</colgroup>
+				<thead style="display: none;">
+					<tr>
+						<th><label><input type="checkbox"><span class="check-mark"></span></label></th>
+						<th>자재내역</th>
+						<th>저장빈</th>
+						<th>설명</th>
+						<th>조달유형</th>
+						<th>자재유형</th>
+						<th>처리유형</th>
+						<th>작업</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="selected">
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+					<tr>
+						<td><label><input type="checkbox"><span class="check-mark"></span></label></td>
+						<td>*TR-R36-ERFFMTSBMDNASHNA</td>
+						<td>
+							<select style="width:80px;">
+								<option>셀렉트01</option>
+							</select>
+							<select style="width:80px;">
+								<option>셀렉트02</option>
+							</select>
+						</td>
+						<td></td>
+						<td>E</td>
+						<td>MFER</td>
+						<td>C</td>
+						<td><button class="select-line">선택</button></td>
+					</tr>
+				</tbody>
+				<tfoot style="display: none;"></tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+<h2><strong>register Table</strong></h2>
+<div class="register-table">
+	<p class="required">필수항목</p>
+	<ul>
+		<li>
+			<div class="title required">입력선택</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<label><input type="radio" name="select-bom" /><span class="radio-mark">자재 유형 선택</span></label>
+					<button class="btn-small">찾기</button>
+					<label><input type="radio" name="select-bom" /><span class="radio-mark">직접입력</span></label>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title required">워크센터 명</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<span><input type="text" placeholder="워크센터 명을 입력하세요."></span><span class="no-flex"><button class="btn-small">중복확인</button></span>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">면적(가로x세로)</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<span><input type="text" readonly="readonly" placeholder="readonly input box"></span>
+					<span class="no-flex">x</span>
+					<span><input type="text"></span>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">도면</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<span><input type="text"></span><span class="no-flex"><span class="file-srch"><input type="file"><em>파일찾기</em></span></span>
+				</div>
+				<p class="description">※ 5MB 이하의 jpg, png, gif 파일만 등록이 가능합니다.</p>
+			</div>
+		</li>
+		<li>
+			<div class="title">도면</div>
+			<div class="cont">
+				<div class="line-wrap">
+					일반 텍스트
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">도면</div>
+			<div class="cont">
+				<div class="line-wrap">
+					div -class ="line-wrap"안에 여러줄이 나오면 이렇게 나옵니다<br/>
+					text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+				</div>
+				<div class="line-wrap">
+					줄간격을 좀 더 넓히고 싶다면 div하나더 추가해주세요
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">도면</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<select>
+						<option value="6" selected>부서</option>
+						<option value="7">부서2</option>
+					</select>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">라디오버튼</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<label><input type="radio" name="agree" /><span class="radio-mark">yes</span></label>
+					<label><input type="radio" name="agree" checked /><span class="radio-mark">no</span></label>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">체크박스</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<label><input type="checkbox" /><span class="check-mark">우편</span></label>
+					<label><input type="checkbox" checked /><span class="check-mark">e-mail</span></label>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">안전 재고량</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<span>
+						<input type="text"/>
+					</span>
+					<span class="no-flex">
+						<select style="width:100px">
+							<option value="6" selected>부서</option>
+							<option value="7">부서2</option>
+						</select>
+					</span>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="title">자재규격</div>
+			<div class="cont">
+				<div class="line-wrap">
+					<textarea placeholder="30자 이내로 입력하세요"></textarea>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<h2><strong>register Table - small</strong></h2>
+<div>
+	<div class="register-table small">
+		<p class="required">필수항목</p>
+		<ul>
+			<li>
+				<div class="title required">입력선택</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<label><input type="radio" name="select-bom" /><span class="radio-mark">자재 유형 선택</span></label>
+						<button class="btn-small">찾기</button>
+						<label><input type="radio" name="select-bom" /><span class="radio-mark">직접입력</span></label>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title required">워크센터 명</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<span><input type="text" placeholder="워크센터 명을 입력하세요."></span><span class="no-flex"><button class="btn-small">중복확인</button></span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">면적(가로x세로)</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<span><input type="text" readonly="readonly" placeholder="readonly input box"></span>
+						<span class="no-flex">x</span>
+						<span><input type="text"></span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">도면</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<span><input type="text"></span><span class="no-flex"><span class="file-srch"><input type="file"><em>파일찾기</em></span></span>
+					</div>
+					<p class="description">※ 5MB 이하의 jpg, png, gif 파일만 등록이 가능합니다.</p>
+				</div>
+			</li>
+			<li>
+				<div class="title">도면</div>
+				<div class="cont">
+					<div class="line-wrap">
+						일반 텍스트
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">도면</div>
+				<div class="cont">
+					<div class="line-wrap">
+						div -class ="line-wrap"안에 여러줄이 나오면 이렇게 나옵니다<br/>
+						text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+					</div>
+					<div class="line-wrap">
+						줄간격을 좀 더 넓히고 싶다면 div하나더 추가해주세요
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">도면</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<select>
+							<option value="6" selected>부서</option>
+							<option value="7">부서2</option>
+						</select>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">라디오버튼</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<label><input type="radio" name="agree" /><span class="radio-mark">yes</span></label>
+						<label><input type="radio" name="agree" checked /><span class="radio-mark">no</span></label>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">체크박스</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<label><input type="checkbox" /><span class="check-mark">우편</span></label>
+						<label><input type="checkbox" checked /><span class="check-mark">e-mail</span></label>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">안전 재고량</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<span>
+							<input type="text"/>
+						</span>
+						<span class="no-flex">
+							<select style="width:100px">
+								<option value="6" selected>부서</option>
+								<option value="7">부서2</option>
+							</select>
+						</span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="title">자재규격</div>
+				<div class="cont">
+					<div class="line-wrap">
+						<textarea placeholder="30자 이내로 입력하세요"></textarea>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<h2><strong>static Table</strong></h2>
+<div>
+	<table class="static-table">
+		<colgroup>
+			<col style="width:33.33%">
+			<col style="width:33.33%">
+			<col style="width:33.33%">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th>제품</th>
+				<th>Model</th>
+				<th>원재료</th>
+			</tr>
+			<tr>
+				<td>I40 Bumper</td>
+				<td>40Bumper</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<h2><strong>static Table - small</strong></h2>
+<div>
+	<table class="static-table small">
+		<colgroup>
+			<col style="width:33.33%">
+			<col style="width:33.33%">
+			<col style="width:33.33%">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th>제품</th>
+				<th>Model</th>
+				<th>원재료</th>
+			</tr>
+			<tr>
+				<td>I40 Bumper</td>
+				<td>40Bumper</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<h2><strong>Progress Bar - progress Tag</strong></h2>
+<div>
+	default
+	<progress value="10" max="100"></progress>
+	<div class="auto" style="margin-top:10px">
+		auto
+		<progress value="10" max="100"></progress>
+	</div>
+	<div class="idle" style="margin-top:10px">
+		idle
+		<progress value="10" max="100"></progress>
+	</div>
+	<div class="setup" style="margin-top:10px">
+		setup
+		<progress value="10" max="100"></progress>
+	</div>
+	<div class="alarm" style="margin-top:10px">
+		alarm
+		<progress value="10" max="100"></progress>
+	</div>
+	<div class="change" style="margin-top:10px">
+		change
+		<progress value="10" max="100"></progress>
+	</div>
+</div>
+<h2><strong>Progress Bar - div-span Tag</strong></h2>
+<div>
+	default
+	<div class="progress-bar">
+		<span style="width:10%"></span>
+	</div>
+	<div class="auto" style="margin-top:10px">
+		auto
+		<div class="progress-bar">
+			<span style="width:10%"></span>
+		</div>
+	</div>
+	<div class="idle" style="margin-top:10px">
+		idle
+		<div class="progress-bar">
+			<span style="width:10%"></span>
+		</div>
+	</div>
+	<div class="setup" style="margin-top:10px">
+		setup
+		<div class="progress-bar">
+			<span style="width:10%"></span>
+		</div>
+	</div>
+	<div class="alarm" style="margin-top:10px">
+		alarm
+		<div class="progress-bar">
+			<span style="width:10%"></span>
+		</div>
+	</div>
+	<div class="change" style="margin-top:10px">
+		change
+		<div class="progress-bar">
+			<span style="width:10%"></span>
+		</div>
+	</div>
+</div>
+<h2><strong>Progress Bar </strong>- only div tag, auto span tag with jquery</h2>
+<script>
+	$(function() {
+		$('.progress-bar').each(progressbar);
+	});
+	function progressbar() {
+		var $bar, gauge,
+			value = parseInt(this.getAttribute('data-value'));
+		if (isNaN(value)) {
+			return;
+		}
+		$bar = $(this);
+		$('<span>').appendTo($bar)[0]
+		gauge = $(this).children("span");
+		gauge.animate({width: value + "%"},1000)
+	}
+</script>
+
+<div>
+	default
+	<div class="progress-bar" data-value="20">
+	</div>
+	<div class="auto" style="margin-top:10px">
+		auto
+		<div class="progress-bar" data-value="40">
+		</div>
+	</div>
+	<div class="idle" style="margin-top:10px">
+		idle
+		<div class="progress-bar" data-value="100">
+		</div>
+	</div>
+	<div class="setup" style="margin-top:10px">
+		setup
+		<div class="progress-bar"  data-value="60">
+		</div>
+	</div>
+	<div class="alarm" style="margin-top:10px">
+		alarm
+		<div class="progress-bar" data-value="80">
+		</div>
+	</div>
+	<div class="change" style="margin-top:10px">
+		change
+		<div class="progress-bar" data-value="50">
+		</div>
+	</div>
+</div>
+<h2><strong>Progress-bar -dotted type</strong></h2>
+<div>
+	<div class="bar-wrap">
+		<div class="progress-bar dotted" >
+			<span style="width:90%" class="green"></span>
+			<span style="width:50%" class="red"></span>
+		</div>
+		<span class="label-left">00:00:00</span>
+		<span class="label-right"><strong>0</strong> / 0</span>
+	</div>
+</div>
+<h2><strong>Tab</strong>(max : 7)</h2>
+<div class="tab-container">
+	<input id="tab1" type="radio" name="tabs" checked>
+	<label for="tab1">Code</label>
+	<input id="tab2" type="radio" name="tabs">
+	<label for="tab2">About</label>
+	<input id="tab3" type="radio" name="tabs">
+	<label for="tab3">Services</label>
+	<!-- <input id="tab4" type="radio" name="tabs">
+	<label for="tab4">Portfolio</label>
+	<input id="tab5" type="radio" name="tabs">
+	<label for="tab5">Contact</label>
+	<input id="tab6" type="radio" name="tabs">
+	<label for="tab6">Contact</label>
+	<input id="tab7" type="radio" name="tabs">
+	<label for="tab7">Contact</label>
+
+-->
+	<section class="tab-content tab01">cont1111111111111</section>
+	<section class="tab-content tab02">cont22222222222</section>
+	<section class="tab-content tab03">cont33333333333</section>
+	<!-- <section class="tab-content tab04">cont4</section>
+	<section class="tab-content tab05">cont5</section>
+	<section class="tab-content tab06">cont6</section>
+	<section class="tab-content tab07">cont7</section>
+
+-->
+</div>
+<h2><strong>tooltip</strong></h2>
+<div style="width:400px;margin:50px auto 0" >
+	기본 툴팁 <a href="#" class="tooltip" data-tooltip="tooltip 내용 1">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0;">
+	왼쪽 툴팁 <a href="#" class="tooltip left" data-tooltip="tooltip 내용 2">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0;">
+	오른쪽 툴팁 <a href="#" class="tooltip right" data-tooltip="tooltip 내용 3">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0;">
+	아래쪽 툴팁 <a href="#" class="tooltip bottom" data-tooltip="tooltip 내용 4">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0" >
+	위쪽 / 화살표-왼쪽 툴팁 <a href="#" class="tooltip arrow-left" data-tooltip="tooltip 내용 5">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0" >
+	위쪽 / 화살표-오른쪽 툴팁 <a href="#" class="tooltip arrow-right" data-tooltip="tooltip 내용 6">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0;">
+	아래쪽 /화살표-왼쪽 툴팁 <a href="#" class="tooltip bottom arrow-left" data-tooltip="tooltip 내용 7">tooltip</a>
+</div>
+<div style="width:400px;margin:50px auto 0;">
+	아래쪽 /화살표-오른쪽 툴팁 <a href="#" class="tooltip bottom arrow-right" data-tooltip="tooltip 내용 8">tooltip</a>
+</div>
+<!-- Switch-button -->
+<h2><strong>switch button</strong></h2>
+<div>
+	<div>
+		<label class="switch">
+			<input type="checkbox">
+			<span class="switch-btn"></span>
+		</label>
+		<label class="switch">
+			<input type="checkbox" checked>
+			<span class="switch-btn"></span>
+		</label>
+	</div>
+	<div style="margin-top:10px">
+		<label class="switch small">
+			<input type="checkbox">
+			<span class="switch-btn"></span>
+		</label>
+		<label class="switch small">
+			<input type="checkbox" checked>
+			<span class="switch-btn"></span>
+		</label>
+	</div>
+</div>
+<!-- //Switch-button -->
+<!-- spin box -->
+<h2><strong>spin box</strong></h2>
+<div>
+	<span class="spin-box">
+		<input type="number" value="0">
+		<button class="minus">-</button>
+		<button class="plus">+</button>
+	</span>
+</div>
+<div>
+	<span class="spin-box tp2">
+		<input type="number" value="0">
+		<button class="minus">-</button>
+		<button class="plus">+</button>
+	</span>
+</div>
+<style>
+	.spin-box.tp3 > input[type="number"],.spin-box.tp3 > input[type="text"]{height:50px;padding:0 25px 0 0;}
+	.spin-box.tp3 > button.minus{left:auto;right:0;bottom:0;top:auto;border-top:0}
+</style>
+<div>
+	<span class="spin-box tp3">
+		<input type="number" value="0">
+		<button class="plus">+</button>
+		<button class="minus">-</button>
+	</span>
+</div>
+<!-- //spin box  -->
+
+<!-- round-chart -->
+<script>
+	var svgnsurl = 'http://www.w3.org/2000/svg';
+	$(function() {
+		$('.round-chart').each(roundchart);
+	});
+
+	function roundchart() {
+
+		var $box, path,
+			width, height, radius, linewidth = 25,
+			angle = parseInt(this.getAttribute('data-value'));
+
+		if (isNaN(angle)) {
+			return;
+		}
+
+		$box = $(this);
+		width = parseInt($box.css('width'));
+		height = parseInt($box.css('height'));
+		radius = height/2-linewidth/2;
+		angle = Math.min(359.999, 360*angle/100);
+		angle = 90-angle;
+
+		path = document.createElementNS(svgnsurl, 'path');
+		path.setAttributeNS(null, 'stroke', this.getAttribute('data-color'));
+		path.setAttributeNS(null, 'd', [
+				'M', width/2, ',', linewidth/2,
+				'A', radius, ',', radius, ' 0 ', Math.abs(angle) > 90 ? 1 : 0, ',1 ', width/2+radius*Math.cos(-angle*Math.PI/180), ',', height/2+radius*Math.sin(-angle*Math.PI/180)
+			].join(''));
+
+		$('<svg xmlns="'+ svgnsurl +'" xmlns:xlink="http://www.w3.org/1999/xlink" />')
+			.attr({width: width, height: height})
+			.appendTo($box)[0].appendChild(path);
+
+	}
+</script>
+<h2><strong>round-chart</strong> (no highchart)</h2>
+<div class="round-chart" data-value="80%">
+	<span class="chart-text">80%</span>
+</div>
+<div class="round-chart small" data-value="20%" data-color="#06a6b1">
+	<span class="chart-text">20%</span>
+</div>
+<br><br><br><br><br><br>
+</body>
+</html>
+

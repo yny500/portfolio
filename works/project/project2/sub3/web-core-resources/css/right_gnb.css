@@ -1,0 +1,11 @@
+@charset "utf-8";
+nav ~ main{padding-right:95px}
+nav ~ main header{right:95px}
+
+body > nav{right:0;-webkit-box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.2);-moz-box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.2);box-shadow:-2px 2px 5px 0px rgba(0,0,0,0.2);}
+body > nav > ul ul{right:95px;border-right:1px solid #d7d7d7;box-shadow:-4px 2px 5px -3px rgba(0,0,0,0.2);}
+body > nav > ul ul ul {right:100%}
+body > nav > ul ul li a{padding:0 20px 0 35px;}
+body > nav > ul ul li a.has-depth:after{left:20px;transform:rotateY(180deg)}
+body > nav ul li:hover > a{color:#16838a;background-color:#e3f3f1;}
+nav + main .function-area.fix-position{left:0;right:95px}

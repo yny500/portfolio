@@ -814,6 +814,40 @@ body.fixed {
     z-index: 1;
     width: 100%;
 }
+#page3 .works {
+    display: block;
+    position: absolute;
+    right: 50px;
+    top: 110px;
+    width: 300px;
+    height: 70px;
+    z-index: 100;
+    padding: 14px 60px 14px 20px;
+    font-family: "Noto sans", sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 12px;
+    background-color: #585a80;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transition: width 0.3s;
+}
+#page3 .works::before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg);
+    transition: right 0.3s;
+}
+
 #page3 .publishing_zone li.over[class^=pub_area]  {
    background-color: #dedee6;
 }
@@ -948,6 +982,17 @@ body.fixed {
     #page3 {
         font-size: 0.875em;
     }
+    #page3 .works {
+        right: 10px;
+        width: 70px;
+        padding: 0;
+        text-indent: -9999px;
+        overflow: hidden;
+    }
+    #page3 .works::before {
+        right: 50%;
+        margin-right: -5px;
+    }
     #page3 .publishing_zone li[class^=pub_area] {
         padding: 0 10px;
     }
@@ -999,6 +1044,12 @@ body.fixed {
 @media only screen and (max-width: 540px) {
     #page3 {
         font-size: 0.813em;
+    }
+    #page3 .works {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        top: 90px;
     }
     #page3 .publishing_zone ul {
         padding-top: 100px;
@@ -1062,6 +1113,9 @@ body.fixed {
     }
 }
 @media only screen and (max-width: 360px) {
+    #page3 .works {
+        display: none;
+    }
     #page3 .publishing_zone li .area_cont .project_info {
         display: none;
     }

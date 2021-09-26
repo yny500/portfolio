@@ -1,0 +1,3249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080">
+    <meta charset="UTF-8">
+    <title>LGL</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="../ilc/resources/images/favicon.ico">
+
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/button.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/common.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/form.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/grid.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/sfp/sfp-dialog.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/sfp/sfp-ui-grid.css">
+
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/theme/factory/button.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/theme/factory/common.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/theme/factory/form.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/theme/factory/grid.css">
+
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/project/button.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/project/common.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/project/form.css">
+    <link defer="" rel="stylesheet" href="../ilc/resources/css/project/grid.css">
+
+    <script src="../ilc/resources/js/lib/jquery/jquery.min.js"></script>
+    <script src="../ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+    <script src="../ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/moment/moment.min.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+    <script src="../ilc/resources/js/phrase.js"></script>
+    <script src="../ilc/resources/js/interpreter.js"></script>
+
+    <script src="../ilc/resources/js/project/sfp-property-pattern.js"></script>
+
+    <script defer="" src="../ilc/resources/js/sfp/sfp-stringutils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-utils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ajax.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-dialog.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-template.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-box.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-datepicker.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-dateutils.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+    <script defer="" src="../ilc/resources/js/sfp/sfp-websocket.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-multi-input.js"></script>
+
+    <script defer="" src="../ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+    <script defer="" src="../ilc/resources/js/lib/jquery-barcode.js"></script>
+    <script defer="" src="../ilc/resources/js/lib/jquery.balloon.js"></script>
+
+    <script defer="" src="../ilc/resources/js/project/sfp-common.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            SFPURL.setContextUrl("ilc");
+            SFPURL.setMenuUrl();
+            SfpUtils.setLocale("ko");
+            $(".btn-reset").on("click", function () {
+                $(this).closest(".function-area").find("select, input:not([type=hidden])").each(function () {
+                    var $this = $(this);
+                    if ($this.hasClass("reset-ignore") == false) {
+                        $this.val("");
+                        $(".calendar").datepicker("option", { "minDate": null, "maxDate": null });
+
+                        if ($this.hasClass("multi-input-select") == true) {
+                            $this.data("val", "");
+                        }
+
+                    }
+                });
+            });
+        });
+
+        function showProgress() {
+            var $window = $(window);
+            var $loaderPanel = $("#loader-panel");
+            var $loader = $("#loader");
+            var windowWidth = $window.width();
+            var windowHeight = $window.height();
+            var loaderWidth = $loader.width();
+            var loaderHeight = $loader.height();
+
+            $loaderPanel.css("width", windowWidth).css("height", windowHeight);
+            $loader.css("left", (windowWidth / 2) - (loaderWidth / 2));
+            $loader.css("top", (windowHeight / 2) - (loaderHeight / 2));
+
+            $loaderPanel.fadeIn(100);
+            // 	$("#loader-panel").show();
+        }
+
+        function closeProgress() {
+            var $loaderPanel = $("#loader-panel");
+            $loaderPanel.fadeOut(100);
+            // 	$("#loader-panel").hide();
+        }
+
+    </script>
+    <style>
+        #loader-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            text-align: center;
+            vertical-align: middle;
+            display: none;
+        }
+
+        #loader {
+            position: absolute;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+        }
+
+        #layer-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            text-align: center;
+            vertical-align: middle;
+            display: none;
+        }
+
+        #big-image {
+            position: absolute;
+            z-index: 1001;
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+    <style type="text/css">
+        .JColResizer {
+            table-layout: fixed;
+        }
+
+        .JColResizer>tbody>tr>td,
+        .JColResizer>tbody>tr>th {
+            overflow: hidden;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        .JCLRgrips {
+            height: 0px;
+            position: relative;
+        }
+
+        .JCLRgrip {
+            margin-left: -5px;
+            position: absolute;
+            z-index: 5;
+        }
+
+        .JCLRgrip .JColResizer {
+            position: absolute;
+            background-color: red;
+            filter: alpha(opacity=1);
+            opacity: 0;
+            width: 10px;
+            height: 100%;
+            cursor: e-resize;
+            top: 0px
+        }
+
+        .JCLRLastGrip {
+            position: absolute;
+            width: 1px;
+        }
+
+        .JCLRgripDrag {
+            border-left: 1px dotted black;
+        }
+
+        .JCLRFlex {
+            width: auto !important;
+        }
+
+        .JCLRgrip.JCLRdisabledGrip .JColResizer {
+            cursor: default;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader-panel" style="width: 1670px; height: 863px; display: none;">
+        <img id="loader" src="../ilc/resources/images/ajax-loader.gif" alt="" style="left: 810px; top: 406.5px;">
+
+    </div>
+    <div id="layer-box">
+        <img id="big-image" src="../ilc/resources/images/ajax-loader.gif" alt="">
+    </div>
+
+
+
+
+    <link rel="stylesheet" href="../ilc/resources/css/page.css">
+    <link rel="stylesheet" href="../ilc/resources/css/theme/factory/page.css">
+    <link rel="stylesheet" href="../ilc/resources/css/project/page.css">
+
+    <script src="../../ilc/resources/js/project/sfp-common-page.js"></script>
+    <script src="../../ilc/resources/js/lib/jquery.fileDownload.js"></script>
+    <script src="../ilc/resources/js/lib/colResizable.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("header > h2").click(function () {
+                if (window.frameElement) {
+                    window.frameElement.src = window.frameElement.src;
+                } else {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+    <style>
+        h2 {
+            cursor: pointer;
+        }
+    </style>
+
+
+
+    <link rel="stylesheet" href="../ilc/resources/css/project/kiva-map.css">
+
+ <main>
+    <header>
+        <h2>Map - Point</h2>
+    </header>
+    <div class="contents-wrap no-footer">
+        <section>
+            <div class="function-area horizontal">
+                <div class="align-left">
+                    <span>
+                        <button class="btn-">공급선반 POP 설정</button>
+                        <button class="btn-">shelf 관리</button>
+                        <button class="btn-">map 갱신</button>
+                    </span>
+                    <span>
+                        <label class="label-text">배출선반 분출대기 시간(초)</label>
+                        <input type="text">
+                    </span>
+                    <button class="btn-">설정</button>
+                </div>
+                <div class="align-right">
+                    <div class="thread-area">
+                        <label class="label-text">Thread 동작</label>
+                        <button class="btn-">중지</button>
+                        <button class="btn-">시작</button>
+                    </div>
+                </div>
+            </div>
+            <div class="kiva-map-area">
+                <div class="kiva-map">
+                    <div class="map-zone">
+                        <ul>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>1</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>2</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>3</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>4</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>5</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>6</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>7</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>8</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>9</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>11</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>12</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>13</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>14</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>15</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>16</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_COMMON_WAITING">
+                                <span>17</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_COMMON_WAITING">
+                                <span>18</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_COMMON_WAITING">
+                                <span>19</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_COMMON_WAITING">
+                                <span>20</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>21</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>22</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>23</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>24</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>25</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>26</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>27</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>28</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>29</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>30</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>31</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>32</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>33</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>34</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>35</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>36</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>37</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>38</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>39</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>40</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>41</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>42</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>43</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>44</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>45</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>46</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>47</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>48</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>49</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>50</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box SUPPLY_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_INPUT_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_STATION">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box DISCHARGE_REMOVE_WAITING">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>90</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                            <li class="map-zone-box">
+                                <span>10</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="map-info">
+                        <div class="supply-shelf">
+                            <p class="title">공급선반</p>
+                            <ul>
+                                <li>
+                                    <span class="SUPPLY_INPUT_STATION"></span>
+                                    <p>투입 스테이션</p>
+                                </li>
+                                <li>
+                                    <span class="SUPPLY_REMOVE_STATION"></span>
+                                    <p>분출 스테이션</p>
+                                </li>
+                                <li>
+                                    <span class="SUPPLY_INPUT_WAITING"></span>
+                                    <p>투입 대기소</p>
+                                </li>
+                                <li>
+                                    <span class="SUPPLY_REMOVE_WAITING"></span>
+                                    <p>분출 대기소</p>
+                                </li>
+                                <li>
+                                    <span class="SUPPLY_COMMON_WAITING"></span>
+                                    <p>공통 대기소</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="emission-shelf">
+                            <p class="title">배출선반</p>
+                            <ul>
+                                <li>
+                                    <span class="DISCHARGE_INPUT_STATION"></span>
+                                    <p>투입 스테이션</p>
+                                </li>
+                                <li>
+                                    <span class="DISCHARGE_REMOVE_STATION"></span>
+                                    <p>분출 스테이션</p>
+                                </li>
+                                <li>
+                                    <span class="DISCHARGE_INPUT_WAITING"></span>
+                                    <p>투입 대기소</p>
+                                </li>
+                                <li>
+                                    <span class="DISCHARGE_REMOVE_WAITING"></span>
+                                    <p>분출 대기소</p>
+                                </li>
+                                <li>
+                                    <span class="DISCHARGE_COMMON_WAITING"></span>
+                                    <p>공통 대기소</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-setting">
+                    <p class="m-title">Location 설정</p>
+                    <div class="box-area">
+                        <table>
+                            <tr>
+                                <th>Cell Code</th>
+                                <td>0202323</td>
+                            </tr>
+                            <tr>
+                                <th>Cell Type</th>
+                                <td>SHELF_CELL</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="setting-item">
+                        <form action="">
+                            <div class="item-block location-type">
+                                <p class="title">Location Type</p>
+                                <div class="location-type-list">
+                                    <select>
+                                        <option>공급선반 투입 스테이션</option>
+                                        <option>공급선반 투입 스테이션</option>
+                                        <option>공급선반 투입 스테이션</option>
+                                        <option>공급선반 투입 스테이션</option>
+                                        <option>공급선반 투입 스테이션</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item-block location-name">
+                                <p class="title">Location Name</p>
+                                <input type="text" class="name">
+                            </div>
+                            <div class="item-block location-id">
+                                <p class="title">Location ID</p>
+                                <input type="text" class="id">
+                            </div>
+                            <div class="item-block prioritize">
+                                <p class="title">우선순위</p>
+                                <input type="text" class="rank"><span>1~99</span>
+                            </div>
+                            <div class="item-block active-check">
+                                <p class="title">활성여부</p>
+                                <ul>
+                                    <li><input type="radio" id="check-y"><label for="check-y">Y</label></li>
+                                    <li><input type="radio" id="check-n"><label for="check-n">N</label></li>
+                                </ul>
+                            </div>
+                            <div class="item-block picking-station">
+                                <p class="title">Picking Station</p>
+                                <div class="picking-station-list">
+                                    <select class="priorityStationId" id="priorityStationId">
+                                        <option>1번</option>
+                                        <option>2번</option>
+                                        <option>3번</option>
+                                        <option>4번</option>
+                                        <option>5번</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn-area1">
+                                <button class="btn-">출발지 설정</button>
+                                <button class="btn-">목적지 설정</button>
+                            </div>
+                            <div class="btn-area2">
+                                <button class="btn-">삭제</button>
+                                <button class="btn-">저장</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+
+</html>

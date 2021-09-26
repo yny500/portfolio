@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+.sfp-grid tbody tr:hover td{ background-color:#49555e;color:#f68e1f; }
+.sfp-grid tbody tr.selected td{ background-color:#544a31;color:#e7ebea; }
+/* .sfp-grid tbody tr:hover td{ background-color:#49555e;color:#078f98; }
+.sfp-grid tbody tr.selected td{ background-color:#134f53;color:#aec0c9; } */
+
+/* .sfp-grid thead th{color:#fff;background-color:#107178;} */
+.sfp-grid thead th{color:#fff;background-color:#f68e1f;}
+.sfp-grid tbody td{color:#fff;border-top:1px solid #676767;background-color:#3f464c;}
+.sfp-grid tfoot td{color:#444;border-top:1px solid #f68e1f;background-color:#fff;}
+
+.border-style.sfp-grid th,.border-style.sfp-grid td,.border-style .sfp-grid th, .border-style .sfp-grid td{border-top: 1px solid #676767;border-left: 1px solid #272e38;}
+.border-style.sfp-grid tbody td,.border-style .sfp-grid tbody td{border-top: 1px solid #676767;border-left: 1px solid #676767;border-right: 1px solid #676767;}
+
+.sfp-grid-body-panel{background-color:#30383e}
+
+
+
+/* register-table */
+.register-table {color:#fff}
+.register-table ul{border-top:1px solid #f68e1f;border-bottom:1px solid #f68e1f}
+.register-table .title{color:#fff;border-color:#272e38;background-color:#f68e1f}
+.register-table .title > em{color:#ed1c24;}
+.register-table .cont{border-bottom:1px solid #514c46;background-color:#202731}
+/* .register-table .cont{border-bottom:1px solid #514c46;background-color:#3f464c} */
+.register-table .description{color:#fff;}
+.register-table .title.no-bg,.register-table .cont.no-bg{background-color:#202731}
+.register-table .title.no-bg:after,.register-table .cont.no-bg:after{background-color:#202731}
+.register-table .vertical .title{border-color:#272e38}
+.register-table .vertical .title:after{background-color:#272e38}
+.register-table .vertical .cont{border-right-color:#514c46}
+
+
+/* static-table */
+.static-table th, .static-table td{color:#fff}
+.static-table th{border-right:1px solid #272e38;border-bottom:0;background-color:#f68e1f}
+.static-table td{border-right:1px solid #676767;background-color:#3f464c}
+.static-table td:last-child{border-right:0}
+.static-table td input[type="text"],
+.static-table td input[type="number"],
+.static-table td select{border: 1px solid #d0d0d0;}
+
+.static-table button[class*="btn"]{border:1px solid;border-color: #d8d8d8 #c1c1c1 #b8b8b8 #d8d8d8;}
+.static-table.type2 th{background-color:#fff}
+.static-table.type2 th:after{background-color:#929292}
+.static-table.type2 th,.static-table.type2 td{border-top:1px dotted #c5c5c5}

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080" />
+    <meta charset="UTF-8" />
+    <title>LGL Test</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="../ilc/resources/images/favicon.ico" />
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/button.css">
+    <link rel="stylesheet" href="../ilc/resources/css/page.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/common.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/form.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/grid.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-dialog.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/sfp/sfp-ui-grid.css">
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+
+
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/button.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/common.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/form.css">
+    <link defer rel="stylesheet" href="../ilc/resources/css/project/grid.css">
+
+    <script src="../ilc/resources/js/lib/jquery/jquery.min.js"></script>
+    <script src="../ilc/resources/js/lib/jquery.cookie/jquery.cookie.js"></script>
+    <script src="../ilc/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/moment/moment.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/moment/moment-with-locales.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery-timepicker/jquery.ui.timepicker.js"></script>
+    <script defer src="../ilc/resources/js/lib/sockjs-client/sockjs.min.js"></script>
+    <script defer src="../ilc/resources/js/lib/stompjs/stomp.min.js"></script>
+
+    <script src="../ilc/resources/js/project/sfp-property-pattern.js"></script>
+
+    <script defer src="../ilc/resources/js/sfp/sfp-stringutils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-utils.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ajax.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dialog.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dialog-sizer.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-template.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-box.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-grid.js"></script>
+    <script src="../ilc/resources/js/sfp/sfp-ui-pager.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-datepicker.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-autocomplete.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-oee.barchart.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-dateutils.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-ui-excel.template.js"></script>
+    <script defer src="../ilc/resources/js/sfp/sfp-websocket.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-multi-input.js"></script>
+
+    <script defer src="../ilc/resources/js/project/project-dialog-sizer.js"></script>
+
+    <script defer src="../ilc/resources/js/lib/jquery-barcode.js"></script>
+    <script defer src="../ilc/resources/js/lib/jquery.balloon.js"></script>
+
+    <script defer src="../ilc/resources/js/project/sfp-common.js"></script>
+
+    <script src="../ilc/resources/js/sfp/sfp-lang.js"></script>
+</head>
+
+<main>
+    <header>
+        <h2>DEV</h2>
+    </header>
+    <div class="contents-wrap no-footer master">
+        <section>
+            <div class="function-area das">
+                <div class="align-left">
+                    <span>
+                        <label class="label-text">das_system_id</label>
+                        <input type="text" name="dasSystemId" placeholder="das_system_id">
+                    </span>
+                    <span>
+                        <label class="label-text">ip</label>
+                        <input type="text" name="ip" placeholder="ip">
+                    </span>
+                    <span>
+                        <label class="label-text">port</label>
+                        <input type="text" name="port" placeholder="port">
+                    </span>
+                    <span>
+                        <label class="label-text">connect_yn</label>
+                        <input type="text" name="connectYn" placeholder="connect_yn">
+                    </span>
+                    <button class="btn-srch ico" id="dasSystemSearch">조회</button>
+                    <button class="btn-reset image">초기화</button>
+                </div>
+                <div class="align-center"></div>
+                <div class="align-right">
+                </div>
+            </div>
+            <div id="das-system-grid" class="sfp-grid-panel">
+                <div class="sfp-grid-header-panel" style="overflow-x: hidden;overflow-y:hidden">
+                    <table class="sfp-grid small">
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:100px;">
+                            <col style="width:50px;">
+                            <col style="width:50px;">
+                            <col style="width:50px;">
+                            <col style="width:*">
+                            <col style="width:50px;">
+                            <col style="width:60px;">
+                            <col style="width:60px;">
+                            <col style="width:60px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>das_system_id</th>
+                                <th>das_system_name</th>
+                                <th>ip</th>
+                                <th>port</th>
+                                <th>connect_yn</th>
+                                <th>삭제여부</th>
+                                <th>논리삭제</th>
+                                <th>원복</th>
+                                <th>연결</th>
+                                <th>끊기</th>
+                                <th>전체OFF</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="sfp-grid-body-panel"
+                    style="overflow-y:hidden; overflow-x:hidden;min-height: 640px;height: 640px">
+                    <table class="sfp-grid small">
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:100px;">
+                            <col style="width:50px;">
+                            <col style="width:50px;">
+                            <col style="width:50px;">
+                            <col style="width:*">
+                            <col style="width:50px;">
+                            <col style="width:60px;">
+                            <col style="width:60px;">
+                            <col style="width:60px;">
+                        </colgroup>
+                        <thead style="display: none;">
+                            <tr>
+                                <th>das_system_id</th>
+                                <th>das_system_name</th>
+                                <th>ip</th>
+                                <th>port</th>
+                                <th>connect_yn</th>
+                                <th>삭제여부</th>
+                                <th>논리삭제</th>
+                                <th>원복</th>
+                                <th>연결</th>
+                                <th>끊기</th>
+                                <th>전체OFF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="sfp-template-el R">
+                                <td>DAS01</td>
+                                <td>DAS01</td>
+                                <td>192.168.100.61</td>
+                                <td>2001</td>
+                                <td>N</td>
+                                <td>N</td>
+                                <td><button type="button" class="btn-choice" name="delete">논리삭제</button></td>
+                                <td><button type="button" class="btn-choice" name="rollback" disabled="">원복</button>
+                                </td>
+                                <td><button type="button" class="btn-orange" name="CON">CON</button></td>
+                                <td><button type="button" class="btn-orange" name="DIS">DIS</button></td>
+                                <td><button type="button" class="btn-orange" name="ACLR">ACLR</button></td>
+                                <!--
+	<td><button type="button" class="btn-orange" name="END_F">END_F</button></td>
+	<td><button type="button" class="btn-orange" name="SET">SET</button></td>
+	<td><button type="button" class="btn-orange" name="CLR">CLR</button></td>
+	-->
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>DAS02</td>
+                                <td>DAS02</td>
+                                <td>192.168.100.62</td>
+                                <td>2001</td>
+                                <td>N</td>
+                                <td>N</td>
+                                <td><button type="button" class="btn-choice" name="delete">논리삭제</button></td>
+                                <td><button type="button" class="btn-choice" name="rollback" disabled="">원복</button>
+                                </td>
+                                <td><button type="button" class="btn-orange" name="CON">CON</button></td>
+                                <td><button type="button" class="btn-orange" name="DIS">DIS</button></td>
+                                <td><button type="button" class="btn-orange" name="ACLR">ACLR</button></td>
+                                <!--
+	<td><button type="button" class="btn-orange" name="END_F">END_F</button></td>
+	<td><button type="button" class="btn-orange" name="SET">SET</button></td>
+	<td><button type="button" class="btn-orange" name="CLR">CLR</button></td>
+	-->
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>DAS03</td>
+                                <td>DAS03</td>
+                                <td>192.168.100.63</td>
+                                <td>2001</td>
+                                <td>N</td>
+                                <td>N</td>
+                                <td><button type="button" class="btn-choice" name="delete">논리삭제</button></td>
+                                <td><button type="button" class="btn-choice" name="rollback" disabled="">원복</button>
+                                </td>
+                                <td><button type="button" class="btn-orange" name="CON">CON</button></td>
+                                <td><button type="button" class="btn-orange" name="DIS">DIS</button></td>
+                                <td><button type="button" class="btn-orange" name="ACLR">ACLR</button></td>
+                                <!--
+	<td><button type="button" class="btn-orange" name="END_F">END_F</button></td>
+	<td><button type="button" class="btn-orange" name="SET">SET</button></td>
+	<td><button type="button" class="btn-orange" name="CLR">CLR</button></td>
+	-->
+                            </tr>
+                            <tr class="sfp-template-el R">
+                                <td>DAS04</td>
+                                <td>DAS04</td>
+                                <td>192.168.100.64</td>
+                                <td>2001</td>
+                                <td>N</td>
+                                <td>N</td>
+                                <td><button type="button" class="btn-choice" name="delete">논리삭제</button></td>
+                                <td><button type="button" class="btn-choice" name="rollback" disabled="">원복</button>
+                                </td>
+                                <td><button type="button" class="btn-orange" name="CON">CON</button></td>
+                                <td><button type="button" class="btn-orange" name="DIS">DIS</button></td>
+                                <td><button type="button" class="btn-orange" name="ACLR">ACLR</button></td>
+                                <!--
+	<td><button type="button" class="btn-orange" name="END_F">END_F</button></td>
+	<td><button type="button" class="btn-orange" name="SET">SET</button></td>
+	<td><button type="button" class="btn-orange" name="CLR">CLR</button></td>
+	-->
+                            </tr>
+                        </tbody>
+                        <tfoot style="display: none;"></tfoot>
+                    </table>
+                </div>
+                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                    <table class="sfp-grid small">
+                        <colgroup>
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:100px;">
+                            <col style="width:50px;">
+                            <col style="width:50px;">
+                            <col style="width:50px;">
+                            <col style="width:*">
+                            <col style="width:50px;">
+                            <col style="width:60px;">
+                            <col style="width:60px;">
+                            <col style="width:60px;">
+                        </colgroup>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="contents-wrap no-footer slave">
+        <section>
+            <div class="function-area cell">
+                <div class="align-left">
+                    <span>
+                        <label class="label-text">das_cell_id</label>
+                        <input type="text" name="dasCellId" placeholder="das_cell_id">
+                    </span>
+                    <span>
+                        <label class="label-text">das_system_id</label>
+                        <input type="text" class="reset-ignore" name="dasSystemId" id="dasSystemId" disabled="disabled"
+                            placeholder="das_system_id">
+                    </span>
+                    <span>
+                        <label class="label-text">das_cell_no</label>
+                        <input type="text" name="dasCellNo" data-valid="number" placeholder="das_cell_no">
+                    </span>
+                    <span>
+                        <label class="label-text">das_cell_port</label>
+                        <input type="text" name="dasCellPort" data-valid="number" placeholder="das_cell_port">
+                    </span>
+                    <button class="btn-srch ico" id="dasCellSearch">조회</button>
+                    <button class="btn-reset image">초기화</button>
+                </div>
+                <div class="align-center"></div>
+                <div class="align-right">
+                    <button class="btn " id="btn-ok-set">END</button>
+                    <button class="btn " id="btn-incomplete-set">END_F</button>
+                    <button class="btn orange" id="btn-set">SET</button>
+                    <button class="btn blue" id="btn-clr">CLR</button>
+                </div>
+            </div>
+            <div id="das-cell-grid" class="sfp-grid-panel">
+                <div class="sfp-grid-header-panel" style="overflow-x: hidden;overflow-y:hidden">
+                    <table class="sfp-grid small">
+                        <colgroup>
+                            <col style="width:80px">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th><label><input type="checkbox" id="allCheck"><span class="check-mark"></span></label>
+                                </th>
+                                <th>das_cell_id</th>
+                                <th>das_system_id</th>
+                                <th>das_cell_no</th>
+                                <th>das_cell_port</th>
+                                <th>das_cell_unit</th>
+                                <th>기능1</th>
+                                <th>기능2</th>
+                                <th>기능3</th>
+                                <th>das_displqy_data</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="sfp-grid-body-panel"
+                    style="overflow-y:hidden; overflow-x:hidden;min-height: 640px;height: 640px">
+                    <table class="sfp-grid small">
+                        <colgroup>
+                            <col style="width:80px">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                        </colgroup>
+                        <thead style="display: none;">
+                            <tr>
+                                <th><label><input type="checkbox" id="allCheck"><span class="check-mark"></span></label>
+                                </th>
+                                <th>das_cell_id</th>
+                                <th>das_system_id</th>
+                                <th>das_cell_no</th>
+                                <th>das_cell_port</th>
+                                <th>das_cell_unit</th>
+                                <th>기능1</th>
+                                <th>기능2</th>
+                                <th>기능3</th>
+                                <th>das_displqy_data</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot style="display: none;"></tfoot>
+                    </table>
+                </div>
+                <div class="sfp-grid-footer-panel" style="overflow-x:hidden;overflow-y:hidden">
+                    <table class="sfp-grid small">
+                        <colgroup>
+                            <col style="width:80px">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                            <col style="width:*">
+                        </colgroup>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+</html>

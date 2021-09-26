@@ -1,0 +1,64 @@
+.wrap { min-width: 1200px; padding: 10px; height: 100vh; background-color: #1E262D; box-sizing: border-box; }
+
+header { height: 40px; margin-bottom: 10px; }
+
+header h1 { float: left; }
+
+header h1 .header-logo { display: inline-block; vertical-align: middle; width: 40px; }
+
+header h1 .header-logo img { max-width: 100%; }
+
+header h1 span { display: inline-block; vertical-align: middle; padding-left: 10px; font-size: 30px; font-weight: 700; color: #fff; }
+
+header .util-menu { float: right; }
+
+header .util-menu time { line-height: 40px; font-size: 12px; color: #fff; }
+
+main .area-top { height: 30vh; }
+
+main .area-bottom { margin-top: 20px; height: 60vh; background-color: #383B48; }
+
+main .area-top > div { float: left; margin-left: 8px; width: calc((100% - 24px)/4); }
+
+main .area-top > div:first-child { margin-left: 0; }
+
+main .area-top .area-top-item em { display: block; padding: 3px 0; text-align: center; font-size: 20px; color: #fff; background-color: #383B48; }
+
+main .area-top .area-top-item .item-block { margin-top: 10px; height: calc(30vh - 44px); overflow: hidden; }
+
+main .area-top .area-top-item .item-block > div[class^=block] { float: left; margin-left: 8px; padding: 10px; width: calc((100% - 8px)/2); height: calc(30vh - 44px); background-color: #383B48; box-sizing: border-box; }
+
+main .area-top .area-top-item .item-block > div[class^=block]:first-child { margin-left: 0; }
+
+main .area-top .area-top-item .item-block dt { font-size: 20px; color: #fff; }
+
+main .area-top .area-top-item .item-block dd { padding-top: 5px; font-size: 20px; color: #737375; }
+
+main .area-top .area-top-item .item-block span { display: block; padding-top: 10px; text-align: center; font-size: 60px; color: #fff; }
+
+main .area-top .area-top-item .item-block .order-amount { float: right; }
+
+main .area-top .area-top-item .item-block .order-amount span { float: left; font-size: 25px; }
+
+main .area-top .area-top-item .item-block .order-amount span:nth-child(2) { text-indent: 6px; }
+
+main .area-bottom { position: relative; padding: 40px 60px; box-sizing: border-box; }
+
+/* highchart */
+.highcharts-figure, .highcharts-data-table table { max-width: 1920px; width: 100%; }
+
+#container { height: calc(60vh - 120px); }
+
+.highcharts-data-table table { font-family: "notokr", sans-serif; border-collapse: collapse; border: 1px solid #EBEBEB; margin: 10px auto; text-align: center; width: 100%; max-width: 500px; }
+
+.highcharts-data-table caption { padding: 1em 0; font-size: 1.2em; color: #555; }
+
+.highcharts-data-table th { font-weight: 600; padding: 0.5em; }
+
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption { padding: 0.5em; }
+
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) { background: #f8f8f8; }
+
+.highcharts-data-table tr:hover { background: #f1f7ff; }
+
+.highcharts-button { display: none; }

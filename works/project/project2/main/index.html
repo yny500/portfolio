@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=1920, height=1080">
+<meta charset="utf-8">
+<title>Dashboard-main</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/exporting.js"></script>
+<script src="js/export-data.js"></script>
+<script src="js/accessibility.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+    <header>
+        <h1>
+            <a href="#">
+                <img src="images/efficiency.png" alt="header-logo" class="header-logo">
+                <span id="dash-title">월간 지표</span>
+            </a>
+        </h1>
+        <div class="util-menu">
+           <time id="current">2021-06-14</time>
+        </div>
+    </header>
+    <main>
+        <div class="area-top">
+            <div class="area-top-item">
+                <em>출고</em>
+                <div class="item-block">
+                    <div class="block-left">
+                        <dl>
+                            <dt>누적 주문 수</dt>
+                            <dd>Orders</dd>
+                        </dl>
+                        <span class="order-rate">1,650</span>
+                    </div>
+                    <div class="block-right">
+                        <dl>
+                            <dt>누적 출고 수량</dt>
+                            <dd>Pieces</dd>
+                        </dl>
+                        <span class="order-rate">12,000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="area-top-item">
+                <em>입고</em>
+                <div class="item-block">
+                    <div class="block-left">
+                        <dl>
+                            <dt>누적 입고 SKU</dt>
+                            <dd>SKUs</dd>
+                        </dl>
+                        <span class="order-rate">1,000</span>
+                    </div>
+                    <div class="block-right">
+                        <dl>
+                            <dt>누적 입고 수량</dt>
+                            <dd>Pieces</dd>
+                        </dl>
+                        <span class="order-rate">12,000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="area-top-item">
+                <em>재고</em>
+                <div class="item-block">
+                    <div class="block-left">
+                        <dl>
+                            <dt>보관 재고 SKU 수</dt>
+                            <dd>Orders</dd>
+                        </dl>
+                        <span class="order-rate">1,000</span>
+                    </div>
+                    <div class="block-right">
+                        <dl>
+                            <dt>보관 재고 수량</dt>
+                            <dd>Pieces</dd>
+                        </dl>
+                        <span class="order-rate">12,000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="area-top-item">
+                <em>가동율</em>
+                <div class="item-block">
+                    <div class="block-left">
+                        <dl>
+                            <dt>점유 Shelf</dt>
+                            <dd>Shelves</dd>
+                        </dl>
+                        <span class="order-rate">80%</span>
+                        <div class="order-amount">
+                            <span class="picking-order">230 /</span>
+                            <span class="total-order">470</span>
+                        </div>
+                    </div>
+                    <div class="block-right">
+                        <dl>
+                            <dt>점유 Cell</dt>
+                            <dd>Cells</dd>
+                        </dl>
+                        <span class="order-rate">78%</span>
+                        <div class="order-amount">
+                            <span class="picking-order">1000 /</span>
+                            <span class="total-order">1270</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="area-bottom">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+            </figure>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=1920, height=1080">
+    <meta charset="utf-8">
+    <title>Dashboard2</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="web-core-resources/css/common.css">
+    <link rel="stylesheet" href="project-resources/css/project/dash.css">
+    <link rel="stylesheet" href="web-core-resources/css/lib/jquery-flexdatalist/jquery.flexdatalist.min.css">
+    <link rel="stylesheet" href="web-core-resources/css/lib/jquery-timepicker/jquery.ui.timepicker.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/button.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/common.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/form.css">
+    <link rel="stylesheet" href="web-core-resources/css/theme/factory/grid.css">
+    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="web-core-resources/js/accessibility.js"></script>
+    <script src="web-core-resources/js/export-data.js"></script>
+    <script src="web-core-resources/js/exporting.js"></script>
+    <script src="web-core-resources/js/solid-gauge.js"></script>
+    
+    <link rel="stylesheet" href="web-core-resources/css/project/button.css">
+    <link rel="stylesheet" href="web-core-resources/css/project/common.css">
+    <link rel="stylesheet" href="web-core-resources/css/project/form.css">
+    <link rel="stylesheet" href="web-core-resources/css/project/grid.css">
+    <link rel="stylesheet" href="web-core-resources/css/common.css">
+    <link rel="stylesheet" href="web-core-resources/css/dash.css"> 
+    <link rel="stylesheet" href="project-resources/css/project/dash.css"> 
+
+    <script src="project-resources/js/project/jquery-1.12.4.min.js"></script>
+    <script src="project-resources/js/project/main.js"></script>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h2>진척률</h2>
+        </header>
+        <div class="contents-wrap">
+            <section class="dash-2">
+                <div class="area-top">
+                    <div class="item-block">
+                        <p class="title">업무 진척률</p>
+                        <figure class="highcharts-figure">
+                            <div id="pie-chart"></div>
+                            <div class="value">
+                                <span>28.8</span>
+                                <span class="percent">%</span>
+                            </div>
+                        </figure>
+                        <div class="sub_title">
+                            처리수량 / 지시수량
+                            <div class="amount-wrap">
+                                <span class="process_amount">1095</span>
+                                /
+                                <span class="order_amount">2000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-block">
+                        <p class="title">진열 진척률</p>
+                        <figure class="highcharts-figure">
+                            <div id="pie-chart2"></div>
+                            <div class="value">
+                                <span>64.5</span>
+                                <span class="percent">%</span>
+                            </div>
+                        </figure>
+                        <div class="sub_title">
+                            처리수량 / 지시수량 
+                            <div class="amount-wrap">
+                                <span class="process_amount">645</span>
+                                /
+                                <span class="order_amount">1000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-block">
+                        <p class="title">피킹 진척률</p>
+                            <div class="sub_title">
+                                처리수량 / 지시수량
+                                <div class="amount-wrap">
+                                    <span class="process_amount">450</span>
+                                    /
+                                    <span class="order_amount">1000</span>
+                                </div>
+                            </div>
+                        <figure class="highcharts-figure">
+                            <div id="pie-chart3"></div>
+                            <div class="value">
+                                <span>45.0</span>
+                                <span class="percent">%</span>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+                <div class="area-bottom">
+                    <div class="item-block workspace">
+                        <div class="title">
+                            <dl>
+                                <dt>작업장 별 진척률</dt>
+                                <dd>
+                                    지시수량 - <span class="order_amount">2000</span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="block-wrap">
+                            <div class="block-row">
+                                <p class="name">피킹 작업장 1</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate picking-1"><span>12.5%</span></div>
+                                </div>
+                                <span class="progress-total">250</span>
+                            </div>
+                            <div class="block-row">
+                                <p class="name">피킹 작업장 2</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate picking-2"><span>10%</span></div>
+                                </div>
+                                <span class="progress-total">200</span>
+                            </div>
+                            <div class="block-row">
+                                <p class="name">보충 작업장</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate add"><span>32.3%</span></div>
+                                </div>
+                                <span class="progress-total">645</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-block box-call">
+                        <div class="title">
+                            <dl>
+                                <dt>박스 호출 수</dt>
+                                <dd>
+                                    총 호출 수 - <span class="order_amount">100</span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="block-wrap">
+                            <div class="block-row">
+                                <p class="name">피킹 작업장 1</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate picking-1"><span>30%</span></div>
+                                </div>
+                                <span class="progress-total">30</span>
+                            </div>
+                            <div class="block-row">
+                                <p class="name">피킹 작업장 2</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate picking-2"><span>50%</span></div>
+                                </div>
+                                <span class="progress-total">50</span>
+                            </div>
+                            <div class="block-row">
+                                <span class="name">보충 작업장</span>
+                                <div class="progress-bar">
+                                    <div class="progress-rate add"><span>20%</span></div>
+                                </div>
+                                <span class="progress-total">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-block picking">
+                        <div class="title">
+                            <dl>
+                                <dt>작업장 별 피킹 진척률</dt>
+                                <dd>
+                                    피킹지시수량 - <span class="order_amount">100</span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="block-wrap">
+                            <div class="block-row">
+                                <p class="name">피킹 작업장 1</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate picking-1"><span>25%</span></div>
+                                </div>
+                                <span class="progress-total">250</span>
+                            </div>
+                            <div class="block-row">
+                                <p class="name">피킹 작업장 2</p>
+                                <div class="progress-bar">
+                                    <div class="progress-rate picking-2"><span>20%</span></div>
+                                </div>
+                                <span class="progress-total">200</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
