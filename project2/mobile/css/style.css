@@ -114,6 +114,9 @@ body.fixed {
 	background: url(../images/btn_close.png) no-repeat right 34px;
 	background-size: 18px;
 }
+#gnb > ul > li:last-child.active  {
+	background: none;
+}
 #gnb > ul > li > a {
 	display: block;
 	line-height: 4em;
