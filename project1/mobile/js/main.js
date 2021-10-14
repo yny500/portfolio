@@ -25,8 +25,6 @@ $(function(){
     });
     
     // 슬라이더 관련
-    var slideN=0;
-    
     var main_swiper = new Swiper('#main_slider .swiper-container', {
             autoplay: {
                 delay: 5000,
@@ -46,6 +44,7 @@ $(function(){
     var gallery_swiper = new Swiper('#gallery_slider .swiper-container', {
           pagination: {
             el: '#gallery_slider .swiper-container .swiper-pagination',
+            clickable: true,
         },
     });
     
@@ -96,11 +95,11 @@ $(function(){
            $(this).addClass("active");
            
            $("#gnb ul ul.sub").slideUp(300);
-           $(this).find("ul.sub").slideDown(300);
+           $(this).children(".sub").slideDown(300);
         }
         else {
             $(this).removeClass("active");
-            $(this).find("ul.sub").slideUp(300);
+            $(this).children(".sub").slideUp(300);
         }
     });
     

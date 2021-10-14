@@ -35,7 +35,7 @@ $(function(){
         }
         h=$(window).height();
         pos=n*h;
-        
+
         if(n == 0){
             $(".menu_zone").removeClass("fixed");
             $("#page_controller").addClass("active"); // 사라지는 클래스 효과
@@ -43,6 +43,7 @@ $(function(){
         else {
             $(".menu_zone").addClass("fixed");
             $("#page_controller").removeClass("active");// 나타나는 클래스 효과
+            
             if(n == 3){
                 $("#page_controller").addClass("color");
             }

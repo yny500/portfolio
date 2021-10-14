@@ -133,22 +133,21 @@ body.fixed {
     display: block;
     position: absolute;
     right: 30px;
-    top: 25px;
-    width: 15px;
-    height: 8px;
-    background: url(../images/dep1_arrow.png) no-repeat center center;
-    background-size: cover;
-    transform: rotate(0deg);
+    top: 50%;
+    margin-top: -8px;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    transform: rotate(135deg);
     transition: transform 0.5s;
 }
 #gnb > ul > li.active > a::after {
-    transform: rotate(180deg);
+    transform: rotate(315deg);
 }
 #gnb ul ul.sub {
     display: none;
-    padding: 0 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 30px;
     background-color: #F8F8F8;
 }
 #gnb ul ul li a {
@@ -166,10 +165,10 @@ body.fixed {
     border-bottom: 1px solid #e9e9e9;
 }
 #header .header_top .mobile_menu .link_box li {
-    padding-bottom: 15px;
+    padding-top: 15px;
 }
-#header .header_top .mobile_menu .link_box li:last-child {
-    padding-bottom: 0;
+#header .header_top .mobile_menu .link_box li:first-child {
+    padding-top: 0;
 }
 #header .header_top .mobile_menu .link_box li a {
     display: block;
