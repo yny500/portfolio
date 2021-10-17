@@ -1180,23 +1180,23 @@ body.fixed {
     display: block;
     width: 100%;
     height: 100%;
-    background: url(../images/graphic_list_img1.jpg) no-repeat center center;
+    background: url(../images/gp_img1.jpg) no-repeat center center;
     background-size: cover;
     transform: scale(1);
     transition: transform 0.6s;
     transition-duration: 0.6s;
 }
 #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide:nth-child(2) .gp_list_image_zone .gp_list_image {
-    background-image: url(../images/graphic_list_img2.jpg);
+    background-image: url(../images/gp_img2.jpg);
 }
 #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide:nth-child(3) .gp_list_image_zone .gp_list_image {
-    background-image: url(../images/graphic_list_img3.jpg);
+    background-image: url(../images/gp_img3.jpg);
 }
 #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide:nth-child(4) .gp_list_image_zone .gp_list_image {
-    background-image: url(../images/graphic_list_img4.jpg);
+    background-image: url(../images/gp_img4.jpg);
 }
 #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide:nth-child(5) .gp_list_image_zone .gp_list_image {
-    background-image: url(../images/graphic_list_img5.jpg);
+    background-image: url(../images/gp_img5.jpg);
 }
 #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide .gp_list_image_zone.over .gp_list_image {
     transform: scale(1.1);
@@ -1256,6 +1256,10 @@ body.fixed {
     color: #2f2f2f;
 }
 
+#page4 .page4_inner .graphic_slider .swiper-container .swiper-slide .gp_list_name .gp_tools {
+    padding-top: 2.5em;
+}
+
 @media only screen and (max-width: 1200px){
     #page4 .description {
         max-width: 1000px;
@@ -1273,7 +1277,7 @@ body.fixed {
         left: 0;
         top: 0;
         width: 100%;
-        z-index: 1;
+        z-index: 10;
         opacity: 0.3;
         transform: scale(1);
         transition: opacity 0.3s, transform 0.6s;
@@ -1283,10 +1287,16 @@ body.fixed {
         opacity: 0.8;
         transform: scale(1.1);
     }
+    #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide .gp_list_image_zone .gp_more_area {
+        width: 100%;
+    }
     #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide .gp_list_name {
         position: relative;
         width: 100%;
-        z-index: 10;
+        z-index: 1;
+    }
+    #page4 .page4_inner .graphic_slider .swiper-container .swiper-slide.over .gp_list_name {
+        display: none;
     }
 }
 @media only screen and (max-width: 640px) {
