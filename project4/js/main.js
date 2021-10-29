@@ -4,7 +4,6 @@ $(function(){
     var resizeTimer;
     
     $(".keyvisual li").eq(n).addClass("active");
-    $("#page_controller").addClass("active");
     
     // 리사이즈 관련
     $(window).resize(function(){
@@ -38,26 +37,26 @@ $(function(){
 
         if(n == 0){
             $(".menu_zone").removeClass("fixed");
-            $("#page_controller").addClass("active"); // 사라지는 클래스 효과
+            $(".page_controller").removeClass("active");
         }
-        else {
+        else if(n !== 0) {
             $(".menu_zone").addClass("fixed");
-            $("#page_controller").removeClass("active");// 나타나는 클래스 효과
+            $(".page_controller").addClass("active");
             
             if(n == 3){
-                $("#page_controller").addClass("color");
+                $(".page_controller").addClass("color");
             }
             else if(n == 7){
-                $("#page_controller").addClass("color");
+                $(".page_controller").addClass("color");
             }
             else{
-                $("#page_controller").removeClass("color");
+                $(".page_controller").removeClass("color");
             }
         }
         
         $("html").stop().animate({"scrollTop":pos}, 500, function(){
-            $("#page_controller li").removeClass("active");
-            $("#page_controller li").eq(n-1).addClass("active");
+            $(".page_controller li").removeClass("active");
+            $(".page_controller li").eq(n-1).addClass("active");
             $("div[id^=page]").removeClass("active");
             $("#page"+n).addClass("active");
         });
@@ -77,11 +76,11 @@ $(function(){
     $(".show li").mouseleave(function(){
        $(".show li").removeClass("over");
     });
-    $("#page_controller li").mouseenter(function(){
+    $(".page_controller li").mouseenter(function(){
        $(this).addClass("over");
     });
-    $("#page_controller li").mouseleave(function(){
-       $("#page_controller li").removeClass("over");
+    $(".page_controller li").mouseleave(function(){
+       $(".page_controller li").removeClass("over");
     });
     $(".rental li").mouseenter(function(){
         $(this).addClass("over");
@@ -122,16 +121,16 @@ $(function(){
         pos=n*h;
         
         $(".menu_zone").addClass("fixed");
-        $("#page_controller").removeClass("active");
+        $(".page_controller").addClass("active");
         $("#page"+n).addClass("active");
        
         $("html").animate({"scrollTop":pos}, 500, function(){
-            $("#page_controller li").removeClass("active");
-            $("#page_controller li").eq(n-1).addClass("active");
+            $(".page_controller li").removeClass("active");
+            $(".page_controller li").eq(n-1).addClass("active");
         });
     });
     
-    $("#page_controller li").click(function(e){
+    $(".page_controller li").click(function(e){
         if($("html").is(":animated")) return;
         
         e.preventDefault();
@@ -139,18 +138,18 @@ $(function(){
 		pos=n*h;
         
         if(n == 3){
-            $("#page_controller").addClass("color");
+            $(".page_controller").addClass("color");
         }
         else if(n == 7){
-                $("#page_controller").addClass("color");
+                $(".page_controller").addClass("color");
         }
         else {
-            $("#page_controller").removeClass("color");
+            $(".page_controller").removeClass("color");
         }
         
         $("html").animate({"scrollTop":pos}, 500, function(){
-            $("#page_controller li").removeClass("active");
-            $("#page_controller li").eq(n-1).addClass("active");
+            $(".page_controller li").removeClass("active");
+            $(".page_controller li").eq(n-1).addClass("active");
             $("div[id^=page]").removeClass("active");
             $("#page"+n).addClass("active"); 
         });

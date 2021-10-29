@@ -358,8 +358,7 @@ ol {
 /* @media ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 @media only screen and (max-width: 1200px) {
-    #header .menu_zone .location li.login,
-    #header .menu_zone .location li.join {
+    #header .menu_zone .location {
         display: none;
     }
     #header .menu_zone .location {
@@ -426,20 +425,19 @@ ol {
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ ㅡ*/
 
-/* #page_controller */
-#page_controller {
+/* .page_controller */
+.page_controller {
     position: fixed;
-    left: 27px;
+    left: -50px;
     bottom: 0;
     font-size: 1em;
     transition: left 0.4s;
-    transition-delay: 0.4s;
+    transition-delay: 0.1s;
 }
-#page_controller.active {
-    left: -50px;
-    transition-delay: 0s;
+.page_controller.active {
+    left: 27px;
 }
-#page_controller ul {
+.page_controller ul {
     position: relative;
     overflow: hidden;
     height: 27px;
@@ -451,7 +449,7 @@ ol {
     transform: rotate(-90deg);
     box-sizing: border-box;
 }
-#page_controller ul::before {
+.page_controller ul::before {
     content: '';
     display: block;
     position: absolute;
@@ -464,14 +462,14 @@ ol {
     transition: background-color 0.2s;
     transition-timing-function: ease;
 }
-#page_controller.color ul::before {
+.page_controller.color ul::before {
      background-color: #fff;
 }
-#page_controller li {
+.page_controller li {
     float: right;
     margin-left: 26px;
 }
-#page_controller li a {
+.page_controller li a {
     position: relative;
     z-index: 1;
     padding-bottom: 9px;
@@ -482,14 +480,14 @@ ol {
     transition: opacity 0.2s, color 0.2s;
     transition-timing-function: ease;
 }
-#page_controller.color li a {
+.page_controller.color li a {
     color: #fff;
 }
-#page_controller li.over a,
-#page_controller li.active a {
+.page_controller li.over a,
+.page_controller li.active a {
     opacity: 1;
 }
-#page_controller li a::before {
+.page_controller li a::before {
     content: '';
     display: block;
     position: absolute;
@@ -503,11 +501,11 @@ ol {
     transition: transform 0.2s, background-color 0.2s;
     transition-timing-function: ease;
 }
-#page_controller.color li a::before {
+.page_controller.color li a::before {
     background-color: #fff;
 }
-#page_controller li.over a::before,
-#page_controller li.active a::before {
+.page_controller li.over a::before,
+.page_controller li.active a::before {
     transform: scaleX(1);
 }
 
