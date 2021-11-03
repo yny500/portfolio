@@ -18,7 +18,7 @@ $(function(){
         resizeTimer=setTimeout(function(){
            h=$(window).height();
             pos=n*h;
-            
+             
             $("html").stop().animate({"scrollTop": pos}, 500);
         }, 100);
     });
