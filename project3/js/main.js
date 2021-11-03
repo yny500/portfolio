@@ -2,8 +2,9 @@ $(function(){
 	var n=0;
 	var t=0;
 	var pos=0;
-	var timer=0;
 	var sum=0;
+	var scrollTimer;
+	var resizeTimer;
     var speedGap=200;
 
 	$("#main_slider").addClass("active");
@@ -20,9 +21,9 @@ $(function(){
 			$("#header").removeClass("fixed");
 		}
 		
-		clearTimeout(timer);
+		clearTimeout(scrollTimer);
 		
-		timer=setTimeout(function(){
+		scrollTimer=setTimeout(function(){
 			t=$(window).scrollTop();
 			sum+=1;
 			
@@ -63,7 +64,21 @@ $(function(){
 		}, 100);
 	});
     $(window).trigger("scroll");
-    
+
+	// 리사이즈 관련
+	$(window).resize(function(){
+		clearTimeout(resizeTimer);
+
+		resizeTimer=setTimeout(function(){
+			w=$(window).width();
+			
+			if(w > 720){
+				closeTab();
+			}
+		}, 100);
+	});
+	$(window).trigger("resize");
+	
     // 메뉴 클릭 관련
     $("#gnb li, #mobile li").click(function(e){
         e.preventDefault();
@@ -75,11 +90,7 @@ $(function(){
         else {
          pos=$("#page"+n).offset().top;
         }
-        
-        $("#mobile").removeClass("active");
-		$(".main_tab").removeClass("active");
-		$(".dim").removeClass("active");
-        $("body").removeClass("fixed");
+        closeTab();
         
         $("html").stop().animate({scrollTop:pos}, 800);
     });
@@ -108,11 +119,15 @@ $(function(){
         $("body").toggleClass("fixed");
 	});
 	$(".dim").click(function(){
+		closeTab();
+	});
+
+	function closeTab(){
 		$("#mobile").removeClass("active");
 		$(".main_tab").removeClass("active");
 		$(".dim").removeClass("active");
         $("body").removeClass("fixed");
-	});
+	}
     
     // 상단 이동 관련
 	$(".btn_top").click(function(e){

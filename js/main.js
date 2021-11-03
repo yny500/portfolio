@@ -5,7 +5,7 @@ $(function(){
     }
     
     // 로드 관련
-     $("#gnb li").eq(0).addClass("active");
+    $("#gnb li").eq(0).addClass("active"); 
     $("#header").addClass("active");
     
     // 리사이즈 관련
@@ -18,15 +18,8 @@ $(function(){
         resizeTimer=setTimeout(function(){
            h=$(window).height();
             pos=n*h;
+            
             $("html").stop().animate({"scrollTop": pos}, 500);
-
-            w=window.innerWidth;
-            if(w < 540){
-                
-            }
-            else if(w > 540){
-
-            }
         }, 100);
     });
     $(window).trigger("resize");
@@ -125,11 +118,15 @@ $(function(){
         $("body").addClass("fixed");
     });
     $(".dim, .close_tab").click(function(e){
-       e.preventDefault();
+        e.preventDefault();
+        closeTab();
+    });
+
+    function closeTab() {
         $(".dim").fadeOut(300);
         $("#mobile").removeClass("active");
         $("body").removeClass("fixed");
-    });
+    }
     
     // 마우스오버 관련
     $("#page1 .swiper-slide").mouseenter(function(){

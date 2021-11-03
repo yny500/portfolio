@@ -89,11 +89,9 @@ body.fixed {
 #header .menu_zone .tab {
     position: absolute;
     right: 0;
-    top: 36px;  
+    top: 26px;  
 }
-#header .menu_zone.fixed .tab{
-    top: 26px;
-}
+
 .dim {
     display: none;
     position: fixed;
